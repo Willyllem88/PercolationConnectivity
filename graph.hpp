@@ -3,10 +3,6 @@
 #include "utils.hpp"
 
 class Graph {
-private:
-    int n;  // Number of nodes
-    std::vector<std::vector<int>> adjList;  // Adjacency list
-
 public:
     // Default constructor
     Graph();
@@ -30,6 +26,9 @@ public:
     void displayGraph();
 
 private:
+    int n;  // Number of nodes
+    std::vector<std::vector<int>> adjList;  // Adjacency list
+
     // Helper function for DFS traversal
     void dfs(int start, std::vector<bool>& visited);
 

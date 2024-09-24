@@ -25,10 +25,6 @@
 #include <algorithm>
 #include <random>
 
-#pragma once
-
-#include <random>
-
 // Function to set the random seed
 inline void setSeed(unsigned int seed) {
     std::srand(seed); // Standard library
