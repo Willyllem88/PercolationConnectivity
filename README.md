@@ -1,1 +1,1 @@
-# PrecolationConnectivity
+# PercolationConnectivity
