@@ -32,10 +32,25 @@ En el context del projecte, la propietat _Π_ que voldrem analitzar serà el nom
 
 (MARC)
 
-## Altes models de graf
+## Altres models de graf
 
 **Graelles triangluars**:
+
+The triangular grid graph T_n is the lattice graph obtained by interpreting the order-(n+1) triangular grid as a graph, with the intersection of grid lines being the vertices and the line segments between vertices being the edges. Equivalently, it is the graph on vertices (i,j,k) with i,j,k being nonnegative integers summing to n such that vertices are adjacent if the sum of absolute differences of the coordinates of two vertices is 2.
+
+A triangular grid, also called an isometric grid (Gardner 1986, pp. 209-210), is a grid formed by tiling the plane regularly with equilateral triangles. 
 
 **Graelles tridimensionals**:
 
 **Altre model de graf aleatòri**:
+
+1. Hexagonal Lattice
+
+## Bibliografia
+
+## Coses interesants (treure al presentar)
+[Random Graph description](https://www.math.cmu.edu/~af1p/BOOK.pdf)
+
+[YT - Random Graph explanation](https://www.youtube.com/watch?v=mc6lrywc0Zc)
+
+[YT - Percolation](https://www.youtube.com/watch?v=a-767WnbaCQ)
