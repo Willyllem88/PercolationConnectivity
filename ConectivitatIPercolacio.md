@@ -65,17 +65,3 @@ En el context del projecte, la propietat _Π_ que voldrem analitzar serà el nom
 - **Graella Hexagonal**: Ofereix una disposició més simètrica i compacta que la graella triangular, amb un patró de connexions molt regular. Això pot afectar com es distribueixen les falles i la manera en què es fragmenta el graf.
 
 - **Graella Tridimensional**: Més complexa que les versions bidimensionals, aquesta graella permet un estudi de percolació amb major profunditat en les connexions, ja que els nodes tenen més direccions de connexió. Això resulta en un comportament més interessant per a estudis de xarxes de tres dimensions com materials porosos o xarxes neuronals.
-
-## Bibliografia
-
-1. **Albert, R., & Barabási, A.-L.** (2002). *Statistical mechanics of complex networks*. Reviews of Modern Physics, 74(1), 47-97.
-   - Aquesta referència descriu en profunditat el model de Barabási-Albert i la teoria de xarxes complexes, útil per a estudiar l'estructura i la percolació en grafs d'escala lliure.
-
-2. **Newman, M. E. J.** (2010). *Networks: An Introduction*. Oxford University Press.
-   - Un llibre de referència que ofereix una visió general sobre la teoria de grafs, incloent-hi models aleatoris i de xarxes complexes, així com aplicacions a l'estudi de percolació.
-
-3. **Grimmett, G.** (1999). *Percolation* (2nd ed.). Springer.
-   - Un text clàssic sobre la teoria de la percolació, molt rellevant per als estudis de grafs i transicions de fase.
-
-4. **Penrose, M.** (2003). *Random Geometric Graphs*. Oxford University Press.
-   - Explica en detall el model de grafs geomètrics aleatoris, una part important per al teu estudi sobre la percolació en grafs espacials.
