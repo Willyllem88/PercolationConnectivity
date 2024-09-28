@@ -54,9 +54,7 @@ En el context del projecte, la propietat _Π_ que voldrem analitzar serà el nom
 - **Aplicació a la percolació**: Aquest model permet estudiar la percolació en estructures tridimensionals, com ara materials o xarxes complexes. La desconnexió de nodes o arestes es pot observar en una estructura més rica i complexa que les graelles bidimensionals.
 - **Representació**: Es pot representar com una matriu tridimensional, on cada node té sis veïns ortogonals, creant una estructura cúbica on les connexions poden eliminar-se per estudiar la fragmentació.
 
----
-
-## Comparació general
+### Comparació general
 
 - **Grafo de Barabási-Albert**: La seva característica principal és la presència de "hubs" o nodes centrals amb moltes connexions. És ideal per a estudiar xarxes reals com les socials, on els hubs tenen un paper clau en la connectivitat global.
   
