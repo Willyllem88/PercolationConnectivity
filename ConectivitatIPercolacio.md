@@ -1,12 +1,32 @@
-# Conectivitat i Percolaciò
+# Connectivitat i Percolació
 
 (BELDA)
 
 ## Transició de fase
 
+Una transició de fase d'un graf per a una propietat concreta _Π_ fa referència a un resultat satisfactori d'un procés de percolació aplicat al graf.
+
+Definim un resultat com a satisfactori si, donat que es troba una probabilitat de valor _q_ tal que es compleix la propietat _Π_ al graf _G<sub>q</sub>_ (definim aquesta probabilitat com _q<sub>Π</sub>_), per als grafs amb _G<sub>q'</sub>_ on _q'_ > _q<sub>Π</sub>_ verifiquen la propietat _Π_ i als grafs amb _G<sub>q'</sub>_ on _q'_ < _q<sub>Π</sub>_ no verifiquen la propietat _Π_ (totes dues afirmacions són válides si es compleixen amb una probabilitat prou alta).    
+
+Quan s'ha obtingut aquest resultat, diem que la propietat _Π_ presenta una transició de fase al voltant de _q<sub>Π</sub>_.  
+
 ## Grafs aleatoris
 
+Els grafs aleatoris es caracteritzen per basar la seva estructura de node o arestes en probabilitats, a diferència dels grafs deterministes on les connexions entre nodes ja estan definides.
+
+Les probabilitats que s'utilitzen en aquest tipus de grafs solen seguir diferents criteris segons el tipus, d'entre els quals destaquen:
+
+* **Model de Erdös-Rényi**: En aquest model, dins d'un graf _G_, s'afegeix una aresta entre cada parell de nodes amb una probabilitat _p_.
+
+* **Model Small World**: Aquest model utilitza tant models regulats com aleatoris, amb la finalitat de simular xarxes del món real. Es comença amb un graf regular on els nodes tenen arestes amb els seus veïns. Després, mitjançant una probablitat _p_, es formen arestes entre nodes de diferents "xarxes locals". Com més alta sigui aquesta probabilitat, més semblant serà el graf als del model anterior.
+
 ## Grafs amb fallides
+
+Denominem una fallida a un graf si un node o una aresta falla. Aquesta fallida es representa per una probabilitat _q_ que defineix el graf i els seus components.
+
+L'estudi d'aquests grafs permet estudiar la estructura i el comportament del graf en funció d'un probabilitat arbitrària de fallida.
+
+Les fallides, tot i normalment ser aleatòries, poden també ser regulades i, per tant, no dependre d'una probabilitat, tot i que d'aquest tipus no en farem servir al projecte.
 
 (GUILLEM)
 
