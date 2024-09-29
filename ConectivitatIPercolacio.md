@@ -1,7 +1,5 @@
 # Connectivitat i Percolació
 
-(BELDA)
-
 ## Transició de fase
 
 Una transició de fase d'un graf per a una propietat concreta _Π_ fa referència a un resultat satisfactori d'un procés de percolació aplicat al graf.
@@ -28,8 +26,6 @@ L'estudi d'aquests grafs permet estudiar la estructura i el comportament del gra
 
 Les fallides, tot i normalment ser aleatòries, poden també ser regulades i, per tant, no dependre d'una probabilitat, tot i que d'aquest tipus no en farem servir al projecte.
 
-(GUILLEM)
-
 ## Percolaciò
 
 La percolació en un graf consisteix en eliminar o desactivar nodes o arestes, i es mesura com això afecta la connectivitat global del graf. Quan desactivem una aresta o node direm que ha tingut una fallida.
@@ -49,8 +45,6 @@ Aquest mecanisme és important per a l'estudi de xarxes complexes, ja que ens aj
 Donat un graf _G(V,E)_ connex i un paràmetre _q ∈ [0, 1]_ que representa la probabilitat de no fallida d'un element del graf (aresta o node), un cop s'aplica la percolació obtindrem _G<sub>q</sub>_. 
 
 En el context del projecte, la propietat _Π_ que voldrem analitzar serà el nombre de components connexes que tindrà _G<sub>q</sub>_. Estudiarem com aquestes varien a mesura que modifiquem _q_.
-
-(MARC)
 
 ## Altres models de graf
 
@@ -73,6 +67,22 @@ En el context del projecte, la propietat _Π_ que voldrem analitzar serà el nom
 - **Descripció**: Extensió de la graella quadrada en tres dimensions, on els nodes es disposen en una estructura cúbica. Cada node està connectat amb sis veïns: davant, darrere, esquerra, dreta, a dalt i a baix.
 - **Aplicació a la percolació**: Aquest model permet estudiar la percolació en estructures tridimensionals, com ara materials o xarxes complexes. La desconnexió de nodes o arestes es pot observar en una estructura més rica i complexa que les graelles bidimensionals.
 - **Representació**: Es pot representar com una matriu tridimensional, on cada node té sis veïns ortogonals, creant una estructura cúbica on les connexions poden eliminar-se per estudiar la fragmentació.
+
+**Grafs Geomètrics Aleatoris (RGG)**:
+- **Descripció**: Un graf no dirigit en què els nodes es col·loquen aleatòriament en un espai mètric, connectant dos nodes si la seva distància és menor que un radi definit, r.
+- **Aplicació a les xarxes socials**: Els RGG s'utilitzen per modelar xarxes socials humanes, ja que mostren comunitats naturals i una alta modularitat, així com una connexió preferencial entre nodes populars.
+- **Representació**: Els nodes es mostregen en un espai [0,1)d, amb connexions basades en la distància euclidiana entre ells, definint una xarxa depenent del paràmetre r.
+
+```pseudo
+V := generarMostres(n)  // Genera n mostres en el cub unitari.
+per a cada p ∈ V fer
+    per a cada q ∈ V\{p} fer
+        si distància(p, q) ≤ r llavors
+            afegirConnexió(p, q)  // Afegeix l'aresta (p, q) a l'estructura de dades d'arestes.
+        fi
+    fi
+fi
+```
 
 ### Comparació general
 
