@@ -5,4 +5,5 @@
 *.o
 
 # Ignore the test executable
+main
 test
