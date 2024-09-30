@@ -8,7 +8,7 @@ Graph::Graph(int nodes) : n(nodes) {
     adjList.resize(n);
 }
 
-// Generate a random graph G(n, p)
+// Generate a random graph G(n, p), being p the probability of an edge between two nodes
 Graph Graph::generateRandomGraph(int n, double p) {
     Graph g(n);
     for (int i = 0; i < n; ++i) {
@@ -28,12 +28,16 @@ void Graph::addEdge(int u, int v) {
 }
 
 // Perform edge percolation on the graph, returns the percolated graph
-Graph Graph::edgePercolation(double q) {
-    //use rand01() to generate a random number between 0 and 1
+Graph Graph::edgePercolation(double p) const {
     Graph gp(n);
     for (int i = 0; i < n; ++i) {
         for (int j = i + 1; j < n; ++j) {
-            if (rand01() < q) {
+            //check if the edge exists continue
+            if (std::find(adjList[i].begin(), adjList[i].end(), j) == adjList[i].end()) {
+                continue; //if the edge does not exist
+            }
+
+            if (rand01() > p) { //if the edge is not removed
                 gp.addEdge(i, j);
             }
         }
@@ -42,12 +46,12 @@ Graph Graph::edgePercolation(double q) {
 }
 
 // Perform node percolation on the graph, returns the percolated graph
-Graph Graph::nodePercolation(double q) {
-    //TODO: implement
+Graph Graph::nodePercolation(double p) const {
+    //TODO: implement;
 }
 
 // Display the adjacency list of the graph
-void Graph::displayGraph() {
+void Graph::displayGraph() const{
     for (int i = 0; i < n; ++i) {
         std::cout << "Node " << i << ": ";
         for (int neighbor : adjList[i]) {
@@ -57,8 +61,22 @@ void Graph::displayGraph() {
     }
 }
 
+// Get the number of nodes
+int Graph::getNbNodes() const {
+    return n;
+}
+
+// Get the number of edges
+int Graph::getNbEdges() const {
+    int edgeCount = 0;
+    for (int i = 0; i < n; ++i) {
+        edgeCount += adjList[i].size();
+    }
+    return edgeCount / 2;  // Each edge is counted twice
+}
+
 // Get the number of connected components using BFS
-int Graph::connectedComponents() {
+int Graph::connectedComponents() const {
     std::vector<bool> visited(n, false);
     int componentCount = 0;
 
@@ -72,7 +90,7 @@ int Graph::connectedComponents() {
 }
 
 // DFS traversal to explore the component
-void Graph::dfs(int start, std::vector<bool>& visited) {
+void Graph::dfs(int start, std::vector<bool>& visited) const {
     visited[start] = true;
     for (int neighbor : adjList[start]) {
         if (!visited[neighbor]) {
@@ -82,7 +100,7 @@ void Graph::dfs(int start, std::vector<bool>& visited) {
 }
 
 // BFS traversal to explore the component
-void Graph::bfs(int start, std::vector<bool>& visited) {
+void Graph::bfs(int start, std::vector<bool>& visited) const {
     std::queue<int> q;
     visited[start] = true;
     q.push(start);
