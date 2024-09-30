@@ -11,13 +11,13 @@ public:
     Graph(int nodes);
 
     // Generate a random graph G(n, p)
-    Graph generateRandomGraph(int n, double p);
+    static Graph generateRandomGraph(int n, double p);
     
     // Add an edge between two nodes u and v
     void addEdge(int u, int v);
 
     // Perform node percolation on the graph
-    Graph nodePercolation(Graph& originalGraph, double q);  
+    Graph nodePercolation(double q);  
     
     // Get the number of connected components
     int connectedComponents();

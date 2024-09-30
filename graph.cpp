@@ -28,8 +28,8 @@ void Graph::addEdge(int u, int v) {
 }
 
 // Perform node percolation on the original graph with probability q
-Graph Graph::nodePercolation(Graph& originalGraph, double q) {
-    int n = originalGraph.connectedComponents();  // Number of nodes
+Graph Graph::nodePercolation(double q) {
+    int n = this->connectedComponents();  // Number of nodes
     Graph percolatedGraph(n);
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -37,7 +37,7 @@ Graph Graph::nodePercolation(Graph& originalGraph, double q) {
 
     for (int i = 0; i < n; ++i) {
         if (dist(gen)) {
-            for (int neighbor : originalGraph.adjList[i]) {
+            for (int neighbor : this->adjList[i]) {
                 percolatedGraph.addEdge(i, neighbor);
             }
         }
