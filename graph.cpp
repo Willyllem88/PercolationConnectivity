@@ -27,22 +27,23 @@ void Graph::addEdge(int u, int v) {
     adjList[v].push_back(u);  // Bidirectional edge
 }
 
-// Perform node percolation on the original graph with probability q
-Graph Graph::nodePercolation(double q) {
-    int n = this->connectedComponents();  // Number of nodes
-    Graph percolatedGraph(n);
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::bernoulli_distribution dist(q);
-
+// Perform edge percolation on the graph, returns the percolated graph
+Graph Graph::edgePercolation(double q) {
+    //use rand01() to generate a random number between 0 and 1
+    Graph gp(n);
     for (int i = 0; i < n; ++i) {
-        if (dist(gen)) {
-            for (int neighbor : this->adjList[i]) {
-                percolatedGraph.addEdge(i, neighbor);
+        for (int j = i + 1; j < n; ++j) {
+            if (rand01() < q) {
+                gp.addEdge(i, j);
             }
         }
     }
-    return percolatedGraph;
+    return gp;
+}
+
+// Perform node percolation on the graph, returns the percolated graph
+Graph Graph::nodePercolation(double q) {
+    //TODO: implement
 }
 
 // Display the adjacency list of the graph

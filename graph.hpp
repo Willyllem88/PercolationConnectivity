@@ -16,8 +16,11 @@ public:
     // Add an edge between two nodes u and v
     void addEdge(int u, int v);
 
+    // Perform edge percolation on the graph
+    Graph edgePercolation(double q);
+
     // Perform node percolation on the graph
-    Graph nodePercolation(double q);  
+    Graph nodePercolation(double q);
     
     // Get the number of connected components
     int connectedComponents();

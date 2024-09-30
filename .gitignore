@@ -7,3 +7,6 @@
 # Ignore the test executable
 main
 test
+
+#ignore the results of the test
+results.csv
