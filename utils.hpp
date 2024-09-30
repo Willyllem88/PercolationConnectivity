@@ -2,6 +2,7 @@
 
 // I/O and string handling
 #include <iostream>
+#include <fstream>
 #include <string>
 
 // Data structures
