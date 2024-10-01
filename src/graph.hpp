@@ -10,15 +10,17 @@ public:
     // Constructor to initialize the graph with 'n' nodes
     Graph(int nodes);
 
-// Generate a random graph G(n, p), being p the probability of an edge between two nodes
-    static Graph generateRandomGraph(int n, double p);
+    // Generate a random graph G(n, p), being p the probability of an edge between two nodes
+    static Graph generateRandomGraph_ErdosRenyi(int n, double p);
 
     //Generate a square grid graph G(m x m)
     static Graph generateSquareGridGraph(int m);
 
-    
     // Add an edge between two nodes u and v
     void addEdge(int u, int v);
+
+    // Check if there is an edge between two nodes u and v
+    bool existsEdge(int u, int v) const;
 
     // Perform edge percolation on the graph. p is the probability of failure
     Graph edgePercolation(double p) const;

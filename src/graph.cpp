@@ -9,11 +9,11 @@ Graph::Graph(int nodes) : n(nodes) {
 }
 
 // Generate a random graph G(n, p), being p the probability of an edge between two nodes
-Graph Graph::generateRandomGraph(int n, double p) {
+Graph Graph::generateRandomGraph_ErdosRenyi(int n, double p) {
     Graph g(n);
     for (int i = 0; i < n; ++i) {
         for (int j = i + 1; j < n; ++j) {
-            if (rand01() < p) {
+            if (!g.existsEdge(i, j) && rand01() < p) {
                 g.addEdge(i, j);
             }
         }
@@ -57,17 +57,18 @@ void Graph::addEdge(int u, int v) {
     adjList[v].push_back(u);  // Bidirectional edge
 }
 
+// Check if there is an edge between two nodes u and v
+bool Graph::existsEdge(int u, int v) const {
+    return std::find(adjList[u].begin(), adjList[u].end(), v) != adjList[u].end();
+}
+
 // Perform edge percolation on the graph, returns the percolated graph
 Graph Graph::edgePercolation(double p) const {
     Graph gp(n);
     for (int i = 0; i < n; ++i) {
         for (int j = i + 1; j < n; ++j) {
-            //check if the edge exists continue
-            if (std::find(adjList[i].begin(), adjList[i].end(), j) == adjList[i].end()) {
-                continue; //if the edge does not exist
-            }
-
-            if (rand01() > p) { //if the edge is not removed
+            // Remove the edge with probability p if it exists
+            if (existsEdge(i, j) && rand01() > p) {
                 gp.addEdge(i, j);
             }
         }
