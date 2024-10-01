@@ -7,7 +7,7 @@ static constexpr int MAX_NB_NODES = 100;
 static constexpr int NB_NODES_STEP = 10;
 static constexpr double RANDOM_GRAPH_P = 0.2; // 0 = no edges (empty graph), 1 = all edges (complete graph)
 static constexpr int TRIES_PER_P = 1000; // Number of tries for each value of p
-const std::string CSV_FILE = "results.csv";
+const std::string CSV_FILE = "data/results.csv";
 
 // Struct for CSV entry
 struct CSVEntry {

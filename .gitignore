@@ -1,12 +1,9 @@
 # Ignore Visual Studio Code settings
 .vscode/
+.obj/
 
 # Ignore object files
 *.o
 
 # Ignore the test executable
 main
-test
-
-#ignore the results of the test
-results.csv
