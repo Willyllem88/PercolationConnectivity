@@ -21,6 +21,36 @@ Graph Graph::generateRandomGraph(int n, double p) {
     return g;
 }
 
+//Generate a square grid graph G(m x m)
+Graph Graph::generateSquareGridGraph(int m){
+    int n = m*m;
+    Graph g(n);
+    for(int i=0; i<m;++i){
+        for(int j=0; j<m;++j){
+            int currentNode = i*m + j;
+            //Add edge when two vertices are at distance 1
+            //Connect with neighbours above, below, left and right, if possible
+            if(i > 0){
+                int neighborNode = (i-1)*m + j;
+                g.addEdge(currentNode,neighborNode);
+            }
+            if(i<m-1){
+                int neighborNode = (i+1)*m + j;
+                g.addEdge(currentNode,neighborNode);
+            }
+            if(j>0){
+                int neighborNode = i*m + (j-1);
+                g.addEdge(currentNode,neighborNode);
+            }
+            if(j<m-1){
+                int neighborNode = i*m + (j+1);
+                g.addEdge(currentNode,neighborNode);
+            }
+        }
+    }
+    return g;
+}
+
 // Add an undirected edge between node u and node v
 void Graph::addEdge(int u, int v) {
     adjList[u].push_back(v);
