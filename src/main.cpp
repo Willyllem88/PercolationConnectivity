@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
                 // Keep generating random graphs until you get a connected graph
                 while (true) {
                     // Generate a random graph G(n, p)
-                    G = Graph::generateRandomGraph(n, RANDOM_GRAPH_P);
+                    G = Graph::generateRandomGraph_ErdosRenyi(n, RANDOM_GRAPH_P);
 
                     // Check if the graph is connected, if not, continue
                     if (G.connectedComponents() == 1) break;
