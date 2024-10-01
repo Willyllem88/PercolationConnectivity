@@ -6,7 +6,7 @@ static constexpr int MIN_NB_NODES = 10;
 static constexpr int MAX_NB_NODES = 100;
 static constexpr int NB_NODES_STEP = 10;
 static constexpr double RANDOM_GRAPH_P = 0.2; // 0 = no edges (empty graph), 1 = all edges (complete graph)
-static constexpr int TRIES_PER_P = 100; // Number of tries for each value of p
+static constexpr int TRIES_PER_P = 1000; // Number of tries for each value of p
 const std::string CSV_FILE = "results.csv";
 
 // Struct for CSV entry
@@ -29,8 +29,6 @@ struct CSVEntry {
 
 // Write CSV header
 void writeCSVHeader(std::ofstream& csvFile) {
-    csvFile << "RANDOM_GRAPH_P: " << RANDOM_GRAPH_P << std::endl;
-    csvFile << "TRIES_PER_P: " << TRIES_PER_P << std::endl << std::endl;
     csvFile << "p;n;connectedGraphs" << std::endl;
 }
 
@@ -48,7 +46,7 @@ int main(int argc, char* argv[]) {
     std::ofstream csvFile(CSV_FILE);
     writeCSVHeader(csvFile);
     
-    for (int n = MIN_NB_NODES; n < MAX_NB_NODES; n += NB_NODES_STEP) {
+    for (int n = MIN_NB_NODES; n <= MAX_NB_NODES; n += NB_NODES_STEP) {
         for (int step = 0; step <= 100; ++step) {
             // Calculate the value of q from the number of steps, to avoid losing precision
             double p = step * 0.01; //Probability of failure
