@@ -19,4 +19,5 @@ ggplot(data, aes(x = p, y = connectedGraphs, color = as.factor(n))) +
     y = "Número de grafos conexos",
     color = "Número de nodos (n)"
   ) +
+  scale_color_brewer(palette = "RdBu") +
   theme_minimal()
