@@ -10,19 +10,6 @@ if (!require(ggplot2)) install.packages("ggplot2")
 # Cargar ggplot2
 library(ggplot2)
 
-# Graficar
-ggplot(data, aes(x = p, y = connectedGraphs, color = as.factor(n))) +
-  geom_line() +
-  geom_point() +
-  labs(
-    title = "Número de grafos conexos según n y p",
-    x = "Probabilidad de fallo (p)",
-    y = "Número de grafos conexos",
-    color = "Número de nodos (n)"
-  ) +
-  theme_minimal()
-
-
 ggplot(data, aes(x = p, y = connectedGraphs, color = as.factor(n))) +
   geom_line(size = 1) +  # Ajustar el grosor de la línea
   geom_point(size = 2) + # Ajustar el tamaño de los puntos
@@ -33,4 +20,3 @@ ggplot(data, aes(x = p, y = connectedGraphs, color = as.factor(n))) +
     color = "Número de nodos (n)"
   ) +
   theme_minimal()
-
