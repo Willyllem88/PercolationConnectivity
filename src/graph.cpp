@@ -13,7 +13,7 @@ Graph Graph::generateRandomGraph_ErdosRenyi(int n, double p) {
     Graph g(n);
     for (int i = 0; i < n; ++i) {
         for (int j = i + 1; j < n; ++j) {
-            if (!g.existsEdge(i, j) && rand01() < p) {
+            if (rand01() < p) {
                 g.addEdge(i, j);
             }
         }
