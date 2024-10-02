@@ -16,6 +16,9 @@ public:
     //Generate a square grid graph G(m x m)
     static Graph generateSquareGridGraph(int m);
 
+    //Generate a triangular grid graph G
+    static Graph generateTriangularGridGraph(int rows);
+
     // Add an edge between two nodes u and v
     void addEdge(int u, int v);
 

@@ -29,23 +29,39 @@ Graph Graph::generateSquareGridGraph(int m){
         for(int j=0; j<m;++j){
             int currentNode = i*m + j;
             //Add edge when two vertices are at distance 1
-            //Connect with neighbours above, below, left and right, if possible
-            if(i > 0){
-                int neighborNode = (i-1)*m + j;
-                g.addEdge(currentNode,neighborNode);
-            }
+            //Connect with neighbours right and below, if possible
             if(i<m-1){
-                int neighborNode = (i+1)*m + j;
-                g.addEdge(currentNode,neighborNode);
-            }
-            if(j>0){
-                int neighborNode = i*m + (j-1);
-                g.addEdge(currentNode,neighborNode);
+                int belowNode = (i+1)*m + j;
+                g.addEdge(currentNode,belowNode);
             }
             if(j<m-1){
-                int neighborNode = i*m + (j+1);
-                g.addEdge(currentNode,neighborNode);
+                int rightNode = i*m + (j+1);
+                g.addEdge(currentNode,rightNode);
             }
+        }
+    }
+    return g;
+}
+
+//Generate a Triangular Grid Graph
+Graph Graph::generateTriangularGridGraph(int rows){
+    int n = (rows*(rows+1))/2;
+    Graph g(n);
+    int currentNode = 0;
+    for(int i = 0; i<rows;++i){
+        for(int j=0;j<=i;++j){
+            //Connect currentNode with right neighbour and the two below, if they exist
+            if(j<i){
+                int rightNode = currentNode + 1;
+                g.addEdge(currentNode,rightNode);
+            }
+            if(i < rows-1){
+                int belowLeftNode = currentNode + i + 1;
+                g.addEdge(currentNode, belowLeftNode);
+                int belowRightNode = currentNode + i + 2;
+                g.addEdge(currentNode, belowRightNode);
+            }
+            currentNode++;
         }
     }
     return g;
