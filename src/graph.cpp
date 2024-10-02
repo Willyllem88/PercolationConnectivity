@@ -64,16 +64,27 @@ bool Graph::existsEdge(int u, int v) const {
 
 // Perform edge percolation on the graph, returns the percolated graph
 Graph Graph::edgePercolation(double p) const {
-    Graph gp(n);
-    for (int i = 0; i < n; ++i) {
-        for (int j = i + 1; j < n; ++j) {
-            // Remove the edge with probability p if it exists
-            if (existsEdge(i, j) && rand01() > p) {
-                gp.addEdge(i, j);
+    // Create a new graph as a deep copy of the current graph
+    Graph percolatedGraph(this->n);  // Copy the number of nodes
+
+    // Iterate over each node in the adjacency list
+    for (int u = 0; u < n; ++u) {
+        for (int v : adjList[u]) {
+            // Avoid processing the same edge twice
+            if (u < v) {
+                // Generate a random number between 0 and 1
+                double randomValue = rand01();
+
+                // If randomValue is greater than p, keep the edge
+                if (randomValue > p) {
+                    percolatedGraph.addEdge(u, v);
+                }
             }
         }
     }
-    return gp;
+
+    // Return the new percolated graph
+    return percolatedGraph;
 }
 
 // Perform node percolation on the graph, returns the percolated graph
