@@ -89,8 +89,39 @@ Graph Graph::edgePercolation(double p) const {
 
 // Perform node percolation on the graph, returns the percolated graph
 Graph Graph::nodePercolation(double p) const {
-    //TODO: implement;
+    // Create a new graph as a deep copy of the current graph
+    Graph percolatedGraph(this->n);  // Copy the number of nodes
+
+    // Vector to track which nodes survived percolation
+    std::vector<bool> nodeAlive(n, true);
+
+    // Iterate over each node
+    for (int u = 0; u < n; ++u) {
+        // Generate a random number between 0 and 1
+        double randomValue = rand01();
+
+        // If randomValue is less than p, the node fails and is removed
+        if (randomValue < p) {
+            nodeAlive[u] = false;  // Mark the node as failed
+        }
+    }
+
+    // Now add edges to the percolatedGraph for nodes that survived
+    for (int u = 0; u < n; ++u) {
+        if (nodeAlive[u]) {
+            for (int v : adjList[u]) {
+                // Only add the edge if both nodes u and v survived
+                if (nodeAlive[v]) {
+                    percolatedGraph.addEdge(u, v);
+                }
+            }
+        }
+    }
+
+    // Return the new percolated graph
+    return percolatedGraph;
 }
+
 
 // Display the adjacency list of the graph
 void Graph::displayGraph() const{
