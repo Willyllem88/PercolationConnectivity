@@ -67,6 +67,24 @@ Graph Graph::generateTriangularGridGraph(int rows){
     return g;
 }
 
+//Generate a Random Geometric Graph(n, r)
+Graph Graph::generateRandomGeometricGraph(int n, int r){
+    Graph g(n);
+    std::vector<std::pair<int,int>> coords(n);
+    for(int i = 0; i < n; ++i){
+        coords[i].first = rand01();
+        coords[i].second = rand01();
+    }
+    for(int i = 0; i < n; ++i){
+        for(int j = i + 1; j < n; ++j){            
+            int dist_x = coords[i].first - coords[j].first;
+            int dist_y = coords[i].second - coords[j].second;
+            if((sqrt(dist_x * dist_x + dist_y * dist_y)) < r) g.addEdge(i, j);
+        }
+    }
+    return g;
+}
+
 //Returns a candidate to connection in a BA model Graph following a preferential attachment method
 int preferentialAttachment(std::vector<int> connection_degree){
     int degree_sum = 0, temp_sum = 0, random_num, chosen = 0;  
