@@ -67,6 +67,45 @@ Graph Graph::generateTriangularGridGraph(int rows){
     return g;
 }
 
+//Returns a candidate to connection in a BA model Graph following a preferential attachment method
+int preferentialAttachment(std::vector<int> connection_degree){
+    int degree_sum = 0, temp_sum = 0, random_num, chosen = 0;  
+    for(auto i : connection_degree) degree_sum += i;
+    random_num = rand() % degree_sum;
+    for(int i = 0; i < int(connection_degree.size()); ++i){
+        temp_sum += connection_degree[i];
+        if(random_num <= temp_sum){
+            chosen = i;
+            break;
+        } 
+    }
+    return chosen;
+}
+
+Graph Graph::generateBAmodelGraph(int n, int m0, int m){
+    Graph g(n);
+    std::vector<int> connection_degree(n);
+    //Connect m0 nodes with each other, assign them a connection degree of m0 - 1
+    for(int i = 0; i < m0; ++i){
+        for(int j = i + 1; j < m0; ++j) g.addEdge(i, j);
+        connection_degree[i] = m0 - 1;
+    }
+    for(int i = m0; i < n; ++i){
+        //Connect the remaining nodes with the others based on their connection degree
+        std::vector<int> candidates;
+        while(int(candidates.size()) < m){
+            int selectedNode = preferentialAttachment(connection_degree);
+            if(find(candidates.begin(), candidates.end(), selectedNode) == candidates.end()) candidates.push_back(selectedNode);
+        }
+        for(auto j : candidates) {
+            g.addEdge(i, j);
+            connection_degree[j] += 1;
+        }
+        connection_degree[i] = m;
+    }
+    return g;
+}
+
 // Add an undirected edge between node u and node v
 void Graph::addEdge(int u, int v) {
     adjList[u].push_back(v);
@@ -108,7 +147,7 @@ Graph Graph::nodePercolation(double p) const {
     // Create a new graph as a deep copy of the current graph
     Graph percolatedGraph(this->n);  // Copy the number of nodes
 
-    // Vector to track which nodes survived percolation
+    // std::vector to track which nodes survived percolation
     std::vector<bool> nodeAlive(n, true);
 
     // Iterate over each node
