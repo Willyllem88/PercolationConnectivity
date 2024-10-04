@@ -20,9 +20,9 @@ public:
     static Graph generateTriangularGridGraph(int rows);
 
     //Generate a random geometric Graph(n, r) being r the maximum connectivity distance between two nodes
-    static Graph generateRandomGeometricGraph(int n, int r);
+    static Graph generateRandomGeometricGraph(int n, double r);
 
-    //Generate a BA model Graph(n, m0, m) being m0 the number of inital nodes connected and m the number of edges the rest of nodes are connected
+    //Generate a BA model Graph(n, m0, m) being m0 the number of inital nodes connected and m the number of edges the rest of nodes are connected to
     static Graph generateBAmodelGraph(int n, int m0, int m);
 
     // Add an edge between two nodes u and v

@@ -68,17 +68,19 @@ Graph Graph::generateTriangularGridGraph(int rows){
 }
 
 //Generate a Random Geometric Graph(n, r)
-Graph Graph::generateRandomGeometricGraph(int n, int r){
+Graph Graph::generateRandomGeometricGraph(int n, double r){
     Graph g(n);
-    std::vector<std::pair<int,int>> coords(n);
+    std::vector<std::pair<double,double>> coords(n);
     for(int i = 0; i < n; ++i){
         coords[i].first = rand01();
         coords[i].second = rand01();
+        //std::cout << coords[i].first << "  "  << coords[i].second << std::endl;
     }
     for(int i = 0; i < n; ++i){
         for(int j = i + 1; j < n; ++j){            
-            int dist_x = coords[i].first - coords[j].first;
-            int dist_y = coords[i].second - coords[j].second;
+            double dist_x = coords[i].first - coords[j].first;
+            double dist_y = coords[i].second - coords[j].second;
+            //std::cout << (sqrt(dist_x * dist_x + dist_y * dist_y)) << std::endl;
             if((sqrt(dist_x * dist_x + dist_y * dist_y)) < r) g.addEdge(i, j);
         }
     }
