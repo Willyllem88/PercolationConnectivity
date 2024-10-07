@@ -8,6 +8,8 @@
 # Ignore test files
 input.txt
 *.csv
+.Rhistory
 
 # Ignore the test executable
 main
+runner
