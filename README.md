@@ -90,12 +90,4 @@ Exemple de contingut de `input.txt`:
 72479   100  1000   100  100     ./data/test3.csv    Square-Grid
 ```
 
-- **21312**: Llavor aleatòria (RandomSeed)
-- **10**: Nombre mínim de nodes
-- **100**: Nombre màxim de nodes
-- **10**: Increment de nodes en cada iteració (NúmeroNodesStep)
-- **./data/test1.csv**: Fitxer de resultats
-- **Erdos-Renyi**: Algoritme generador de grafs
-- **0.1**: Paràmetre addicional per a l'algoritme (probabilitat d'aresta en el cas de **Erdos-Renyi**)
-
 ---
