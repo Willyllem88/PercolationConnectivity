@@ -5,5 +5,9 @@
 # Ignore object files
 *.o
 
+# Ignore test files
+input.txt
+*.csv
+
 # Ignore the test executable
 main
