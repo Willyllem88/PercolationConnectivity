@@ -26,6 +26,9 @@
 #include <algorithm>
 #include <random>
 
+// Functional programming
+#include <functional>
+
 // Function to set the random seed
 inline void setSeed(unsigned int seed) {
     std::srand(seed); // Standard library
