@@ -1,5 +1,4 @@
 #include "graph.hpp"
-#include <functional>
 
 // Constants
 namespace Options {
@@ -107,7 +106,6 @@ void selectOptions() {
 
 // Main function
 int main() {
-main:
     // Select options
     selectOptions();
 
@@ -151,8 +149,6 @@ main:
             std::cout << entry.printEntry() << std::endl;
         }
     }
-
-    goto main;
 
     return 0;
 }
