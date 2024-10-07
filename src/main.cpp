@@ -107,6 +107,7 @@ void selectOptions() {
 
 // Main function
 int main() {
+main:
     // Select options
     selectOptions();
 
@@ -150,6 +151,8 @@ int main() {
             std::cout << entry.printEntry() << std::endl;
         }
     }
+
+    goto main;
 
     return 0;
 }

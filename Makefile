@@ -1,6 +1,6 @@
 # Variables
 CXX = g++
-CXXFLAGS = -Wall -O2 -g
+CXXFLAGS = -Wall -O2 -g -O2
 
 # Definir el directorio de origen y de objetos
 SRC_DIR = ./src
