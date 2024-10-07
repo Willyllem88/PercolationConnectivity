@@ -102,7 +102,7 @@ int preferentialAttachment(std::vector<int> connection_degree){
     return chosen;
 }
 
-Graph Graph::generateRandom_BarabsiAlbert(int n, int m0, int m){
+Graph Graph::generateRandom_BarabasiAlbert(int n, int m0, int m){
     Graph g(n);
     std::vector<int> connection_degree(n);
     //Connect m0 nodes with each other, assign them a connection degree of m0 - 1

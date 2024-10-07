@@ -23,7 +23,7 @@ public:
     static Graph generateRandomGeometricGraph(int n, double r);
 
     //Generate a BA model Graph(n, m0, m) being m0 the number of inital nodes connected and m the number of edges the rest of nodes are connected to
-    static Graph generateRandom_BarabsiAlbert(int n, int m0, int m);
+    static Graph generateRandom_BarabasiAlbert(int n, int m0, int m);
 
     // Add an edge between two nodes u and v
     void addEdge(int u, int v);
