@@ -164,11 +164,9 @@ Graph Graph::edgePercolation(double p) const {
 
 // Perform node percolation on the graph, returns the percolated graph
 Graph Graph::nodePercolation(double p) const {
-    // Create a new graph as a deep copy of the current graph
-    Graph percolatedGraph(this->n);  // Copy the number of nodes
-
     // std::vector to track which nodes survived percolation
-    std::vector<bool> nodeAlive(n, true);
+    std::vector<std::pair<bool, int>> nodeAlive(n, {true, 0});
+    int nbNodesAlive = n;
 
     // Iterate over each node
     for (int u = 0; u < n; ++u) {
@@ -177,17 +175,23 @@ Graph Graph::nodePercolation(double p) const {
 
         // If randomValue is less than p, the node fails and is removed
         if (randomValue < p) {
-            nodeAlive[u] = false;  // Mark the node as failed
+            nodeAlive[u].first = false;  // Mark the node as failed
+            nbNodesAlive--;
+        }
+        else {
+            nodeAlive[u].second = u - n + nbNodesAlive;
         }
     }
 
+    Graph percolatedGraph(nbNodesAlive);
+
     // Now add edges to the percolatedGraph for nodes that survived
     for (int u = 0; u < n; ++u) {
-        if (nodeAlive[u]) {
+        if (nodeAlive[u].first) {
             for (int v : adjList[u]) {
-                // Only add the edge if both nodes u and v survived
-                if (nodeAlive[v]) {
-                    percolatedGraph.addEdge(u, v);
+                // Only add the edge if both nodes u and v survived and the edge is not added
+                if (nodeAlive[v].first && u < v) {
+                    percolatedGraph.addEdge(nodeAlive[u].second, nodeAlive[v].second);
                 }
             }
         }
