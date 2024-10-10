@@ -264,6 +264,3 @@ void Graph::bfs(int start, std::vector<bool>& visited) const {
         }
     }
 }
-
-
-

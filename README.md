@@ -73,7 +73,7 @@ Aquest és un exemple de `input.txt`, on cada línia conté una configuració pe
 - **NúmeroMàximNodes**: El nombre màxim de nodes del graf.
 - **NúmeroNodesStep**: Increment dels nodes en cada iteració.
 - **IteracionsPerObtenirResultat**: El nombre de vegades que es provarà la configuració d'aquell moment, per probabilita _p_ de percolació i per nombre de vèrtex _n_, per tal de trobar la mitja.
-- **ModePercolació**: La percolació pot ser o bé per nodes o per arestes (edges). Per seleccionar quin tipus de percolació volem que s'apliqui ficarem PERC_NODE o PERC_EDGE.
+- **ModePercolació**: La percolació pot ser o bé per nodes o per arestes (edges). Per seleccionar quin tipus de percolació volem que s'apliqui ficarem NODE_PERC o EDGE_PERC.
 - **PathResultat**: El fitxer on es guardaran els resultats.
 - **AlgorismeGeneradorGraf**: L'algoritme utilitzat per generar el graf.
   - **Erdos-Renyi** (p)

@@ -6,7 +6,7 @@ namespace Options {
     static int MIN_NB_NODES;
     static int MAX_NB_NODES;
     static int NB_NODES_STEP;
-    static std::string PERC_MODE; // Percolation Mode, (PERC_EDGE, PERC_NODE)
+    static std::string PERC_MODE; // Percolation Mode, (EDGE_PERC, NODE_PERC)
     static int TRIES_PER_P; // Number of tries for each value of p
     static std::string CSV_FILE = "data/results.csv";
     static std::function<Graph(int)> GRAPH_GENERATOR;
@@ -98,9 +98,9 @@ void selectOptions() {
     std::cout << "Enter the number of tries per p: ";
     std::cin >> Options::TRIES_PER_P;
 
-    std::cout << "Select the percolation mode [PERC_EDGE | PERC_NODE]";
+    std::cout << "Select the percolation mode [EDGE_PERC | NODE_PERC]";
     std::cin >> Options::PERC_MODE;
-    if (Options::PERC_MODE != "PERC_EDGE" && Options::PERC_MODE != "PERC_NODE")
+    if (Options::PERC_MODE != "EDGE_PERC" && Options::PERC_MODE != "NODE_PERC")
         errorAndExit(Options::PERC_MODE + " is not a valid percolation mode");
 
     std::cout << "Enter the path of the CSV file: ";
@@ -145,7 +145,7 @@ int main() {
 
                 // Perform node percolation on the graph
                 Graph Gp;
-                if (Options::PERC_MODE == "PERC_EDGE")
+                if (Options::PERC_MODE == "EDGE_PERC")
                     Gp = G.edgePercolation(p);
                 else
                     Gp = G.nodePercolation(p);

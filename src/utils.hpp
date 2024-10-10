@@ -30,7 +30,7 @@
 #include <functional>
 
 // Manage error function
-void errorAndExit(std::string s) {
+inline void errorAndExit(std::string s) {
     std::cout << "ERROR: " << s << std::endl;
     exit(1);
 }

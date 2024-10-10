@@ -1,5 +1,5 @@
 # Cargar el archivo CSV
-data <- read.csv("../data/belda.csv", sep=";")
+data <- read.csv("../data/vert.csv", sep=";")
 
 # Ver un resumen rápido de los datos
 head(data)
