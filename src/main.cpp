@@ -6,6 +6,7 @@ namespace Options {
     static int MIN_NB_NODES;
     static int MAX_NB_NODES;
     static int NB_NODES_STEP;
+    static std::string PERC_MODE; // Percolation Mode, (PERC_EDGE, PERC_NODE)
     static int TRIES_PER_P; // Number of tries for each value of p
     static std::string CSV_FILE = "data/results.csv";
     static std::function<Graph(int)> GRAPH_GENERATOR;
@@ -75,7 +76,7 @@ std::function<Graph(int)> selectGraphAlgorithm() {
         return [m0, m](int n) { return Graph::generateRandom_BarabasiAlbert(n, m0, m); };
     }
     else {
-        std::cout << "Invalid choice\n";
+        errorAndExit(choice + " is not a valid generation algoritm");
         return nullptr;
     }
 }
@@ -96,6 +97,11 @@ void selectOptions() {
 
     std::cout << "Enter the number of tries per p: ";
     std::cin >> Options::TRIES_PER_P;
+
+    std::cout << "Select the percolation mode [PERC_EDGE | PERC_NODE]";
+    std::cin >> Options::PERC_MODE;
+    if (Options::PERC_MODE != "PERC_EDGE" && Options::PERC_MODE != "PERC_NODE")
+        errorAndExit(Options::PERC_MODE + " is not a valid percolation mode");
 
     std::cout << "Enter the path of the CSV file: ";
     std::cin >> Options::CSV_FILE;
@@ -138,7 +144,11 @@ int main() {
                 if (G.connectedComponents() != 1) continue;
 
                 // Perform node percolation on the graph
-                Graph Gp = G.edgePercolation(p);
+                Graph Gp;
+                if (Options::PERC_MODE == "PERC_EDGE")
+                    Gp = G.edgePercolation(p);
+                else
+                    Gp = G.nodePercolation(p);
 
                 if (Gp.connectedComponents() == 1) ++connectedCount;
             }

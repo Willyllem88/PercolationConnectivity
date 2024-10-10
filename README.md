@@ -73,6 +73,7 @@ Aquest és un exemple de `input.txt`, on cada línia conté una configuració pe
 - **NúmeroMàximNodes**: El nombre màxim de nodes del graf.
 - **NúmeroNodesStep**: Increment dels nodes en cada iteració.
 - **IteracionsPerObtenirResultat**: El nombre de vegades que es provarà la configuració d'aquell moment, per probabilita _p_ de percolació i per nombre de vèrtex _n_, per tal de trobar la mitja.
+- **ModePercolació**: La percolació pot ser o bé per nodes o per arestes (edges). Per seleccionar quin tipus de percolació volem que s'apliqui ficarem PERC_NODE o PERC_EDGE.
 - **PathResultat**: El fitxer on es guardaran els resultats.
 - **AlgorismeGeneradorGraf**: L'algoritme utilitzat per generar el graf.
   - **Erdos-Renyi** (p)
@@ -85,9 +86,9 @@ Aquest és un exemple de `input.txt`, on cada línia conté una configuració pe
 Exemple de contingut de `input.txt`:
 
 ```txt
-21312   10   100    10   1000    ./data/test1.csv    Erdos-Renyi         0.1
-35353   50   500    50   1000    ./data/test2.csv    Random-Geometric    0.3
-72479   100  1000   100  100     ./data/test3.csv    Square-Grid
+21312   10   100    10   1000    NODE_PERC    ./data/test1.csv    Erdos-Renyi         0.1
+35353   50   500    50   1000    EDGE_PERC    ./data/test2.csv    Random-Geometric    0.3
+72479   100  1000   100  100     EDGE_PERC    ./data/test3.csv    Square-Grid
 ```
 
 ---
