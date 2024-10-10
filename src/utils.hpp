@@ -29,6 +29,12 @@
 // Functional programming
 #include <functional>
 
+// Manage error function
+void errorAndExit(std::string s) {
+    std::cout << "ERROR: " << s << std::endl;
+    exit(1);
+}
+
 // Function to set the random seed
 inline void setSeed(unsigned int seed) {
     std::srand(seed); // Standard library
