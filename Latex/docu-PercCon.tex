@@ -1,0 +1,118 @@
+\documentclass[a4paper]{article}
+\usepackage[a4paper,left=3cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage{titling}
+\usepackage{lipsum} % Paquete opcional para texto de ejemplo
+\usepackage{color}
+
+\title{\textbf{\huge Algorismia}\\[0.5cm]
+	\textbf{\Large Estudi Experimental de Connectivitat i Percolació de Grafs}}
+\author{\emph{Pau Belda, Guillem Cabré, Marc Peñalver, Prisca Oleart}}
+\date{\textbf{Curs 2024-25, Quatrimestre de tardor}}
+
+\renewcommand*\contentsname{Continguts}
+\renewcommand{\figurename}{Figura}
+
+\begin{document}
+	
+	\begin{titlepage}
+		\clearpage\maketitle
+		\thispagestyle{empty}
+	\end{titlepage}
+	
+	\tableofcontents
+	\clearpage
+	
+	\section{Definicions}
+	
+	\subsection{Graf}
+	
+	\subsection{Percolació}
+	
+	\subsection{Transició de Fase}
+	
+	\subsection{Objectius de la Experimentació}
+	
+	\newpage
+	\section{Grafs Seleccionats}
+	
+	\subsection{Erdős-Rényi}
+	
+	\subsection{Square-Grid}
+	
+	\subsection{Triangular-Grid}
+	
+	\subsection{Random-Geometric}
+	
+	\subsection{Barábasi-Albert}
+	
+	\newpage
+	\section{Algoritmes}
+	
+	\subsection{Percolació per Nodes}
+	
+	\subsection{Percolació per Arestes}
+	
+	\subsection{Càlcul de Components Connexes}
+	
+	\newpage
+	\section{Experimentació}
+	
+	Per dur a terme l'experimentació del projecte, hem utilitzat diferents eines. Hem programat dos programes en \texttt{C++}, un llenguatge que ens ofereix molta eficàcia temporal i espacial. Aquests programes són el \texttt{main} i el \texttt{runner}. També hem dissenyat un fitxer de classe \texttt{graph} amb tots els atributs i funcions necessàries per operar amb els grafs. Aquesta classe representa els grafs com a llistes d'adjacència. \\
+	
+	Per compilar aquests programes, hem fet ús del programari lliure \texttt{make}, que automatitza i paral·litza el compilatge i l'enllaç. \\
+	
+	A més, hem dissenyat scripts per a l'interpret \texttt{R}, que és un programari de tractament de dades que ens analitzarà i generarà gràfics dels resultats dels estudis, que estaran en format \texttt{.csv}. \\
+	
+	Més informació del procés d'experimentació es pot trobar en el GitHub del projecte, premeu \href{https://github.com/Willyllem88/PercolationConnectivity}{\texttt{aquí}} per accedir-hi. Allà, a part del codi, també podreu consultar més informació sobre la generació de grafs, les dependències del programa per compilar-lo i executar-lo, com inserir els paràmetres pels programes i més. \\
+	
+	\subsection{Metodologia}
+	
+	El programa \texttt{main}, mitjançant la classe \texttt{graph}, ens ha permès analitzar les propietats del canvi de fase a partir dels paràmetres inicials. Aquests paràmetres són els següents:
+	
+	\begin{itemize}
+		\item \textbf{RandomSeed}: La llavor per al generador aleatori.
+		\item \textbf{NúmeroMínimNodes}: El nombre mínim de nodes del graf.
+		\item \textbf{NúmeroMàximNodes}: El nombre màxim de nodes del graf.
+		\item \textbf{NúmeroNodesStep}: Increment dels nodes en cada iteració.
+		\item \textbf{IteracionsPerObtenirResultat}: El nombre de vegades que es provarà la configuració per probabilitat \(p\) de percolació i per nombre de vèrtex \(n\).
+		\item \textbf{ModePercolació}: Tipus de percolació per nodes o per arestes.
+		\item \textbf{PathResultat}: Fitxer on es guardaran els resultats.
+		\item \textbf{AlgorismeGeneradorGraf}: Algoritme utilitzat per generar el graf (per exemple, Erdős-Rényi, Square-Grid, etc.).
+		\item \textbf{ParàmetresAlgorisme}: Paràmetres addicionals per al generador de graf (opcional segons l'algorisme).
+	\end{itemize}
+	
+	A partir d'aquests paràmetres, el programa \texttt{main} escriurà un fitxer \texttt{PATH.csv} que posteriorment serà analitzat mitjançant el software de tractament de dades \texttt{R}. \\
+	
+	Per altra banda, tenim el programa \texttt{runner}, que rebrà com a input un fitxer de text. Aquest fitxer tindrà un llistat de paràmetres per diferents experiments del programa \texttt{main}. Un exemple d'això seria:
+	
+	\begin{verbatim}
+		RGN   MIN MAX  STEP ITs   PERC-MODE  RESULT-PATH      GEN-ALGORITM    PARAMETERS-GEN
+		------------------------------------------------------------------------------------
+		21312 10  100   10  1000  NODE_PERC  ./data/test1.csv Erdos-Renyi        0.1
+		35353 50  500   50  1000  EDGE_PERC  ./data/test2.csv Random-Geometric   0.3
+		72479 100 1000  100 100   EDGE_PERC  ./data/test3.csv Square-Grid
+	\end{verbatim}
+	
+	El programa \texttt{runner}, per cada fila del fitxer que rep, inicialitzarà una instància del programa \texttt{main}, aconseguint d'aquesta manera automatitzar molt més els tests, podent córrer diferents programes \texttt{main} simultàniament. \\
+	
+	\newpage
+	\section{Conclusions}
+	
+	\newpage
+	\section{Bibliografia}
+	
+	\begin{itemize}
+		\item \href{https://ca.wikipedia.org/wiki/Model_d%27Erd%C5%91s-R%C3%A9nyi}{Wikipedia. \textit{Model d'Erdős-Rényi}}.
+	\end{itemize}
+	
+	\newpage
+	\section{Annex}
+	
+	
+	
+\end{document}
