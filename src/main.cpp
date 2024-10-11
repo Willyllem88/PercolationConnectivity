@@ -16,23 +16,23 @@ namespace Options {
 struct CSVEntry {
     double p;
     int n;
-    int connectedGraphs;
+    double connectedPercentatge;
 
     // Serialize CSV entry to string
     std::string toCSVString() const {
-        return std::to_string(p) + ";" + std::to_string(n) + ";" + std::to_string(connectedGraphs);
+        return std::to_string(p) + ";" + std::to_string(n) + ";" + std::to_string(connectedPercentatge);
     }
 
 
     // Print CSV entry to console with tabs
     std::string printEntry() const {
-        return "p: " + std::to_string(p) + " \n: " + std::to_string(n) + " \tconnectedPercentatge: " + std::to_string(connectedGraphs);
+        return "p: " + std::to_string(p) + " \n: " + std::to_string(n) + " \tconnectedPercentatge: " + std::to_string(connectedPercentatge);
     }
 };
 
 // Write CSV header
 void writeCSVHeader(std::ofstream& csvFile) {
-    csvFile << "p;n;connectedGraphs" << std::endl;
+    csvFile << "p;n;connectedGraphsPercentatge" << std::endl;
 }
 
 // Write CSV entry
@@ -125,7 +125,7 @@ int main() {
     for (int n = Options::MIN_NB_NODES; n <= Options::MAX_NB_NODES; n += Options::NB_NODES_STEP) {
         for (int step = 0; step <= 100; ++step) {
             // Calculate the value of q from the number of steps, to avoid losing precision
-            double p = step * 0.01; //Probability of failure
+            double p = step * 0.01; //Probability of not failure
 
             int connectedCount = 0;
             for (int i = 0; i < Options::TRIES_PER_P; ++i) {
@@ -154,7 +154,7 @@ int main() {
             }
 
             // Write CSV entry
-            CSVEntry entry = {p, n, connectedCount};
+            CSVEntry entry = {p, n, (double)connectedCount / Options::TRIES_PER_P};
             writeCSVEntry(csvFile, entry);
             std::cout << entry.printEntry() << std::endl;
         }

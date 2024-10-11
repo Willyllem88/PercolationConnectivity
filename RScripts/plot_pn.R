@@ -18,18 +18,19 @@ for (file in file_list) {
   file_name <- tools::file_path_sans_ext(basename(file))
   
   # Crear el gráfico
-  plot <- ggplot(data, aes(x = p, y = connectedGraphs, color = as.factor(n))) +
+  plot <- ggplot(data, aes(x = p, y = connectedGraphsPercentatge, color = as.factor(n))) +
     geom_line(size = 1) +  # Ajustar el grosor de la línea
     geom_point(size = 2) + # Ajustar el tamaño de los puntos
     labs(
       title = paste("Número de grafos conexos según n y p -", file_name),
       x = "Probabilidad de fallo (p)",
-      y = "Número de grafos conexos",
+      y = "Porcetaje de grafos conexos",
       color = "Número de nodos (n)"
     ) +
     scale_color_brewer(palette = "RdBu") +
     theme_minimal()
   
   # Guardar el gráfico como PNG
-  ggsave(filename = paste0(file_name, ".png"), bg = "white", plot = plot, width = 8, height = 6)
+  # Guardar el gráfico como PNG en el directorio ../data
+  ggsave(filename = paste0("../data/", file_name, ".png"), bg = "white", plot = plot, width = 8, height = 6)
 }
