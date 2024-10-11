@@ -98,7 +98,7 @@ void selectOptions() {
     std::cout << "Enter the number of tries per p: ";
     std::cin >> Options::TRIES_PER_P;
 
-    std::cout << "Select the percolation mode [EDGE_PERC | NODE_PERC]";
+    std::cout << "Select the percolation mode [EDGE_PERC | NODE_PERC]: ";
     std::cin >> Options::PERC_MODE;
     if (Options::PERC_MODE != "EDGE_PERC" && Options::PERC_MODE != "NODE_PERC")
         errorAndExit(Options::PERC_MODE + " is not a valid percolation mode");
