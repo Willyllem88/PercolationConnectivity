@@ -22,10 +22,10 @@ for (file in file_list) {
     geom_line(size = 1) +  # Ajustar el grosor de la línea
     geom_point(size = 2) + # Ajustar el tamaño de los puntos
     labs(
-      title = paste("Número de grafos conexos según n y p -", file_name),
-      x = "Probabilidad de fallo (p)",
-      y = "Porcetaje de grafos conexos",
-      color = "Número de nodos (n)"
+      title = paste("Percentatge de grafs connexos segons n i p -", file_name),
+      x = "Probabilidad de fallida (p)",
+      y = "Percentatge de grafs conexos",
+      color = "Número de nodes (n)"
     ) +
     scale_color_brewer(palette = "RdBu") +
     theme_minimal()

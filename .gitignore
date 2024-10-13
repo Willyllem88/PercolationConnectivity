@@ -6,11 +6,8 @@
 *.o
 
 # Ignore test files
-input.txt
-*.csv
 .Rhistory
 .RData
-*.png
 
 # Ignore the test executable
 main
