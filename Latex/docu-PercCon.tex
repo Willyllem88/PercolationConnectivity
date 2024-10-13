@@ -38,7 +38,25 @@
 	
 	\subsection{Percolació}
 	
+	La percolació en un graf $G$ consisteix en eliminar o desactivar nodes o arestes, i posteriorment es mesura com això afecta una certa propietat global del graf. Quan desactivem una aresta o un node, direm que ha tingut una fallida. \\
+	
+	En termes generals, l'objectiu és estudiar com el graf passa d'estar completament connectat a parcialment o totalment desconnectat a mesura que es treuen alguns dels seus components. Quan parlem de percolació, considerem una probabilitat $p$ que determina si una component del graf (node o aresta) es desactiva aleatòriament. Aquest mecanisme és especialment rellevant per a l'estudi de xarxes complexes, ja que ens ajuda a comprendre com de robust o vulnerable és el sistema que volem analitzar.
+	
+	\begin{itemize}
+		\item \textbf{Percolació per nodes}: Cada node té una probabilitat $p$ de ser desactivat. Un cop fet això, s'analitza com ha canviat la connectivitat del graf.
+		\item \textbf{Percolació per arestes}: En aquest cas, les arestes es desactiven en lloc dels nodes. Això també afecta la connectivitat, ja que les connexions directes entre nodes es perden.
+	\end{itemize}
+	
+	Després d'aplicar el procés de percolació (sobre nodes o arestes), s'obté un graf percolat, que és la versió modificada del graf original, amb una connectivitat reduïda i, possiblement, components desconnectats. Aquest graf l'anomenarem $G_{\text{p}}$.
+	
 	\subsection{Transició de Fase}
+	
+	Una transició de fase d'un graf per a una propietat concreta $\Pi$ fa referència a un resultat satisfactori d'un procés de percolació aplicat al graf. En el nostre cas aquesta propietat $\Pi$ serà la connectivitat del graf. \\
+	
+	Definim un resultat com a satisfactori si, donat que es troba una probabilitat de valor $q$ tal que es compleix la propietat $\Pi$ al graf $G_q$ (definim aquesta probabilitat com $q_{\Pi}$), per als grafs $G_{q'}$ on $q' > q_{\Pi}$, aquests verifiquen la propietat $\Pi$, i als grafs $G_{q'}$ on $q' < q_{\Pi}$, no la verifiquen (ambdues afirmacions són vàlides si es compleixen amb una probabilitat prou alta). \\
+	
+	Quan s'ha obtingut aquest resultat, diem que la propietat $\Pi$ presenta una transició de fase al voltant de $q_{\Pi}$. \\
+	
 	
 	\subsection{Objectius de la Experimentació}
 	
