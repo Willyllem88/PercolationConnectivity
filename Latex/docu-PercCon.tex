@@ -62,7 +62,7 @@
 		\end{algorithmic}
 	\end{algorithm}
 	
-	El generador de grafos Erdős-Rényi crea un graf aleatoriitzant la connexió entre nodes. Sigui $p$ la probabilitat d'establir una aresta entre qualsevol parell de nodes del graf. Per a cada parell de nodes $(i, j)$, es genera un nombre aleatori mitjançant la funció $rand01()$, que retorna un valor entre 0 i 1. Si aquest valor és menor que $p$, s'estableix una aresta entre $i$ i $j$. Aquest procés es repeteix per a tots els parells possibles de nodes. \\
+	El generador de grafs Erdős-Rényi crea un graf aleatoriitzant la connexió entre nodes. Sigui $p$ la probabilitat d'establir una aresta entre qualsevol parell de nodes del graf. Per a cada parell de nodes $(i, j)$, es genera un nombre aleatori mitjançant la funció $rand01()$, que retorna un valor entre 0 i 1. Si aquest valor és menor que $p$, s'estableix una aresta entre $i$ i $j$. Aquest procés es repeteix per a tots els parells possibles de nodes. \\
 	
 	La instrucció $j = i + 1$ en el bucle interior assegura que només es considerin les arestes entre nodes diferents i evita la duplicació d'arestes. Això és important perquè en un graf no dirigit, l'aresta entre $i$ i $j$ és la mateixa que l'aresta entre $j$ i $i$. D'aquesta manera, es redueix el nombre de connexions a calcular i s'assegura que cada aresta es consideri només una vegada. \\
 	
@@ -126,7 +126,7 @@
 	
 	\subsection{Programa Main}
 	
-	Per entendre els resultats també s'ha d'entendre les decisions que s'han pres per la recollida de dades. Analitzarem el programa `main` mitjançant un pseudocodi per no entrar en conceptes avançats de `C++`. A continuació vegeu una mostra del pseudocodi: \\
+	Per entendre els resultats també s'ha d'entendre les decisions que s'han pres per la recollida de dades. Analitzarem el programa \texttt{main} mitjançant un pseudocodi per no entrar en conceptes avançats de \texttt{C++}. A continuació vegeu una mostra del pseudocodi: \\
 	
 	\begin{algorithm}
 		\caption{Descripció de l'experiment}
@@ -136,14 +136,14 @@
 			\State Obrir l'arxiu CSV i escriure la capçalera
 			\For{$n$ in range(MIN\_NB\_NODES, MAX\_NB\_NODES + 1, NB\_NODES\_STEP)}
 			\For{$p$ des de 0 fins a 1 amb pas 0.01}
-			\State Inicialitzar el comptador de grafos connectats
+			\State Inicialitzar el comptador de grafs connexos
 			\For{$i = 0$ fins a TRIES\_PER\_P}
 			\Repeat
 			\State Generar el graf seleccionat($p$, $n$, $params$)
 			\Until{el graf és connex}
 			\State Aplicar percolació (per nodes o arestes) al graf
 			\If{el graf percolat és connex}
-			\State Incrementar el comptador de grafos connectats
+			\State Incrementar el comptador de grafs connexos
 			\EndIf
 			\EndFor
 			\State Escriure entrada resultant al CSV
