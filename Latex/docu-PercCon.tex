@@ -2,11 +2,16 @@
 \usepackage[a4paper,left=3cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
-\usepackage{hyperref}
 \usepackage{graphicx}
 \graphicspath{{./images/}}
+\usepackage{hyperref}
+
+\usepackage{algorithm}
+\floatname{algorithm}{Algorisme} % Cambia "Algorithm" por "Algorisme"
+
+\usepackage{algpseudocode}
 \usepackage{titling}
-\usepackage{lipsum} % Paquete opcional para texto de ejemplo
+\usepackage{lipsum}
 \usepackage{color}
 
 \title{\textbf{\huge Algorismia}\\[0.5cm]
@@ -41,6 +46,25 @@
 	\section{Grafs Seleccionats}
 	
 	\subsection{Erdős-Rényi}
+	
+	\begin{algorithm}
+		\caption{Generació de graf Erdős-Rényi $G(n, p)$}
+		\begin{algorithmic} [1]
+			\State Inicialitzar el graf $g$ amb $n$ nodes
+			\For{$i = 0$ fins a $n-1$}
+			\For{$j = i + 1$ fins a $n-1$}
+			\If{rand01() \textless\, $p$}
+			\State Afegir una aresta entre $i$ i $j$ al graf $g$
+			\EndIf
+			\EndFor
+			\EndFor
+			\State Retornar el graf $g$
+		\end{algorithmic}
+	\end{algorithm}
+	
+	El generador de grafos Erdős-Rényi crea un graf aleatoriitzant la connexió entre nodes. Sigui $p$ la probabilitat d'establir una aresta entre qualsevol parell de nodes del graf. Per a cada parell de nodes $(i, j)$, es genera un nombre aleatori mitjançant la funció $rand01()$, que retorna un valor entre 0 i 1. Si aquest valor és menor que $p$, s'estableix una aresta entre $i$ i $j$. Aquest procés es repeteix per a tots els parells possibles de nodes. \\
+	
+	La instrucció $j = i + 1$ en el bucle interior assegura que només es considerin les arestes entre nodes diferents i evita la duplicació d'arestes. Això és important perquè en un graf no dirigit, l'aresta entre $i$ i $j$ és la mateixa que l'aresta entre $j$ i $i$. D'aquesta manera, es redueix el nombre de connexions a calcular i s'assegura que cada aresta es consideri només una vegada. \\
 	
 	\subsection{Square-Grid}
 	
@@ -79,7 +103,7 @@
 		\item \textbf{NúmeroMínimNodes}: El nombre mínim de nodes del graf.
 		\item \textbf{NúmeroMàximNodes}: El nombre màxim de nodes del graf.
 		\item \textbf{NúmeroNodesStep}: Increment dels nodes en cada iteració.
-		\item \textbf{IteracionsPerObtenirResultat}: El nombre de vegades que es provarà la configuració per probabilitat \(p\) de percolació i per nombre de vèrtex \(n\).
+		\item \textbf{IteracionsPerObtenirResultat}: El nombre de vegades que es provarà la configuració per probabilitat $p$ de percolació i per nombre de vèrtex $n$.
 		\item \textbf{ModePercolació}: Tipus de percolació per nodes o per arestes.
 		\item \textbf{PathResultat}: Fitxer on es guardaran els resultats.
 		\item \textbf{AlgorismeGeneradorGraf}: Algoritme utilitzat per generar el graf (per exemple, Erdős-Rényi, Square-Grid, etc.).
@@ -99,6 +123,43 @@
 	\end{verbatim}
 	
 	El programa \texttt{runner}, per cada fila del fitxer que rep, inicialitzarà una instància del programa \texttt{main}, aconseguint d'aquesta manera automatitzar molt més els tests, podent córrer diferents programes \texttt{main} simultàniament. \\
+	
+	\subsection{Programa Main}
+	
+	Per entendre els resultats també s'ha d'entendre les decisions que s'han pres per la recollida de dades. Analitzarem el programa `main` mitjançant un pseudocodi per no entrar en conceptes avançats de `C++`. A continuació vegeu una mostra del pseudocodi: \\
+	
+	\begin{algorithm}
+		\caption{Descripció de l'experiment}
+		\begin{algorithmic}[1]
+			\State Seleccionar opcions de configuració
+			\State Inicialitzar el generador de nombres aleatoris
+			\State Obrir l'arxiu CSV i escriure la capçalera
+			\For{$n$ in range(MIN\_NB\_NODES, MAX\_NB\_NODES + 1, NB\_NODES\_STEP)}
+			\For{$p$ des de 0 fins a 1 amb pas 0.01}
+			\State Inicialitzar el comptador de grafos connectats
+			\For{$i = 0$ fins a TRIES\_PER\_P}
+			\Repeat
+			\State Generar el graf seleccionat($p$, $n$, $params$)
+			\Until{el graf és connex}
+			\State Aplicar percolació (per nodes o arestes) al graf
+			\If{el graf percolat és connex}
+			\State Incrementar el comptador de grafos connectats
+			\EndIf
+			\EndFor
+			\State Escriure entrada resultant al CSV
+			\EndFor
+			\EndFor
+		\end{algorithmic}
+	\end{algorithm}
+	
+	Ara, analitzarem el codi. Per començar, el programa preguntarà per totes les opcions necessàries. D'aquesta manera, ens podem permetre tenir un sol programa que pugui fer tot el que necessitem i que sigui altament modular. S'utilitzarà la llavor per generar nombres aleatoris, i així l'experiment podrà ser repetit amb els mateixos resultats. Després, crearà el fitxer \texttt{PATH.csv}, al qual s'hi inseriran entrades que posteriorment s'analitzaran. \\
+	
+	Ara analitzarem l'algorisme encarregat de generar els resultats. Vegeu com primerament iterarem sobre $n$ tantes vegades com s'hagi indicat en la entrada. Alhora, també iterarem per cada $n$ sobre una probabilitat de fallida de percolació. Aquest bucle tindrà 100 iteracions, $p \in \{0.00, 0.01, \dots, 1.00\}$. A més d'aquests dos bucles, iterarem una altra vegada sobre $p$ i $n$ tantes vegades com l'usuari hagi indicat en l'apartat \textit{IteracionsPerObtenirResultat}. Així, es farà una mitjana amb més o menys mostres. \\
+	
+	S'iniciarà un comptador a 0 que representarà el nombre de grafs percolats connexos. S'utilitzarà el generador de grafs seleccionat a les opcions per generar el graf que posteriorment serà percolat. Vegeu que aquí generarem grafs fins a aconseguir un graf connex. Aquesta decisió la vam prendre per tenir una representació més acurada de la transició de fase. Més endavant, es tornarà a considerar aquesta decisió, ja que hi ha grafs, com ara el \textit{Random Geometric Graph}, que requereixen un paràmetre $r$, el qual, amb valors petits de $r$, acostuma a generar grafs no connexos. \\
+	
+	Per acabar, percolarem el graf $G(V,E)$ de la manera que s'hagi especificat a l'input, ja sigui per nodes o per arestes, obtenint $G_{\text{p}}$. A $G_{\text{p}}$ se li aplicarà un algorisme que determinarà si el graf és connex. Si ho és, s'incrementarà el comptador. Quan les \textit{IteracionsPerObtenirResultat} s'hagin completat, s'escriurà l'entrada resultant al fitxer \texttt{PATH.csv}.
+	
 	
 	\newpage
 	\section{Conclusions}
