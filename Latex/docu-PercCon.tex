@@ -148,8 +148,8 @@
 	
 	El generador de grafs de graella triangular crea un graf amb \( n \) nodes, on \( n = 1 + 2 + 3 + \ldots + rows = \frac{rows \times (rows + 1)}{2} \). Aquests nodes tenen una estructura en què cada node està connectat als veïns de la dreta i l'esquerra, així com als nodes superiors i inferiors, tant a l'esquerra com a la dreta, sempre que aquests existeixin. Això s'aconsegueix comprovant per a cada node si hi ha nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents. \\
 
+	\newpage
 	\subsection{Graf Geomètric Aleatori}
-
 	\begin{algorithm}
 		\caption{Generació de Graf Geomètric Aleatori $G(n, r)$}
 		\begin{algorithmic} [1]
@@ -174,9 +174,9 @@
 			\State Retornar el graf $g$
 		\end{algorithmic}
 	\end{algorithm}
-	
 	El generador de grafs geomètrics aleatoris crea un graf amb \( n \) nodes, on cada node es col·loca aleatòriament en un espai bidimensional unitari. Dos nodes estan connectats per una aresta si la distància entre ells és menor que un radi \( r \) especificat. Això es determina calculant la distància euclidiana entre tots els parells de nodes i afegint arestes quan la distància és inferior a \( r \).
-	
+
+	\newpage	
 	\subsection{Graf de Barabási-Albert}
 
 	\begin{algorithm}
@@ -211,9 +211,9 @@
 		\end{algorithmic}
 	\end{algorithm}
 	
-	El generador de grafs de Barabási-Albert crea un graf que segueix el model de creixement de xarxes, on s'afegeixen nodes nous que es connecten a nodes existents en funció del seu grau de connexió. Comença amb un conjunt inicial de \( m_0 \) nodes completament connectats, i cada nou node que s'afegeix selecciona \( m \) nodes existents per connectar-se, amb una probabilitat proporcional al seu grau de connexió.
+	El generador de grafs de Barabási-Albert crea un graf que segueix el model de creixement de xarxes, on s'afegeixen nodes nous que es connecten a nodes existents en funció del seu grau de connexió. Comença amb un conjunt inicial de \( m_0 \) nodes completament connectats, i cada nou node que s'afegeix selecciona \( m \) nodes existents per connectar-se, amb una probabilitat proporcional al seu grau de connexió. \\
 	
-	Aquesta selecció es realitza mitjançant la funció \texttt{preferentialAttachment}, que s'encarrega de seleccionar un node existent basant-se en el seu grau de connexió. La funció funciona de la següent manera:
+	Aquesta selecció es realitza mitjançant la funció \texttt{preferentialAttachment}, que s'encarrega de seleccionar un node existent basant-se en el seu grau de connexió. La funció funciona de la següent manera: \\
 	
 	\begin{algorithm}
 		\caption{Preferential Attachment}
