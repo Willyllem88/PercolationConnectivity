@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \graphicspath{{./images/}}
 \usepackage{hyperref}
+\usepackage{float}
 
 \usepackage{algorithm}
 \floatname{algorithm}{Algorisme} % Cambia "Algorithm" por "Algorisme"
@@ -65,7 +66,7 @@
 	
 	\subsection{Erdős-Rényi}
 	
-	\begin{algorithm}
+	\begin{algorithm} [H]
 		\caption{Generació de graf Erdős-Rényi $G(n, p)$}
 		\begin{algorithmic} [1]
 			\Statex \textbf{Entrada:} $n$ (dimensió de la graella), $p$ (probabilitat d'establir aresta entre nodes)
@@ -89,7 +90,7 @@
 	
 	\subsection{Graella Quadrada}
 
-	\begin{algorithm}
+	\begin{algorithm} [H]
 		\caption{Generació de Graf de Graella Quadrada $G(m \times m)$}
 		\begin{algorithmic} [1]
 			\Statex \textbf{Entrada:} $m$ (dimensió de la graella)
@@ -118,7 +119,7 @@
 
 	\subsection{Graella Triangular}
 
-	\begin{algorithm}
+	\begin{algorithm} [H]
 		\caption{Generació de Graf de Graella Triangular $G(rows)$}
 		\begin{algorithmic} [1]
 			\Statex \textbf{Entrada:} $rows$ (nombre de files)
@@ -148,9 +149,8 @@
 	
 	El generador de grafs de graella triangular crea un graf amb \( n \) nodes, on \( n = 1 + 2 + 3 + \ldots + rows = \frac{rows \times (rows + 1)}{2} \). Aquests nodes tenen una estructura en què cada node està connectat als veïns de la dreta i l'esquerra, així com als nodes superiors i inferiors, tant a l'esquerra com a la dreta, sempre que aquests existeixin. Això s'aconsegueix comprovant per a cada node si hi ha nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents. \\
 
-	\newpage
 	\subsection{Graf Geomètric Aleatori}
-	\begin{algorithm}
+	\begin{algorithm} [H]
 		\caption{Generació de Graf Geomètric Aleatori $G(n, r)$}
 		\begin{algorithmic} [1]
 			\Statex \textbf{Entrada:} $n$ (nombre de nodes), $r$ (radi de connexió)
@@ -175,11 +175,10 @@
 		\end{algorithmic}
 	\end{algorithm}
 	El generador de grafs geomètrics aleatoris crea un graf amb \( n \) nodes, on cada node es col·loca aleatòriament en un espai bidimensional unitari. Dos nodes estan connectats per una aresta si la distància entre ells és menor que un radi \( r \) especificat. Això es determina calculant la distància euclidiana entre tots els parells de nodes i afegint arestes quan la distància és inferior a \( r \).
-
-	\newpage	
+		
 	\subsection{Graf de Barabási-Albert}
 
-	\begin{algorithm}
+	\begin{algorithm} [H]
 		\caption{Generació de Graf de Barabási-Albert $G(n, m_0, m)$}
 		\begin{algorithmic} [1]
 			\Statex \textbf{Entrada:} $n$ (nombre de nodes), $m_0$ (nombre de nodes inicials), $m$ (grau de connexió per nou node)
@@ -215,7 +214,7 @@
 	
 	Aquesta selecció es realitza mitjançant la funció \texttt{preferentialAttachment}, que s'encarrega de seleccionar un node existent basant-se en el seu grau de connexió. La funció funciona de la següent manera: \\
 	
-	\begin{algorithm}
+	\begin{algorithm} [H]
 		\caption{Preferential Attachment}
 		\begin{algorithmic} [1]
 			\Statex \textbf{Entrada:} $connection\_degree$ (vector de graus de connexió)
@@ -292,7 +291,7 @@
 	
 	Per entendre els resultats també s'ha d'entendre les decisions que s'han pres per la recollida de dades. Analitzarem el programa \texttt{main} mitjançant un pseudocodi per no entrar en conceptes avançats de \texttt{C++}. A continuació vegeu una mostra del pseudocodi: \\
 	
-	\begin{algorithm}
+	\begin{algorithm} [H]
 		\caption{Descripció de l'experiment}
 		\begin{algorithmic}[1]
 			\State Seleccionar opcions de configuració
