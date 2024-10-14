@@ -33,9 +33,7 @@
 	\clearpage
 	
 	\section{Definicions}
-	
-	\subsection{Graf}
-	
+		
 	\subsection{Percolació}
 	
 	La percolació en un graf $G$ consisteix en eliminar o desactivar nodes o arestes, i posteriorment es mesura com això afecta una certa propietat global del graf. Quan desactivem una aresta o un node, direm que ha tingut una fallida. \\
@@ -70,6 +68,9 @@
 	\begin{algorithm}
 		\caption{Generació de graf Erdős-Rényi $G(n, p)$}
 		\begin{algorithmic} [1]
+			\Statex \textbf{Entrada:} $n$ (dimensió de la graella), $p$ (probabilitat d'establir aresta entre nodes)
+			\Statex \textbf{Sortida:} Graf $g$
+			\Statex \vspace{-0.25em}
 			\State Inicialitzar el graf $g$ amb $n$ nodes
 			\For{$i = 0$ fins a $n-1$}
 			\For{$j = i + 1$ fins a $n-1$}
@@ -86,13 +87,156 @@
 	
 	La instrucció $j = i + 1$ en el bucle interior assegura que només es considerin les arestes entre nodes diferents i evita la duplicació d'arestes. Això és important perquè en un graf no dirigit, l'aresta entre $i$ i $j$ és la mateixa que l'aresta entre $j$ i $i$. D'aquesta manera, es redueix el nombre de connexions a calcular i s'assegura que cada aresta es consideri només una vegada. \\
 	
-	\subsection{Square-Grid}
+	\subsection{Graella Quadrada}
+
+	\begin{algorithm}
+		\caption{Generació de Graf de Graella Quadrada $G(m \times m)$}
+		\begin{algorithmic} [1]
+			\Statex \textbf{Entrada:} $m$ (dimensió de la graella)
+			\Statex \textbf{Sortida:} Graf $g$ 
+			\Statex \vspace{-0.25em}
+			\State Inicialitzar $n = m \times m$ (nombre de nodes del graf)
+			\State Crear un graf buit $g$ amb $n$ nodes
+			\For{$i = 0$ fins a $m-1$}
+				\For{$j = 0$ fins a $m-1$}
+					\State $nodeActual = i \times m + j$
+					\If{$i < m-1$} 
+						\State $nodeFilaInferior = (i + 1) \times m + j$
+						\State Afegir una aresta entre $nodeActual$ i $nodeFilaInferior$
+					\EndIf
+					\If{$j<m-1$}
+						\State $nodeColumnaDreta = i \times m + (j + 1)$
+						\State Afegir una aresta entre $nodeActual$ i $nodeColumnaDreta$
+					\EndIf
+				\EndFor
+			\EndFor
+			\State Retornar el graf $g$
+		\end{algorithmic}
+	\end{algorithm}
+
+	El generador de grafs de graella quadrada crea un graf amb una estructura regular en què cada node és adjacent als nodes de la fila superior, inferior, esquerra i dreta, si aquests existeixen. Aixó s'aconsegueix comprovant per cada node si existeixen nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents. \\
+
+	\subsection{Graella Triangular}
+
+	\begin{algorithm}
+		\caption{Generació de Graf de Graella Triangular $G(rows)$}
+		\begin{algorithmic} [1]
+			\Statex \textbf{Entrada:} $rows$ (nombre de files)
+			\Statex \textbf{Sortida:} Graf $g$
+			\Statex \vspace{-0.25em}
+			\State Inicialitzar $n = \frac{rows \times (rows + 1)}{2}$ (nombre de nodes del graf)
+			\State Crear un graf buit $g$ amb $n$ nodes
+			\State $nodeActual = 0$
+			\For{$i = 0$ fins a $rows-1$}
+				\For{$j = 0$ fins a $i$}
+					\If{$j < i$}
+						\State $nodeDreta = nodeActual + 1$
+						\State Afegir una aresta entre $nodeActual$ i $nodeDreta$
+					\EndIf
+					\If{$i < rows-1$}
+						\State $nodeInferiorEsquerra = nodeActual + i + 1$
+						\State Afegir una aresta entre $nodeActual$ i $nodeInferiorEsquerra$
+						\State $nodeInferiorDret = nodeActual + i + 2$
+						\State Afegir una aresta entre $nodeActual$ i $nodeInferiorDret$
+					\EndIf
+					\State $nodeActual = nodeActual + 1$
+				\EndFor
+			\EndFor
+			\State Retornar el graf $g$
+		\end{algorithmic}
+	\end{algorithm}
 	
-	\subsection{Triangular-Grid}
+	El generador de grafs de graella triangular crea un graf amb \( n \) nodes, on \( n = 1 + 2 + 3 + \ldots + rows = \frac{rows \times (rows + 1)}{2} \). Aquests nodes tenen una estructura en què cada node està connectat als veïns de la dreta i l'esquerra, així com als nodes superiors i inferiors, tant a l'esquerra com a la dreta, sempre que aquests existeixin. Això s'aconsegueix comprovant per a cada node si hi ha nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents. \\
+
+	\subsection{Graf Geomètric Aleatori}
+
+	\begin{algorithm}
+		\caption{Generació de Graf Geomètric Aleatori $G(n, r)$}
+		\begin{algorithmic} [1]
+			\Statex \textbf{Entrada:} $n$ (nombre de nodes), $r$ (radi de connexió)
+			\Statex \textbf{Sortida:} Graf $g$
+			\Statex \vspace{-0.25em}
+			\State Crear un graf buit $g$ amb $n$ nodes
+			\State Inicialitzar un vector de coordenades $coords$ de longitud $n$
+			\For{$i = 0$ fins a $n-1$}
+				\State $coords[i].x = \text{rand01}()$
+				\State $coords[i].y = \text{rand01}()$
+			\EndFor
+			\For{$i = 0$ fins a $n-1$}
+				\For{$j = i + 1$ fins a $n-1$}
+					\State $dist_x = coords[i].x - coords[j].x$
+					\State $dist_y = coords[i].y - coords[j].y$
+					\If{$\sqrt{dist_x^2 + dist_y^2} < r$}
+						\State Afegir una aresta entre $i$ i $j$ al graf $g$
+					\EndIf
+				\EndFor
+			\EndFor
+			\State Retornar el graf $g$
+		\end{algorithmic}
+	\end{algorithm}
 	
-	\subsection{Random-Geometric}
+	El generador de grafs geomètrics aleatoris crea un graf amb \( n \) nodes, on cada node es col·loca aleatòriament en un espai bidimensional unitari. Dos nodes estan connectats per una aresta si la distància entre ells és menor que un radi \( r \) especificat. Això es determina calculant la distància euclidiana entre tots els parells de nodes i afegint arestes quan la distància és inferior a \( r \).
 	
-	\subsection{Barábasi-Albert}
+	\subsection{Graf de Barabási-Albert}
+
+	\begin{algorithm}
+		\caption{Generació de Graf de Barabási-Albert $G(n, m_0, m)$}
+		\begin{algorithmic} [1]
+			\Statex \textbf{Entrada:} $n$ (nombre de nodes), $m_0$ (nombre de nodes inicials), $m$ (grau de connexió per nou node)
+			\Statex \textbf{Sortida:} Graf $g$
+			\Statex \vspace{-0.25em}
+			\State Crear un graf buit $g$ amb $n$ nodes
+			\State Inicialitzar un vector $connection\_degree$ de longitud $n$
+			\For{$i = 0$ fins a $m_0 - 1$}
+				\For{$j = i + 1$ fins a $m_0 - 1$}
+					\State Afegir una aresta entre $i$ i $j$ al graf $g$
+				\EndFor
+				\State $connection\_degree[i] = m_0 - 1$
+			\EndFor
+			\For{$i = m_0$ fins a $n - 1$}
+				\State Inicialitzar un vector buit $candidates$
+				\While{la longitud de $candidates$ és menor que $m$}
+					\State $selectedNode = \text{preferentialAttachment}(connection\_degree)$
+					\If{$selectedNode$ no està en $candidates$}
+						\State Afegir $selectedNode$ a $candidates$
+					\EndIf
+				\EndWhile
+				\For{cada $j$ en $candidates$}
+					\State Afegir una aresta entre $i$ i $j$ al graf $g$
+					\State $connection\_degree[j] += 1$
+				\EndFor
+				\State $connection\_degree[i] = m$
+			\EndFor
+			\State Retornar el graf $g$
+		\end{algorithmic}
+	\end{algorithm}
+	
+	El generador de grafs de Barabási-Albert crea un graf que segueix el model de creixement de xarxes, on s'afegeixen nodes nous que es connecten a nodes existents en funció del seu grau de connexió. Comença amb un conjunt inicial de \( m_0 \) nodes completament connectats, i cada nou node que s'afegeix selecciona \( m \) nodes existents per connectar-se, amb una probabilitat proporcional al seu grau de connexió.
+	
+	Aquesta selecció es realitza mitjançant la funció \texttt{preferentialAttachment}, que s'encarrega de seleccionar un node existent basant-se en el seu grau de connexió. La funció funciona de la següent manera:
+	
+	\begin{algorithm}
+		\caption{Preferential Attachment}
+		\begin{algorithmic} [1]
+			\Statex \textbf{Entrada:} $connection\_degree$ (vector de graus de connexió)
+			\Statex \textbf{Sortida:} $chosen$ (node seleccionat)
+			\State Inicialitzar $degree\_sum = 0$, $temp\_sum = 0$
+			\For{cada $i$ en $connection\_degree$}
+				\State $degree\_sum \mathrel{+}= i$
+			\EndFor
+			\State $random\_num = \text{rand()} \mod degree\_sum$
+			\For{$i = 0$ fins a \text{length(connection\_degree)} - 1}
+				\State $temp\_sum \mathrel{+}= connection\_degree[i]$
+				\If{$random\_num \leq temp\_sum$}
+					\State $chosen \gets i$
+					\State
+				\EndIf
+			\EndFor
+			\State Retornar $chosen$
+		\end{algorithmic}
+	\end{algorithm}
+	
+	Aquesta funció calcula la suma total dels graus de connexió de tots els nodes existents i selecciona aleatòriament un node, on la probabilitat de seleccionar cada node és proporcional al seu grau de connexió. Així, els nodes amb més connexions tenen una major probabilitat de ser seleccionats, promovent el creixement de xarxes amb característiques d'escala.
 	
 	\newpage
 	\section{Algoritmes}
