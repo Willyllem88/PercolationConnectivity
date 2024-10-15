@@ -400,27 +400,44 @@
 	
 	Per estudiar la possible transició de fase a graelles quadrades hem decidit fer proves amb grafs de mida petita, des de 2x2 nodes a 20x20, així com amb grafs de mida més gran, de 20x20 nodes a 200x200. Això ens servirà per estudiar el comportament de la percolació tant per node com per aresta en diferents escales de complexitat. Hem triat aquestes mides de grafs per poder comparar resultats en diferents dimensions i observar com la mida del graf influeix en la percolació, formació de components connexes i transició de fase.
 	
-	\subsubsection{Mida petita}
+	\subsubsection{Percolació per arestes}
 	
-	\textbf{Percolació per aresta}
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/squareE-2-20-1}
+			\footnotesize{4321 2 20 2 1000 EDGE\_PERC ./data/squareE-2-20-1.csv Square-Grid}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/squareE-20-200}
+			\footnotesize{4321 2 20 2 1000 EDGE\_PERC ./data/squareE-2-20-1.csv Square-Grid}
+		\end{minipage}
+		\caption{Comparativa de percolació per arestes del grafs quadrats amb mides diferents}
+		\label{fig:percolation_edges_square}
+	\end{figure}
 	
+	\subsubsection{Percolació per nodes}
 	
-	\includegraphics[height=12cm]{images/squareE-2-20-1}
-	
-	
-	\textbf{Percolació per node}
-	
-	\includegraphics[height=12cm]{images/squareN-2-20-1}
-	
-	\subsubsection{Mida gran}
-	
-	\textbf{Percolació per aresta}
-	
-	\includegraphics[height=12cm]{images/squareE-20-200}
-	
-	\textbf{Percolació per node}
-	
-	\includegraphics[height=12cm]{images/squareN-20-200}
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/squareN-2-20-1}
+			\footnotesize{5202 2 20 2 1000 NODE\_PERC ./data/squareN-2-20-1.csv Square-Grid}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/squareN-20-200}
+			\footnotesize{4657 20 200 20 1000 NODE\_PERC ./data/squareN-20-200.csv Square-Grid}
+		\end{minipage}
+		\caption{Comparativa de percolació per nodes del grafs quadrats amb mides diferents}
+		\label{fig:percolation_nodes_square}
+	\end{figure}
+
 	
 	\subsection{Graella triangular}
 	
