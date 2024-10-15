@@ -323,6 +323,60 @@
 	
 	Per acabar, percolarem el graf $G(V,E)$ de la manera que s'hagi especificat a l'input, ja sigui per nodes o per arestes, obtenint $G_{\text{p}}$. A $G_{\text{p}}$ se li aplicarà un algorisme que determinarà si el graf és connex. Si ho és, s'incrementarà el comptador. Quan les \textit{IteracionsPerObtenirResultat} s'hagin completat, s'escriurà l'entrada resultant al fitxer \texttt{PATH.csv}.
 	
+	\subsection{Graella quadrada}
+	
+	Per estudiar la possible transició de fase a graelles quadrades hem decidit fer proves amb grafs de mida petita, des de 2x2 nodes a 20x20, així com amb grafs de mida més gran, de 20x20 nodes a 200x200. Això ens servirà per estudiar el comportament de la percolació tant per node com per aresta en diferents escales de complexitat. Hem triat aquestes mides de grafs per poder comparar resultats en diferents dimensions i observar com la mida del graf influeix en la percolació, formació de components connexes i transició de fase.
+	
+	\subsubsection{Mida petita}
+	
+	\textbf{Percolació per aresta}
+	
+	
+	\includegraphics[height=12cm]{images/squareE-2-20-1}
+	
+	
+	\textbf{Percolació per node}
+	
+	\includegraphics[height=12cm]{images/squareN-2-20-1}
+	
+	\subsubsection{Mida gran}
+	
+	\textbf{Percolació per aresta}
+	
+	\includegraphics[height=12cm]{images/squareE-20-200}
+	
+	\textbf{Percolació per node}
+	
+	\includegraphics[height=12cm]{images/squareN-20-200}
+	
+	\subsection{Graella triangular}
+	
+	Ara estudiem la transició de fase en graelles triangulars. Per l'experimentació hem fet el mateix que en les graelles quadrades, estudiar la percolació per aresta i per node en grafs de mida petita i mida gran. En aquest cas, els grafs petits comencen amb 5 files fins a 55 files, amb increment de 5 files cada vegada, mentre que la mida gran son grafs de 50 a 150 files amb increments de 10 files.
+	
+	\subsubsection{Mida petita}
+	
+	\textbf{Percolació per aresta}
+	
+	
+	\includegraphics[height=12cm]{images/triangularE-5-55-1000}
+	
+	
+	\textbf{Percolació per node}
+	
+	\includegraphics[height=12cm]{images/triangularN-5-55-1000}
+	
+	\subsubsection{Mida gran}
+	
+	\textbf{Percolació per aresta}
+	
+	
+	\includegraphics[height=12cm]{images/triangularE-50-150}
+	
+	
+	\textbf{Percolació per node}
+	
+	\includegraphics[height=12cm]{images/triangularN-50-150}
+	
 	
 	\newpage
 	\section{Conclusions}
