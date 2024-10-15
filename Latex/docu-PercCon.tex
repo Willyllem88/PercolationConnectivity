@@ -59,11 +59,10 @@
 	
 	\subsection{Objectius de la Experimentació}
 	
-	L'objectiu dels experiments que realitzarem serà analitzar com varia certa proppietat $\Pi$ en funció dels paràmetres $n$ i $p$. Siguin aquests nombre de nodes, i probabilitat de fallida en el perídode de percolació del graf $G$. La propietat $\Pi$ a analitzar serà la connectivitat dels grafs generats. A més repetirem l'experiment amb diferents grafs inicials connexos. També intentarem explicar possibles anomalies en aquestes transicions de fase. \\
-	
+	En aquesta secció s'exposen els grafs seleccionats per a l'estudi experimental. Es detallaran les característiques específiques de cada graf, així com els algorismes utilitzats per a la seva generació. Posteriorment, explicarem per què aquests grafs han estat considerats els més rellevants per al nostre estudi.
 	\newpage
 	\section{Grafs Seleccionats}
-	
+	En aquesta secció s'exposen els grafs seleccionats per a l'estudi experimental. Concretament, explicarem les peculiaritats de cada graf. Així mateix, es detallaran els algorismes utilitzats per a la generació de cada tipus de graf. Posteriorment, exposarem per que aquests son els que mes ens han semblat interresants per fer l'estudi. 
 	\subsection{Erdős-Rényi}
 	
 	\begin{algorithm} [H]
@@ -239,13 +238,87 @@
 	
 	\newpage
 	\section{Algoritmes}
-	
-	\subsection{Percolació per Nodes}
-	
+
+	En aquesta secció es presenten els principals algorismes emprats en l'estudi de la transició de fase. A continuació, detallarem cada algorisme i donarem una breu explicació d'aquests. Els algorismes abordats són els següents:
+
 	\subsection{Percolació per Arestes}
+	\begin{algorithm} [H]
+		\caption{Percolació d'Arestes en un Graf}
+		\begin{algorithmic} [1]
+			\Statex \textbf{Entrada:} Graf $G = (V, E)$ amb $n$ nodes, probabilitat $p$
+			\Statex \textbf{Sortida:} Graf percolat $G' = (V, E')$ on $E' \subseteq E$
+			\Statex \vspace{-0.25em}
+			\State Crear un nou graf buit $G'$ amb $n$ nodes (còpia profunda de $G$)
+			\For{cada node $u$ en $V$}
+				\For{cada node $v$ en la llista d'adjacència d'$u$ d'el graf $G$}
+					\If{$u < v\ \land\ rand01() > p$}
+						\State Afegir l'aresta $(u, v)$ al graf $G'$
+					\EndIf
+				\EndFor
+			\EndFor
+			\State Retornar el graf $G'$
+		\end{algorithmic}
+	\end{algorithm}
+
+	Aquest algorisme retorna el graf percolat a partir del graf original. Això s'aconsegueix eliminant les arestes amb una probabilitat \( p \). Per evitar processar una mateixa aresta més d'una vegada, s'utilitza la condició \( u < v \), ja que en grafs no dirigits una aresta \( (u, v) \) és equivalent a \( (v, u) \). Tal com s'ha mencionat prèviament, la funció \texttt{rand01()} genera un nombre aleatori entre 0 i 1, que es compara amb la probabilitat \( p \) per decidir si es manté o s'elimina una aresta.
+
+	\subsection{Percolació per Nodes}
+	\begin{algorithm} [H]
+		\caption{Percolació de Nodes en un Graf}
+		\begin{algorithmic} [1]
+			\Statex \textbf{Entrada:} Graf $G = (V, E)$ amb $n$ nodes, probabilitat $p$
+			\Statex \textbf{Sortida:} Graf percolat $G' = (V', E')$ on $V' \subseteq V$ i $E' \subseteq E$
+			\Statex \vspace{-0.25em}
+			\State Inicialitzar un vector $posicioNodes$ de longitud $n$
+			\State Assignar $nbNodesVius = n$
+			\For{cada node $u$ en $V$}
+				\State Generar un valor aleatori $r = \texttt{rand01}()$
+				\If{$r < p$}
+					\State Marcar el node $u$ com a fallat
+					\State Decrementar $nbNodesVius$
+				\Else
+					\State Actualitzar la posició del node viu $posicioNodes[u] = u - n + nbNodesVius$
+				\EndIf
+			\EndFor
+			\Statex
+			\State Crear un graf buit $G'$ amb $nbNodesVius$ nodes
+			\For{cada node $u$ en $V$}
+				\If{$u$ no ha fallat}
+					\For{cada node $v$ en la llista d'adjacència de $u$ en $G$}
+						\If{$v$ no ha fallat $\land\ u < v$}
+							\State Afegir l'aresta $(posicioNodes[u], posicioNodes[v])$ a $G'$
+						\EndIf
+					\EndFor
+				\EndIf
+			\EndFor
+			\State Retornar el graf $G'$
+		\end{algorithmic}
+	\end{algorithm}
+
+	Aquest algorisme retorna el graf percolat a partir del graf original eliminant nodes amb una probabilitat $p$. Per a cada node, es genera un valor aleatori entre 0 i 1 mitjançant la funció \texttt{rand01()}. Si aquest valor és inferior a $p$, el node es considera eliminat (fallat) i no es conservarà en el graf resultant. \\
+	Els nodes que sobreviuen són reindexats per assegurar que el nou graf té una numeració consecutiva de nodes. Les arestes només es conserven si ambdós nodes que connecten han sobreviscut, i es manté la condició $u<v$ per evitar afegir la mateixa aresta dues vegades, ja que en els grafs no dirigits una aresta $(u,v)$ és equivalent a $(v,u)$. Així, el resultat és un graf amb una mida reduïda en funció de la probabilitat $p$, mantenint només els nodes i arestes que han "sobreviscut" al procés de percolació.
 	
 	\subsection{Càlcul de Components Connexes}
+	\begin{algorithm} [H]
+		\caption{Càlcul del Nombre de Components Connexes}
+		\begin{algorithmic} [1]
+			\Statex \textbf{Entrada:} Graf $G = (V, E)$ amb $n$ nodes
+			\Statex \textbf{Sortida:} Nombre de components connexos $componentCount$
+			\Statex \vspace{-0.25em}
+			\State Inicialitzar un vector $visited$ de longitud $n$ amb valors $false$
+			\State Inicialitzar $componentCount = 0$
+			\For{cada node $i = 0$ fins a $n - 1$}
+				\If{el node $i$ no ha estat visitat}
+					\State Incrementar $componentCount$
+					\State Realitzar una DFS a partir del node $i$, marcant els nodes visitats
+				\EndIf
+			\EndFor
+			\State Retornar $componentCount$
+		\end{algorithmic}
+	\end{algorithm}
 	
+	L'algorisme utilitza una cerca en profunditat (DFS) per explorar cada component connex del graf. Cada vegada que es troba un node no visitat, es crida la funció \texttt{dfs} per explorar recursivament tots els nodes connectats a aquest node. Aquesta crida recursiva assegura que tots els nodes del mateix component quedin marcats com a visitats, evitant comptar-los més d'una vegada. 
+
 	\newpage
 	\section{Experimentació}
 	
