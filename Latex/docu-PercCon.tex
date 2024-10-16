@@ -410,6 +410,13 @@
 		\label{fig:percolation_edges_square}
 	\end{figure}
 	
+	La \textit{Figura 1} mostra una comparació de la percolació per arestes en grafs quadrats de mides diferents. Ambdós gràfics representen la relació entre la probabilitat de fallida \textit{p} (eix x) i el percentatge de grafs connexos (eix y). A mesura que la \textit{p} augmenta, més arestes s'eliminen i per tant hi ha menys connectivitat en els grafs. El gràfic de l'esquerra mostra els resultats per grafs de mida petita, de 2 a 20 files, mentres que el de la dreta representa els resultats per grafs més grans, de 20 200 files. 
+	
+	En els dos gràfics podem veure com a mesura que els grafs són més grans la pèrdua de connectivitat comença a valors més petits de \textit{p}. En canvi, els grafs més petits com els de 2 o 4 files continuen connectats durant més temps, arribant a valors més grans de \textit{p} abans de perdre completament la connectivitat. A més a més, en grafs grans es pot observar una baixada molt més brusca en el percentatge de grafs connexos que ens indica una transició de fase més marcada.
+	
+	Amb aquesta comparació podem veure clarament com la mida del graf influeix en la rapidesa de la pèrdua de connectivitat i el valor de \textit{p} on hi ha la transició de fase. En grafs petits la transició és més gradual i el valor de probabilitat de fallida que provoca la desconnexió completa és més alt. Per contra, en els grafs grans la pèrdua de connectivitat és molt més abrupta i el valor de \textit{p} que provoca la desconexió total del graf és més petit.
+	
+	
 	\subsubsection{Percolació per nodes}
 	
 	\begin{figure}[h]
@@ -429,10 +436,12 @@
 		\label{fig:percolation_nodes_square}
 	\end{figure}
 
+	La \textit{Figura 2} mostra la comparació de la percolació per nodes en grafs quadrats de mides diferents. Com en la percolació per arestes, el gràfic de l'esquerra mostra els resultats per grafs petits i el de la dreta grafs més grans. Els eixos són també els mateixos, i cada linea del graf mostra la relació entre la probabilitat de fallida \textit{p} i el percentatge de grafs connexos segons la mida del graf.
 	
 	\subsection{Graella triangular}
 	
 	Ara estudiem la transició de fase en graelles triangulars. Per l'experimentació hem fet el mateix que en les graelles quadrades, estudiar la percolació per aresta i per node en grafs de mida petita i mida gran. En aquest cas, els grafs petits comencen amb 5 files fins a 55 files, amb increment de 5 files cada vegada, mentre que la mida gran son grafs de 50 a 150 files amb increments de 10 files.
+	
 	
 	\subsubsection{Mida petita}
 	
