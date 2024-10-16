@@ -32,7 +32,9 @@
 	
 	\tableofcontents
 	\clearpage
-	
+
+	\section{Introducció}
+	Objectius i Descripció de l'Estudi
 	\section{Definicions}
 		
 	\subsection{Percolació}
@@ -66,7 +68,8 @@
 	\begin{itemize}
 		\item Estudiar la possible transició de fase en graelles quadrades \( n = m \times m \), sent \( n \) el nombre de nodes, sota un procés de percolació per nodes i arestes amb probabilitat \( p \).
 		\item Estudiar la possible transició de fase en grafs geomètrics aleatoris connexes (\textit{Random geometric graphs}), sota un procés de percolació d’arestes.
-		\item Estudiar la possible transició de fase sota un procés de percolació de nodes i un d'arestes en el graf de tipus \textit{Hub Graph} o graf Barabási-Albert.
+		\item Estudiar la possible transició de fase sota un procés de percolació d'arestes en el graelles triangulars $n = \frac{rows \times (rows + 1)}{2}$, sent $n$ el nombres de nodes.
+		\item Estudiar la possible transició de fase sota un procés de percolació de nodes en el graf de tipus \textit{Hub Graph} o graf Barabási-Albert.
 	\end{itemize}
 	
 	Els resultats obtinguts permetran caracteritzar el comportament de diferents models de grafs sota condicions de percolació i explorar la robustesa d'aquestes xarxes davant de fallades aleatòries. També explicarem per què aquests grafs han estat considerats els més rellevants per al nostre estudi.
@@ -74,33 +77,10 @@
 	
 	\newpage
 	\section{Grafs Seleccionats}
-	En aquesta secció s'exposen els grafs seleccionats per a l'estudi experimental. Concretament, explicarem les peculiaritats de cada graf. Així mateix, es detallaran els algorismes utilitzats per a la generació de cada tipus de graf. Posteriorment, exposarem per que aquests son els que mes ens han semblat interresants per fer l'estudi. 
-	\subsection{Erdős-Rényi}
-	
-	\begin{algorithm} [H]
-		\caption{Generació de graf Erdős-Rényi $G(n, p)$}
-		\begin{algorithmic} [1]
-			\Statex \textbf{Entrada:} $n$ (dimensió de la graella), $p$ (probabilitat d'establir aresta entre nodes)
-			\Statex \textbf{Sortida:} Graf $g$
-			\Statex \vspace{-0.25em}
-			\State Inicialitzar el graf $g$ amb $n$ nodes
-			\For{$i = 0$ fins a $n-1$}
-			\For{$j = i + 1$ fins a $n-1$}
-			\If{rand01() \textless\, $p$}
-			\State Afegir una aresta entre $i$ i $j$ al graf $g$
-			\EndIf
-			\EndFor
-			\EndFor
-			\State Retornar el graf $g$
-		\end{algorithmic}
-	\end{algorithm}
-	
-	El generador de grafs Erdős-Rényi crea un graf aleatoriitzant la connexió entre nodes. Sigui $p$ la probabilitat d'establir una aresta entre qualsevol parell de nodes del graf. Per a cada parell de nodes $(i, j)$, es genera un nombre aleatori mitjançant la funció $rand01()$, que retorna un valor entre 0 i 1. Si aquest valor és menor que $p$, s'estableix una aresta entre $i$ i $j$. Aquest procés es repeteix per a tots els parells possibles de nodes. \\
-	
-	La instrucció $j = i + 1$ en el bucle interior assegura que només es considerin les arestes entre nodes diferents i evita la duplicació d'arestes. Això és important perquè en un graf no dirigit, l'aresta entre $i$ i $j$ és la mateixa que l'aresta entre $j$ i $i$. D'aquesta manera, es redueix el nombre de connexions a calcular i s'assegura que cada aresta es consideri només una vegada. \\
-	
-	\subsection{Graella Quadrada}
 
+	En aquesta secció s'exposen els grafs seleccionats per a l'estudi experimental. Concretament, explicarem les peculiaritats de cada graf. Així mateix, es detallaran els algorismes utilitzats per a la generació de cada tipus de graf. 
+
+	\subsection{Graella Quadrada}
 	\begin{algorithm} [H]
 		\caption{Generació de Graf de Graella Quadrada $G(m \times m)$}
 		\begin{algorithmic} [1]
@@ -158,7 +138,7 @@
 		\end{algorithmic}
 	\end{algorithm}
 	
-	El generador de grafs de graella triangular crea un graf amb \( n \) nodes, on \( n = 1 + 2 + 3 + \ldots + rows = \frac{rows \times (rows + 1)}{2} \). Aquests nodes tenen una estructura en què cada node està connectat als veïns de la dreta i l'esquerra, així com als nodes superiors i inferiors, tant a l'esquerra com a la dreta, sempre que aquests existeixin. Això s'aconsegueix comprovant per a cada node si hi ha nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents. \\
+	El generador de grafs de graella triangular crea un graf amb \( n \) nodes, on \( n = 1 + 2 + 3 + \ldots + rows = \frac{rows \times (rows + 1)}{2} \) per tal de conseguir una estructura triangular. Aquests nodes tenen una estructura en què cada node està connectat als veïns de la dreta i l'esquerra, així com als nodes superiors i inferiors, tant a l'esquerra com a la dreta, sempre que aquests existeixin. Això s'aconsegueix comprovant per a cada node si hi ha nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents. \\
 
 	\subsection{Graf Geomètric Aleatori}
 	\begin{algorithm} [H]
@@ -175,11 +155,10 @@
 			\EndFor
 			\For{$i = 0$ fins a $n-1$}
 				\For{$j = i + 1$ fins a $n-1$}
-					\State $dist_x = coords[i].x - coords[j].x$
-					\State $dist_y = coords[i].y - coords[j].y$
-					\If{$\sqrt{dist_x^2 + dist_y^2} < r$}
+					\If{$distanciaEuclidiana(coords[i],\ coords[j]) < r$}
 						\State Afegir una aresta entre $i$ i $j$ al graf $g$
 					\EndIf
+
 				\EndFor
 			\EndFor
 			\State Retornar el graf $g$
@@ -258,17 +237,17 @@
 		\caption{Percolació d'Arestes en un Graf}
 		\begin{algorithmic} [1]
 			\Statex \textbf{Entrada:} Graf $G = (V, E)$ amb $n$ nodes, probabilitat $p$
-			\Statex \textbf{Sortida:} Graf percolat $G' = (V, E')$ on $E' \subseteq E$
+			\Statex \textbf{Sortida:} Graf percolat $G_{\text{p}} = (V, E')$ on $E' \subseteq E$
 			\Statex \vspace{-0.25em}
-			\State Crear un nou graf buit $G'$ amb $n$ nodes (còpia profunda de $G$)
+			\State Crear un nou graf buit $G_{\text{p}}$ amb $n$ nodes (còpia profunda de $G$)
 			\For{cada node $u$ en $V$}
 				\For{cada node $v$ en la llista d'adjacència d'$u$ d'el graf $G$}
 					\If{$u < v\ \land\ rand01() > p$}
-						\State Afegir l'aresta $(u, v)$ al graf $G'$
+						\State Afegir l'aresta $(u, v)$ al graf $G_{\text{p}}$
 					\EndIf
 				\EndFor
 			\EndFor
-			\State Retornar el graf $G'$
+			\State Retornar el graf $G_{\text{p}}$
 		\end{algorithmic}
 	\end{algorithm}
 
@@ -279,7 +258,7 @@
 		\caption{Percolació de Nodes en un Graf}
 		\begin{algorithmic} [1]
 			\Statex \textbf{Entrada:} Graf $G = (V, E)$ amb $n$ nodes, probabilitat $p$
-			\Statex \textbf{Sortida:} Graf percolat $G' = (V', E')$ on $V' \subseteq V$ i $E' \subseteq E$
+			\Statex \textbf{Sortida:} Graf percolat $G_{\text{p}} = (V', E')$ on $V' \subseteq V$ i $E' \subseteq E$
 			\Statex \vspace{-0.25em}
 			\State Inicialitzar un vector $posicioNodes$ de longitud $n$
 			\State Assignar $nbNodesVius = n$
@@ -293,21 +272,21 @@
 				\EndIf
 			\EndFor
 			\Statex
-			\State Crear un graf buit $G'$ amb $nbNodesVius$ nodes
+			\State Crear un graf buit $G_{\text{p}}$ amb $nbNodesVius$ nodes
 			\For{cada node $u$ en $V$}
 				\If{$u$ no ha fallat}
 					\For{cada node $v$ en la llista d'adjacència de $u$ en $G$}
 						\If{$v$ no ha fallat $\land\ u < v$}
-							\State Afegir l'aresta $(posicioNodes[u], posicioNodes[v])$ a $G'$
+							\State Afegir l'aresta $(posicioNodes[u], posicioNodes[v])$ a $G_{\text{p}}$
 						\EndIf
 					\EndFor
 				\EndIf
 			\EndFor
-			\State Retornar el graf $G'$
+			\State Retornar el graf $G_{\text{p}}$
 		\end{algorithmic}
 	\end{algorithm}
 
-	Aquest algorisme retorna el graf percolat a partir del graf original eliminant nodes amb una probabilitat $p$. Per a cada node, es genera un valor aleatori entre 0 i 1 mitjançant la funció \texttt{rand01()}. Si aquest valor és inferior a $p$, el node es considera eliminat (fallat) i no es conservarà en el graf resultant. \\
+	Aquest algorisme retorna el graf percolat a partir del graf original eliminant nodes amb una probabilitat $p$. Per a cada node, es genera un valor aleatori entre 0 i 1 mitjançant la funció \texttt{rand01()}. Si aquest valor és inferior a $p$, el node es considera eliminat (fallat) i no es conservarà en el graf resultant. \\ \\
 	Els nodes que sobreviuen són reindexats per assegurar que el nou graf té una numeració consecutiva de nodes. Les arestes només es conserven si ambdós nodes que connecten han sobreviscut, i es manté la condició $u<v$ per evitar afegir la mateixa aresta dues vegades, ja que en els grafs no dirigits una aresta $(u,v)$ és equivalent a $(v,u)$. Així, el resultat és un graf amb una mida reduïda en funció de la probabilitat $p$, mantenint només els nodes i arestes que han "sobreviscut" al procés de percolació.
 	
 	\subsection{Càlcul de Components Connexes}
