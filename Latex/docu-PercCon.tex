@@ -56,10 +56,22 @@
 	
 	Quan s'ha obtingut aquest resultat, diem que la propietat $\Pi$ presenta una transició de fase al voltant de $q_{\Pi}$. \\
 	
-	
 	\subsection{Objectius de la Experimentació}
 	
-	En aquesta secció s'exposen els grafs seleccionats per a l'estudi experimental. Es detallaran les característiques específiques de cada graf, així com els algorismes utilitzats per a la seva generació. Posteriorment, explicarem per què aquests grafs han estat considerats els més rellevants per al nostre estudi.
+	En aquest projecte, realitzem un estudi experimental sobre la transició de fase en grafs sotmesos a un procés de percolació, modelat mitjançant un paràmetre \( p \in [0, 1] \) que representa la probabilitat que un node o aresta falli. L'objectiu principal és analitzar com varia el nombre de components connexes d'un graf durant el procés de percolació, avaluant l'existència d'un valor crític, conegut com a \textit{threshold} o umbral de transició de fase, al voltant del qual el graf experimenta canvis significatius en la seva connectivitat. \\
+	
+	Per a aquest anàlisi, considerem diversos models de grafs, incloent xarxes quadrades, grafs geomètrics aleatoris i altres models paramètrics. Els experiments es realitzaran per grafs de diferents mides, enfocant-nos en el comportament asimptòtic a mesura que el nombre de nodes creix. L'estudi es complementarà amb la implementació d'algorismes per a generar aquests grafs, aplicar percolació i calcular el nombre de components connexes. \\
+	
+	\textbf{Objectius específics:}
+	\begin{itemize}
+		\item Estudiar la possible transició de fase en graelles quadrades \( n = m \times m \), sent \( n \) el nombre de nodes, sota un procés de percolació per nodes i arestes amb probabilitat \( p \).
+		\item Estudiar la possible transició de fase en grafs geomètrics aleatoris connexes (\textit{Random geometric graphs}), sota un procés de percolació d’arestes.
+		\item Estudiar la possible transició de fase sota un procés de percolació de nodes i un d'arestes en el graf de tipus \textit{Hub Graph} o graf Barabási-Albert.
+	\end{itemize}
+	
+	Els resultats obtinguts permetran caracteritzar el comportament de diferents models de grafs sota condicions de percolació i explorar la robustesa d'aquestes xarxes davant de fallades aleatòries. També explicarem per què aquests grafs han estat considerats els més rellevants per al nostre estudi.
+	
+	
 	\newpage
 	\section{Grafs Seleccionats}
 	En aquesta secció s'exposen els grafs seleccionats per a l'estudi experimental. Concretament, explicarem les peculiaritats de cada graf. Així mateix, es detallaran els algorismes utilitzats per a la generació de cada tipus de graf. Posteriorment, exposarem per que aquests son els que mes ens han semblat interresants per fer l'estudi. 
@@ -322,6 +334,8 @@
 	\newpage
 	\section{Experimentació}
 	
+	\subsection{Metodologia}
+	
 	Per dur a terme l'experimentació del projecte, hem utilitzat diferents eines. Hem programat dos programes en \texttt{C++}, un llenguatge que ens ofereix molta eficàcia temporal i espacial. Aquests programes són el \texttt{main} i el \texttt{runner}. També hem dissenyat un fitxer de classe \texttt{graph} amb tots els atributs i funcions necessàries per operar amb els grafs. Aquesta classe representa els grafs com a llistes d'adjacència. \\
 	
 	Per compilar aquests programes, hem fet ús del programari lliure \texttt{make}, que automatitza i paral·litza el compilatge i l'enllaç. \\
@@ -329,8 +343,6 @@
 	A més, hem dissenyat scripts per a l'interpret \texttt{R}, que és un programari de tractament de dades que ens analitzarà i generarà gràfics dels resultats dels estudis, que estaran en format \texttt{.csv}. \\
 	
 	Més informació del procés d'experimentació es pot trobar en el GitHub del projecte, premeu \href{https://github.com/Willyllem88/PercolationConnectivity}{\texttt{aquí}} per accedir-hi. Allà, a part del codi, també podreu consultar més informació sobre la generació de grafs, les dependències del programa per compilar-lo i executar-lo, com inserir els paràmetres pels programes i més. \\
-	
-	\subsection{Metodologia}
 	
 	El programa \texttt{main}, mitjançant la classe \texttt{graph}, ens ha permès analitzar les propietats del canvi de fase a partir dels paràmetres inicials. Aquests paràmetres són els següents:
 	
@@ -360,7 +372,7 @@
 	
 	El programa \texttt{runner}, per cada fila del fitxer que rep, inicialitzarà una instància del programa \texttt{main}, aconseguint d'aquesta manera automatitzar molt més els tests, podent córrer diferents programes \texttt{main} simultàniament. \\
 	
-	\subsection{Programa Main}
+	\subsubsection{Programa Main}
 	
 	Per entendre els resultats també s'ha d'entendre les decisions que s'han pres per la recollida de dades. Analitzarem el programa \texttt{main} mitjançant un pseudocodi per no entrar en conceptes avançats de \texttt{C++}. A continuació vegeu una mostra del pseudocodi: \\
 	
