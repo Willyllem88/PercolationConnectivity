@@ -8,10 +8,19 @@
 2837464 50 500 50 1000 EDGE_PERC ./data/ba8.csv Barabasi-Albert 10 5
 
 4575745 10 100 10 1000 NODE_PERC ./data/ba9.csv Barabasi-Albert 2 1
+
+
 9937843 10 100 10 1000 NODE_PERC ./data/ba10.csv Barabasi-Albert 5 1
 8800547 10 100 10 1000 NODE_PERC ./data/ba11.csv Barabasi-Albert 5 2
+
 4435627 50 500 50 1000 NODE_PERC ./data/ba12.csv Barabasi-Albert 2 1
+
 7673658 50 500 50 1000 NODE_PERC ./data/ba13.csv Barabasi-Albert 2 1
+
+
 9947375 50 500 50 1000 NODE_PERC ./data/ba14.csv Barabasi-Albert 5 2
+
 6657323 10 100 10 1000 NODE_PERC ./data/ba15.csv Barabasi-Albert 10 5
 9872345 50 500 50 1000 NODE_PERC ./data/ba16.csv Barabasi-Albert 10 5
+
+8374563 100 1000 100 1000 NODE_PERC ./data/ba17.csv Barabasi-Albert 10 5
