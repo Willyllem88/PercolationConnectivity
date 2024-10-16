@@ -16,6 +16,7 @@ runner
 # Ignore latex temporary files
 *.log
 *.synctex.gz
+*.gz.sum.synctex
 *.toc
 *.aux
 *.out
