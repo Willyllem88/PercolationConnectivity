@@ -6,6 +6,7 @@
 \graphicspath{{./images/}}
 \usepackage{hyperref}
 \usepackage{float}
+\usepackage[table,xcdraw]{xcolor}
 
 \usepackage{algorithm}
 \floatname{algorithm}{Algorisme} % Cambia "Algorithm" por "Algorisme"
@@ -21,6 +22,7 @@
 \date{\textbf{Curs 2024-25, Quatrimestre de tardor}}
 
 \renewcommand*\contentsname{Continguts}
+\renewcommand{\tablename}{Taula}
 \renewcommand{\figurename}{Figura}
 
 \begin{document}
@@ -286,7 +288,8 @@
 		\end{algorithmic}
 	\end{algorithm}
 
-	Aquest algorisme retorna el graf percolat a partir del graf original eliminant nodes amb una probabilitat $p$. Per a cada node, es genera un valor aleatori entre 0 i 1 mitjançant la funció \texttt{rand01()}. Si aquest valor és inferior a $p$, el node es considera eliminat (fallat) i no es conservarà en el graf resultant. \\ \\
+	Aquest algorisme retorna el graf percolat a partir del graf original eliminant nodes amb una probabilitat $p$. Per a cada node, es genera un valor aleatori entre 0 i 1 mitjançant la funció \texttt{rand01()}. Si aquest valor és inferior a $p$, el node es considera eliminat (fallat) i no es conservarà en el graf resultant. \\
+	
 	Els nodes que sobreviuen són reindexats per assegurar que el nou graf té una numeració consecutiva de nodes. Les arestes només es conserven si ambdós nodes que connecten han sobreviscut, i es manté la condició $u<v$ per evitar afegir la mateixa aresta dues vegades, ja que en els grafs no dirigits una aresta $(u,v)$ és equivalent a $(v,u)$. Així, el resultat és un graf amb una mida reduïda en funció de la probabilitat $p$, mantenint només els nodes i arestes que han "sobreviscut" al procés de percolació.
 	
 	\subsection{Càlcul de Components Connexes}
@@ -387,13 +390,30 @@
 	
 	Per acabar, percolarem el graf $G(V,E)$ de la manera que s'hagi especificat a l'input, ja sigui per nodes o per arestes, obtenint $G_{\text{p}}$. A $G_{\text{p}}$ se li aplicarà un algorisme que determinarà si el graf és connex. Si ho és, s'incrementarà el comptador. Quan les \textit{IteracionsPerObtenirResultat} s'hagin completat, s'escriurà l'entrada resultant al fitxer \texttt{PATH.csv}.
 	
+	\subsection{Lectura de taules i gràfics}
+	
+	Abans de procedir amb els experiments, es presenten les claus per interpretar correctament les taules i gràfics que acompanyen els resultats. \\
+	
+	\textbf{Gràfics}: Els gràfics mostren l'evolució dels experiments en funció del paràmetre $p$ (probabilitat de fallida) a l'eix de les X, mentre que l'eix Y mostra la probabilitat que el graf percolat $G_{\text{p}}$ sigui connex. A més, en cada gràfic col·locarem més d'un experiment, donades diferents valors de $n$ (nombre de nodes), pintant de colors diferents cada experiment. Aquest últim paràmetre a vegades canviarà, ja que en grafos, com per exemple en el quadrat, mesurarem amb el paràmetre $m$, que és el nombre de files. \\
+	
+	\textbf{Taules}: Les taules contenen les mètriques que són més difícils de veure amb els gràfics. Cada fila representa una instància específica de l'experiment, mentre que les columnes mostren:
+	
+	\begin{itemize}
+		\item \textbf{N}: nombre de nodes de l'experiment (pot variar depenent del graf).
+		\item \textbf{\textit{Threshold}}: punt d'inflexió en què apareix la transició de fase.
+		\item \textbf{Probabilitat Connex}: la probabilitat que el graf percolat sigui connex.
+		\item \textbf{Taxa de Canvi}: pendent del segment en el punt \textit{threshold}.
+	\end{itemize}
+	
+	Creiem convenient explicar com calculem el punt d'inflexió o punt \textit{threshold}. El trobarem com el segment amb el pendent més pronunciada.
+	
 	\subsection{Graella quadrada}
 	
-	Per estudiar la possible transició de fase a graelles quadrades hem decidit fer proves amb grafs de mida petita, des de 2x2 nodes a 20x20, així com amb grafs de mida més gran, de 20x20 nodes a 200x200. Això ens servirà per estudiar el comportament de la percolació tant per node com per aresta en diferents escales de complexitat. Hem triat aquestes mides de grafs per poder comparar resultats en diferents dimensions i observar com la mida del graf influeix en la percolació, formació de components connexes i transició de fase.
+	Per estudiar la possible transició de fase a graelles quadrades hem decidit fer proves amb grafs de mida petita, des de 2x2 nodes a 20x20, així com amb grafs de mida més gran, de 20x20 nodes a 200x200. Això ens servirà per estudiar el comportament de la percolació tant per node com per aresta en diferents escales de complexitat. Hem triat aquestes mides de grafs per poder comparar resultats en diferents dimensions i observar com la mida del graf influeix en la percolació, formació de components connexes i transició de fase. \\
 	
 	\subsubsection{Percolació per arestes}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.45\textwidth}
 			\centering
@@ -410,16 +430,46 @@
 		\label{fig:percolation_edges_square}
 	\end{figure}
 	
-	La \textit{Figura 1} mostra una comparació de la percolació per arestes en grafs quadrats de mides diferents. Ambdós gràfics representen la relació entre la probabilitat de fallida \textit{p} (eix x) i el percentatge de grafs connexos (eix y). A mesura que la \textit{p} augmenta, més arestes s'eliminen i per tant hi ha menys connectivitat en els grafs. El gràfic de l'esquerra mostra els resultats per grafs de mida petita, de 2 a 20 files, mentres que el de la dreta representa els resultats per grafs més grans, de 20 200 files. 
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{gray!30}
+			$M$ & Threshold $p$ & Percentatge Connex & Tasa de Cambi \\ \hline
+			2 & 0.24 & 0.73 & -5.90 \\ \hline
+			4 & 0.26 & 0.53 & -8.30 \\ \hline
+			6 & 0.27 & 0.37 & -9.80 \\ \hline
+			8 & 0.24 & 0.40 & -7.50 \\ \hline
+			10 & 0.19 & 0.55 & -7.70 \\ \hline
+			12 & 0.18 & 0.56 & -8.70 \\ \hline
+			14 & 0.17 & 0.56 & -7.40 \\ \hline
+			16 & 0.18 & 0.43 & -9.00 \\ \hline
+			18 & 0.15 & 0.60 & -8.80 \\ \hline
+			20 & 0.17 & 0.42 & -8.70 \\ \hline
+			40 & 0.15 & 0.23 & -11.40 \\ \hline
+			60 & 0.11 & 0.40 & -14.90 \\ \hline
+			80 & 0.09 & 0.50 & -14.90 \\ \hline
+			100 & 0.10 & 0.22 & -16.00 \\ \hline
+			120 & 0.07 & 0.56 & -18.50 \\ \hline
+			140 & 0.07 & 0.48 & -19.60 \\ \hline
+			160 & 0.08 & 0.21 & -21.60 \\ \hline
+			180 & 0.06 & 0.54 & -21.30 \\ \hline
+			200 & 0.06 & 0.47 & -23.20 \\ \hline
+		\end{tabular}
+		\caption{Dades de connectivitat de grafs quadrats}
+		\label{tab:conectividad_combinada}
+	\end{table}
 	
-	En els dos gràfics podem veure com a mesura que els grafs són més grans la pèrdua de connectivitat comença a valors més petits de \textit{p}. En canvi, els grafs més petits com els de 2 o 4 files continuen connectats durant més temps, arribant a valors més grans de \textit{p} abans de perdre completament la connectivitat. A més a més, en grafs grans es pot observar una baixada molt més brusca en el percentatge de grafs connexos que ens indica una transició de fase més marcada.
+	La \textit{Figura 1} mostra una comparació de la percolació per arestes en grafs quadrats de mides diferents. Ambdós gràfics representen la relació entre la probabilitat de fallida $p$ (eix x) i el percentatge de grafs connexos (eix y). A mesura que la $p$ augmenta, més arestes s'eliminen i per tant hi ha menys connectivitat en els grafs. El gràfic de l'esquerra mostra els resultats per grafs de mida petita, de 2 a 20 files, mentres que el de la dreta representa els resultats per grafs més grans, de 20 a 200 files. \\
 	
-	Amb aquesta comparació podem veure clarament com la mida del graf influeix en la rapidesa de la pèrdua de connectivitat i el valor de \textit{p} on hi ha la transició de fase. En grafs petits la transició és més gradual i el valor de probabilitat de fallida que provoca la desconnexió completa és més alt. Per contra, en els grafs grans la pèrdua de connectivitat és molt més abrupta i el valor de \textit{p} que provoca la desconexió total del graf és més petit.
+	En els dos gràfics podem veure com a mesura que els grafs són més grans la pèrdua de connectivitat comença a valors més petits de $p$. En canvi, els grafs més petits com els de 2 o 4 files continuen connectats durant més temps, arribant a valors més grans de \textit{p} abans de perdre completament la connectivitat. A més a més, en grafs grans es pot observar una baixada molt més brusca en el percentatge de grafs connexos que ens indica una transició de fase més marcada. \\
+	
+	Amb aquesta comparació podem veure clarament com la mida del graf influeix en la rapidesa de la pèrdua de connectivitat i el valor de $p$ on hi ha la transició de fase. En grafs petits la transició és més gradual i el valor de probabilitat de fallida que provoca la desconnexió completa és més alt. Per contra, en els grafs grans la pèrdua de connectivitat és molt més abrupta i el valor de $p$ que provoca la desconexió total del graf és més petit. \\
 	
 	
 	\subsubsection{Percolació per nodes}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.45\textwidth}
 			\centering
