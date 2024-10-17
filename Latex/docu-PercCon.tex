@@ -518,6 +518,144 @@
 	\includegraphics[height=12cm]{images/triangularN-50-150}
 	
 	
+	\subsection{Graf geomètric aleatori}
+
+	L'estudi de transició sobre grafs geometrics aleatoris depèn, a més de la probabilitat de percolació $p$, dels dos paràmetres que s'utilitzen per a la creació del graf: el nombre de nodes $n$ i el radi de connectivitat $r$.
+	En aquesta experimentació, s'han fet 6 casos de prova, on es compara l'impacte de tots dos paràmetres en diferents nivells. En el cas del nombre de nodes $n$, els valors que s'han utilitzar són de 10 a 100 i de 100 a 1000,
+	donant-nos resultats per a grafs amb pocs nodes fins a grafs amb una quantitat relativament gran de nodes. Per part del radi de connectivitat $r$, els valors que s'han escollit són de 0.2, 0.5, 0.8, que ens permeten observar grafs amb una connectivitat
+	bastant feble en el cas del primer valor, grafs amb una connectivitat molt alta amb $r$ = 0.8 i un mig entre tots dos valors.
+
+	\subsubsection{Percolació per arestes}
+
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/randomGeometric_10-100_0.2}
+			\footnotesize{9283948 10 100 10 1000 EDGE\_PERC ./data/rgg10.csv Random-Geometric 0.2}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/randomGeometric_100-1000_0.2}
+			\footnotesize{9283948 10 100 10 1000 EDGE\_PERC ./data/rgg16.csv Random-Geometric 0.2}
+		\end{minipage}
+		\caption{Comparativa de percolació per arestes del grafs geometrics aleatoris amb $n$ = 10..100 (1) i $n$ = 100..1000 (2), $r$ = 0.2}
+		\label{fig:percolation_edges_rgg_0.8}
+	\end{figure}
+
+	En aquesta primera comparativa veiem com grafs amb una connectivitat feble amb pocs nodes deixen de generar grafs connexos quan hi ha una probabilitat de percolació relativament baixa. No obstant, a mesura que augmenten els nodes, la quantitat de grafs connexos
+	en funció de la probabilitat de percolació comença a creixer de manera notable (imatge 2). Això ens mostra que, tot i ser grafs amb una connectivitat teòrica feble, amb una quantitat de nodes suficientment gran es pot aconseguir una transició de fase tot i que la probabilitat
+	de percolació sigui alta. 
+
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/randomGeometric_10-100_0.5}
+			\footnotesize{2389476 10 100 10 1000 EDGE\_PERC ./data/rgg11.csv Random-Geometric 0.5}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/randomGeometric_100-1000_0.5}
+			\footnotesize{6673428 100 1000 100 1000 EDGE\_PERC ./data/rgg17.csv Random-Geometric 0.5}
+		\end{minipage}
+		\caption{Comparativa de percolació per arestes del grafs geometrics aleatoris amb amb $n$ = 10..100 (1) i $n$ = 100..1000 (2), $r$ = 0.5}
+		\label{fig:percolation_edges_rgg_0.5}
+	\end{figure}
+
+	En aquesta segona comparativa, les imatges mostres mesures sobre grafs amb una connectivitat teòrica major als anteriors. L'impacte d'aquesta connectivitat major es veu reflexat clarament en tots dos experients. En els casos de grafs amb una quantitat
+	de nodes no gaire elevada, el percentatge de grafs connexos en funció de la probabilitat de percolació és bastant elevat fins i tot per al cas de grafs d'únicament 10 nodes (imatge 1). Més enllà d'aquesta quantitat, el percentatge incrementa de forma notòria
+	fins a arribar un punt en el que la diferència entre les probabilitats de percolació per a cada quantitat de nodes és irrisoria.
+
+
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/randomGeometric_10-100_0.8}
+			\footnotesize{8273563 10 100 10 1000 EDGE\_PERC ./data/rgg12.csv Random-Geometric 0.8}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/randomGeometric_100-1000_0.8}
+			\footnotesize{9293745 100 1000 100 1000 EDGE\_PERC ./data/rgg18.csv Random-Geometric 0.8}
+		\end{minipage}
+		\caption{Comparativa de percolació per arestes del grafs geometrics aleatoris amb $n$ = 10..100 (1) i $n$ = 100..1000 (2), $r$ = 0.8}
+		\label{fig:percolation_edges_rgg_0.8}
+	\end{figure}
+
+	Per últim, en aquesta comparativa s'utilitzen grafs geometrics aleatoris amb un radi de connectivitat molt elevat, donant-lis una forma seblant a un graf complet. Per aquest motiu, fins que la probabilitat de percolació no és molt alta, els grafs generats segueixen
+	sent connexos una vegada aplicada la transició de fase. Evidentment, l'augment de nodes provoca que el percentatge de grafs connexos creixi ja que els nodes tenens més probabilitats d'estar units a altres nodes (imatge 2), fet que ha succeït a totes les comparatives.
+	
+	\subsection{Graf de Barabási-Albert}
+
+	L'estudia que s'ha realitzat sobre els grafs generats amb el model de Barabási-Albert és un de transició de fase sota percolació per nodes. El motiu és que es vol veure l'impacte d'una percolació a un graf que conté molts vertexs units entre sí per un o més "hubs" centrals,
+	l'impacte que tindria la fallida d'algun d'aquests nodes o, per altra banda, el no impacte que pot tenir sobre nodes que tenen una estructura de fulla, és a dir, nodes que estan connectats unicament a un altre node i pertant la seva fallida segueix permetent un graf connex.
+
+	Els experiments realitzats sobre aquests grafs depenen de tres paràmetres: nombre de nodes $n$, nombre no nodes inicials o "hubs" $m0$, i el nombre d'arestes que han de tenir com a mínim cada node que no és "hub". Per als nostres experiments, hem decidit donar els següents valors: per al nombre de nodes $n$ = 10..100, $n$ = 50..500, per al nombre inicial
+	de nodes o "hubs" $m0$ = 2, $m0$ = 5, $m0$ = 10, i per el nombre d'arestes incidents a la resta de nodes $m$ = 1, $m$ = 2, $m$ = 5. Abans de veure els resultats, hem cregut adient une explicació del perqué s'han agafat aquests valors i no d'altres. Els grafs construïts amb el model de Barabási-Albert són típicament utilitzats com a xarxes on els nodes s'uneixen
+	mitjançant "hubs". Per aquest motiu, hem decidit utilitzar aquests valors ja que representen d'una manera bastant realista una xarxa generada per aquest model d'una manera computacionalment viable.
+
+	\subsubsection{Percolació per nodes}
+
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/barabasi_10-100_2_1}
+			\footnotesize{4575745 10 100 10 1000 NODE\_PERC ./data/ba9.csv Barabasi-Albert 2 1}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/barabasi_50-500_2_1}
+			\footnotesize{7673658 50 500 50 1000 NODE\_PERC ./data/ba13.csv Barabasi-Albert 2 1}
+		\end{minipage}
+		\caption{Comparativa de percolació per arestes del grafs Barabási-Albert amb $n$ = 10..100 (1) i $n$ = 50..500 (2), $m0$ = 2, $m$ = 1}
+		\label{fig:percolation_nodes_ba_2_1}
+	\end{figure}
+
+
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/barabasi_10-100_5_1}
+			\footnotesize{9937843 10 100 10 1000 NODE\_PERC ./data/ba10.csv Barabasi-Albert 5 1}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/barabasi_10-100_5_2}
+			\footnotesize{8800547 10 100 10 1000 NODE\_PERC ./data/ba11.csv Barabasi-Albert 5 2}
+		\end{minipage}
+		\caption{Comparativa de percolació per arestes del grafs Barabási-Albert amb $n$ = 10..100, $m0$ = 5, $m$ = 1 (1) i $m$ = 2 (2)}
+		\label{fig:percolation_nodes_ba_5_x}
+	\end{figure}
+
+
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/barabasi_10-100_10_5}
+			\footnotesize{6657323 10 100 10 1000 NODE\_PERC ./data/ba15.csv Barabasi-Albert 10 5}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/barabasi_50-500_10_5}
+			\footnotesize{9872345 50 500 50 1000 NODE\_PERC ./data/ba16.csv Barabasi-Albert 10 5}
+		\end{minipage}
+		\caption{Comparativa de percolació per arestes del grafs Barabási-Albert amb $n$ = 10..100 (1) i $n$ = 50..500 (2), $m0$ = 10 $m$ = 5}
+		\label{fig:percolation_nodes_ba_10_x}
+	\end{figure}
+
+
+
 	\newpage
 	\section{Conclusions}
 	
