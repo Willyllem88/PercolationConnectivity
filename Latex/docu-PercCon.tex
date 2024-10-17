@@ -442,7 +442,7 @@
 		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
 			\rowcolor{gray!30}
-			$M$ & Threshold $p$ & Percentatge Connex & Tasa de Cambi \\ \hline
+			$M$ & Threshold $p$ & Percentatge Connex & Tasa de Canvi \\ \hline
 			2 & 0.24 & 0.73 & -5.90 \\ \hline
 			4 & 0.26 & 0.53 & -8.30 \\ \hline
 			6 & 0.27 & 0.37 & -9.80 \\ \hline
@@ -497,32 +497,75 @@
 	
 	\subsection{Graella triangular}
 	
-	Ara estudiem la transició de fase en graelles triangulars. Per l'experimentació hem fet el mateix que en les graelles quadrades, estudiar la percolació per aresta i per node en grafs de mida petita i mida gran. En aquest cas, els grafs petits comencen amb 5 files fins a 55 files, amb increment de 5 files cada vegada, mentre que la mida gran son grafs de 50 a 150 files amb increments de 10 files.
+	Ara estudiem la transició de fase en graelles triangulars. En aquest cas només havíem d'estudiar la percolació per aresta i ho hem fet com en les graelles quadrades, amb grafs de mida petita i mida més gran. En aquest cas, els grafs petits comencen amb 5 files fins a 55 files, amb increment de 5 files cada vegada, mentre que la mida gran son grafs de 50 a 150 files amb increments de 10 files.
+	
+	Hem decidit fer la percolació per aresta perquè volíem veure si el fet de tenir una graella similar a la graella quadrada, pero amb els vertex del mig (el que no estan a la vora del graf i per tant tenen totes les arestes possibles) de grau més alt influiria en el valor de la probabilitat de fallida on hi ha la transició de fase. Creiem que en aquest cas la probabilitat de fallida on hi ha la transició de fase serà un valor més alt que en graelles quadrades ja que el grau dels vèrtex és més alt i per tant hi ha més arestes que han de fallar per desconnectar els nodes. Després de fer aquesta experimentació, hem decidit fer també l'estudi per percolació de node per poder comparar els resultats amb els obtinguts en graelles quadrades.
 	
 	
-	\subsubsection{Mida petita}
+	\subsubsection{Percolació per aresta}
 	
-	\textbf{Percolació per aresta}
+		\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/triangularE-5-55-1000}
+			\footnotesize{3497 5 55 5 1000 EDGE\_PERC ./data/triangularE-5-55-1000.csv Triangular-Grid}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/triangularE-50-150}
+			\footnotesize{3363 50 150 10 1000 EDGE\_PERC ./data/triangularE-50-150.csv Triangular-Grid}
+		\end{minipage}
+		\caption{Comparativa de percolació per arestes de graelles triangulars amb mides diferents}
+		\label{fig:percolation_edges_triangular}
+	\end{figure}
 	
+	La \textit{Figura 3} mostra la comparació de percolació per arestes de graelles triangulars amb els resultats dels grafs petits a l'esquerra i els grans al gràfic de la dreta. La informació que cad agràfic proporciona és la mateixa que en l'experimentació de les graelles quadrades, cada línea indica la relació entre percentatge de grafs connexos i probabilitat de fallida \textit{p} en funció del número de files.
 	
-	\includegraphics[height=12cm]{images/triangularE-5-55-1000}
+	En els dos casos podem observar que hi ha una transició de fase ja que hi ha una caiguda brusca en un valor determinat de \textit{p}, però en el cas dels grafs petits aquesta caiguda és més gradual, la transició de fase no està tant marcada. En canvi, en grafs amb més files la transició és més ràpida i si ens fixem en el valor de la probabilitat de fallida on arribem a la desconnexió total, la \textit{p} que marca la transició de fase disminueix a mesura que el graf és més gran.
 	
+	Per tant, igual que en els grafs quadrats la mida del graf afecta el valor de la probabilitat de fallida on ocorre la transició de fase, la qual disminueix a mesura que el graf augmenta de mida. Pel que fa a la comparació que ens interessava amb les graelles quadrades, tot i que observant els gràfics ja es pot veure que la \textit{p} on hi ha la desconnexió total és més petita en les graelles quadrades, en aquesta taula podem observar resultats de grafs amb el mateix número de files per poder veure millor la comparació.
 	
-	\textbf{Percolació per node}
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{gray!30}
+			Número files & Valor $p$ en graella quadrada & Valor $p$ en graella triangular \\ \hline
+			10 & 0.46 & 0.62 \\ \hline
+			20 & 0.34 & 0.52 \\ \hline
+			40 & 0.24 & 0.40 \\ \hline
+			60 & 0.20 & 0.38 \\ \hline
+			80 & 0.18 & 0.33 \\ \hline
+			100 & 0.16 & 0.31\\ \hline
+			120 & 0.14 & 0.30 \\ \hline
+			140 & 0.13 & 0.28 \\ \hline
+		\end{tabular}
+		\caption{Dades de transició de fase en graelles}
+		\label{tab:comparacio_p_square_triangular}
+	\end{table}
 	
-	\includegraphics[height=12cm]{images/triangularN-5-55-1000}
+	Amb aquesta comparació, podem veure que grafs amb el mateix número de files tenen valors de \textit{p} on hi ha la transició de fase molt més petits, normalment casi la meitat, en les graelles quadrades. 
 	
-	\subsubsection{Mida gran}
+	\subsubsection{Percolació per node}
 	
-	\textbf{Percolació per aresta}
-	
-	
-	\includegraphics[height=12cm]{images/triangularE-50-150}
-	
-	
-	\textbf{Percolació per node}
-	
-	\includegraphics[height=12cm]{images/triangularN-50-150}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/triangularN-5-55-1000}
+			\footnotesize{7002 5 55 5 1000 NODE\_PERC ./data/triangularN-5-55-1000.csv Triangular-Grid}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/triangularE-50-150}
+			\footnotesize{4056 50 150 10 1000 NODE\_PERC ./data/triangularN-50-150.csv Triangular-Grid}
+		\end{minipage}
+		\caption{Comparativa de percolació per nodes de graelles triangulars amb mides diferents}
+		\label{fig:percolation_nodes_triangular}
+	\end{figure}
 	
 	
 	\subsection{Graf geomètric aleatori}
