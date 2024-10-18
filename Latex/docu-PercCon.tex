@@ -36,14 +36,15 @@
 	\clearpage
 
 	\section{Introducció}
-	L'estudi de la connectivitat en grafs sota processos de percolació és un camp d'interès clau en diverses disciplines, incloent la teoria de grafs, la física estadística, i l'anàlisi de xarxes complexes. La percolació modela situacions en què nodes o arestes d'un graf poden fallar de manera aleatòria, i aquestes fallades poden tenir un impacte significatiu en la connectivitat global del sistema. Un aspecte crucial en aquests estudis és la transició de fase, un fenomen on una propietat estructural del graf, com ara la connexió entre els seus components, pateix un canvi sobtat a mesura que variem un paràmetre, com la probabilitat de fallida. \\\endgraf
- 	En aquest estudi, ens centrarem en l'efecte de la percolació sobre diferents tipus de grafs, tant deterministes com aleatoris. Concretament, ens proposem investigar com la percolació de nodes i d'arestes afecta la connectivitat del graf i, més concretament, com es dona la transició de fase que determina el pas d'un graf connex a un graf fragmentat en múltiples components. Les nostres hipòtesis inicials estan basades en la variació d'aquests fenòmens en funció del tipus de graf i del procés de percolació. \\\endgraf	
-	En el cas de les graelles quadrades, la hipòtesi plantejada és que la percolació de nodes generarà una transició de fase més ràpida que la percolació d'arestes. La raó d'aquesta hipòtesi és que, en eliminar nodes, s'eliminen també totes les arestes associades a aquests nodes, fet que altera la connectivitat de manera més dràstica. Per tant, esperem que la connectivitat del graf es vegi més afectada quan els nodes fallin en comparació amb quan només ho facin les arestes. \\\endgraf	
-	En els grafs geomètrics aleatoris, en canvi, l'objectiu és estudiar com el radi de connexió entre nodes afecta la densitat del graf. La nostra hipòtesi és que, a mesura que augmenta el radi de connexió, el graf esdevé més dens, fet que dificulta la fragmentació del graf quan es produeixen fallades. Per tant, preveiem que a mesura que augmenta la densitat del graf, serà necessària una probabilitat de fallida més alta per provocar una transició de fase.\\\endgraf	
-	A més, hem decidit incloure dos tipus addicionals de grafs per enriquir l'estudi. El primer és el graf de Barabási-Albert, un model que genera grafs amb una estructura de xarxa de tipus escala, on alguns nodes (hubs) concentren un nombre desproporcionat d'arestes. La hipòtesi que proposem és que la tolerància d'aquesta xarxa a les fallades es veurà afectada principalment per la percolació de nodes. En concret, si els hubs comencen a fallar, la xarxa perdrà la seva connectivitat molt més ràpidament que en un graf més uniforme, ja que els hubs són crítics per mantenir el graf connectat.\\\endgraf
-	Finalment, considerem les graelles triangulars, on cada node està connectat a més arestes que en una graella quadrada, fet que dóna lloc a una connectivitat inicial més robusta. La hipòtesi aquí és que, com més arestes tingui un node, més difícil serà que la percolació d'arestes alteri significativament la connectivitat global del graf. Això ens permetrà comparar com el nombre d'arestes per node influeix en la resistència del graf davant les fallades.\\\endgraf
+
+	L'estudi de la connectivitat en grafs sota processos de percolació és un camp d'interès clau en diverses disciplines, incloent la teoria de grafs, la física estadística i l'anàlisi de xarxes complexes. La percolació modela situacions en què nodes o arestes d'un graf poden fallar de manera aleatòria, i aquestes fallades poden tenir un impacte significatiu en la connectivitat global del sistema. Un aspecte crucial en aquests estudis és la transició de fase, un fenomen en què una propietat estructural del graf, com ara la connexió entre els seus components, pateix un canvi sobtat a mesura que es varia un paràmetre, com la probabilitat de fallida. \\\endgraf
+	
+	En aquest estudi, ens centrarem en l'efecte de la percolació sobre diferents tipus de grafs, tant deterministes com aleatoris. Concretament, ens proposem investigar com la percolació de nodes i d'arestes afecta la connectivitat del graf i, més específicament, com es produeix la transició de fase que determina el pas d'un graf connex a un graf fragmentat en múltiples components. Les nostres hipòtesis inicials estan basades en la variació d'aquests fenòmens en funció del tipus de graf i del procés de percolació. \\\endgraf
+	
 	Aquestes hipòtesis ens permetran explorar com diferents configuracions estructurals i processos de fallida afecten la transició de fase i la connectivitat dels grafs.\\
+	
 	\newpage
+	
 	\section{Definicions}
 		
 	\subsection{Percolació}
@@ -75,13 +76,20 @@
 	
 	\textbf{Objectius específics:}
 	\begin{itemize}
-		\item Estudiar la possible transició de fase en graelles quadrades \( n = m \times m \), sent \( n \) el nombre de nodes, sota un procés de percolació per nodes i arestes amb probabilitat \( p \).
-		\item Estudiar la possible transició de fase en grafs geomètrics aleatoris connexes (\textit{Random geometric graphs}), sota un procés de percolació d’arestes.
-		\item Estudiar la possible transició de fase sota un procés de percolació d'arestes en el graelles triangulars $n = \frac{rows \times (rows + 1)}{2}$, sent $n$ el nombres de nodes.
-		\item Estudiar la possible transició de fase sota un procés de percolació de nodes en el graf de tipus \textit{Hub Graph} o graf Barabási-Albert.
+		\item Estudiar la possible transició de fase en graelles quadrades \( n = m \times m \), sent \( n \) el nombre de nodes, sota un procés de percolació per nodes i arestes amb probabilitat \( p \). La hipòtesi plantejada és que la percolació de nodes generarà una transició de fase més ràpida que la percolació d'arestes. \\\endgraf
+		La raó d'aquesta hipòtesi és que, en eliminar nodes, també s'eliminen totes les arestes associades a aquests nodes, fet que altera la connectivitat de manera més dràstica. Per tant, s'espera que la connectivitat del graf es vegi més afectada quan fallin nodes en comparació amb quan només fallin les arestes.
+		
+		\item Estudiar la possible transició de fase en grafs geomètrics aleatoris connexos (\textit{Random geometric graphs}), sota un procés de percolació d’arestes. \\\endgraf
+		La nostra hipòtesi és que, a mesura que augmenta el radi de connexió, el graf esdevé més dens, fet que dificulta la fragmentació del graf quan es produeixen fallades. Per tant, preveiem que, a mesura que augmenta la densitat del graf, serà necessària una probabilitat de fallida més alta per provocar una transició de fase.
+		
+		\item Estudiar la possible transició de fase sota un procés de percolació d'arestes en graelles triangulars \( n = \frac{rows \times (rows + 1)}{2} \), sent \( n \) el nombre de nodes. \\\endgraf
+		La nostra hipòtesi és que, com més arestes connectin un node, més resistent serà el graf davant la percolació d'arestes, ja que la seva connectivitat global es veurà menys alterada. Això ens permetrà analitzar com el nombre d'arestes per node influeix en la capacitat del graf per mantenir la seva integritat davant fallades. Per validar aquesta hipòtesi, compararem la percolació per arestes en dos models: el graf de graella quadrada, on cada node està connectat a quatre veïns, i el graf de graella triangular, on cada node està connectat a sis veïns. Aquest contrast ens permetrà estudiar com la diferència en el nombre de connexions per node afecta la robustesa del graf.
+		
+		\item Estudiar la possible transició de fase sota un procés de percolació de nodes en un graf de tipus \textit{Hub Graph} o graf Barabási-Albert. \\\endgraf
+		El graf de Barabási-Albert és un model que genera grafs amb una estructura de xarxa d'escala lliure, on alguns nodes (hubs) concentren un nombre desproporcionat d'arestes. La hipòtesi que proposem és que la tolerància d'aquesta xarxa a les fallades es veurà afectada principalment per la percolació de nodes. En concret, si els hubs comencen a fallar, la xarxa perdrà la seva connectivitat molt més ràpidament que en un graf més uniforme, ja que els hubs són crítics per mantenir el graf connectat.
 	\end{itemize}
 	
-	Els resultats obtinguts permetran caracteritzar el comportament de diferents models de grafs sota condicions de percolació i explorar la robustesa d'aquestes xarxes davant de fallades aleatòries. També explicarem per què aquests grafs han estat considerats els més rellevants per al nostre estudi.
+	Els resultats obtinguts permetran caracteritzar el comportament de diferents models de grafs sota condicions de percolació i explorar la robustesa d'aquestes xarxes davant de fallades aleatòries.
 	
 	
 	\newpage
