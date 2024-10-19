@@ -21,7 +21,7 @@
 \author{\emph{Pau Belda, Guillem Cabré, Marc Peñalver, Prisca Oleart}}
 \date{\textbf{Curs 2024-25, Quatrimestre de tardor}}
 
-\renewcommand*\contentsname{Continguts}
+\renewcommand*\contentsname{Índex}
 \renewcommand{\tablename}{Taula}
 \renewcommand{\figurename}{Figura}
 
@@ -155,7 +155,7 @@
 		\end{algorithmic}
 	\end{algorithm}
 	
-	El generador de grafs de graella triangular crea un graf amb \( n \) nodes, on \( n = 1 + 2 + 3 + \ldots + rows = \frac{rows \times (rows + 1)}{2} \) per tal de conseguir una estructura triangular. Aquests nodes tenen una estructura en què cada node està connectat als veïns de la dreta i l'esquerra, així com als nodes superiors i inferiors, tant a l'esquerra com a la dreta, sempre que aquests existeixin. Això s'aconsegueix comprovant per a cada node si hi ha nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents. \\
+	El generador de grafs de graella triangular crea un graf amb $n$ nodes, on $n = 1 + 2 + 3 + \ldots + rows = \frac{rows \times (rows + 1)}{2}$ per tal de conseguir una estructura triangular. Aquests nodes tenen una estructura en què cada node està connectat als veïns de la dreta i l'esquerra, així com als nodes superiors i inferiors, tant a l'esquerra com a la dreta, sempre que aquests existeixin. Això s'aconsegueix comprovant per a cada node si hi ha nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents. \\
 
 	\subsection{Graf Geomètric Aleatori}
 	\begin{algorithm} [H]
@@ -181,7 +181,7 @@
 			\State Retornar el graf $g$
 		\end{algorithmic}
 	\end{algorithm}
-	El generador de grafs geomètrics aleatoris crea un graf amb \( n \) nodes, on cada node es col·loca aleatòriament en un espai bidimensional unitari. Dos nodes estan connectats per una aresta si la distància entre ells és menor que un radi \( r \) especificat. Això es determina calculant la distància euclidiana entre tots els parells de nodes i afegint arestes quan la distància és inferior a \( r \).
+	El generador de grafs geomètrics aleatoris crea un graf amb $n$ nodes, on cada node es col·loca aleatòriament en un espai bidimensional unitari. Dos nodes estan connectats per una aresta si la distància entre ells és menor que un radi $r$ especificat. Això es determina calculant la distància euclidiana entre tots els parells de nodes i afegint arestes quan la distància és inferior a $r$.
 		
 	\subsection{Graf de Barabási-Albert}
 
@@ -217,7 +217,7 @@
 		\end{algorithmic}
 	\end{algorithm}
 	
-	El generador de grafs de Barabási-Albert crea un graf que segueix el model de creixement de xarxes, on s'afegeixen nodes nous que es connecten a nodes existents en funció del seu grau de connexió. Comença amb un conjunt inicial de \( m_0 \) nodes completament connectats, i cada nou node que s'afegeix selecciona \( m \) nodes existents per connectar-se, amb una probabilitat proporcional al seu grau de connexió. \\
+	El generador de grafs de Barabási-Albert crea un graf que segueix el model de creixement de xarxes, on s'afegeixen nodes nous que es connecten a nodes existents en funció del seu grau de connexió. Comença amb un conjunt inicial de $m_0$ nodes completament connectats, i cada nou node que s'afegeix selecciona $m$ nodes existents per connectar-se, amb una probabilitat proporcional al seu grau de connexió. \\
 	
 	Aquesta selecció es realitza mitjançant la funció \texttt{preferentialAttachment}, que s'encarrega de seleccionar un node existent basant-se en el seu grau de connexió. La funció funciona de la següent manera: \\
 	
@@ -268,7 +268,7 @@
 		\end{algorithmic}
 	\end{algorithm}
 
-	Aquest algorisme retorna el graf percolat a partir del graf original. Això s'aconsegueix eliminant les arestes amb una probabilitat \( p \). Per evitar processar una mateixa aresta més d'una vegada, s'utilitza la condició \( u < v \), ja que en grafs no dirigits una aresta \( (u, v) \) és equivalent a \( (v, u) \). Tal com s'ha mencionat prèviament, la funció \texttt{rand01()} genera un nombre aleatori entre 0 i 1, que es compara amb la probabilitat \( p \) per decidir si es manté o s'elimina una aresta.
+	Aquest algorisme retorna el graf percolat a partir del graf original. Això s'aconsegueix eliminant les arestes amb una probabilitat $p$. Per evitar processar una mateixa aresta més d'una vegada, s'utilitza la condició $u < v $, ja que en grafs no dirigits una aresta $(u, v)$ és equivalent a $(v, u)$. Tal com s'ha mencionat prèviament, la funció \texttt{rand01()} genera un nombre aleatori entre 0 i 1, que es compara amb la probabilitat $p$ per decidir si es manté o s'elimina una aresta.
 
 	\subsection{Percolació per Nodes}
 	\begin{algorithm} [H]
@@ -416,7 +416,7 @@
 	\begin{itemize}
 		\item \textbf{N}: nombre de nodes de l'experiment (pot variar depenent del graf).
 		\item \textbf{\textit{Threshold}}: punt d'inflexió en què apareix la transició de fase.
-		\item \textbf{\% Connex}: la probabilitat, en tant per u, de que el graf percolat sigui connex en el punt $p = \textit{threshold}.$
+		\item \textbf{\% Connex}: la probabilitat, en tant per u, de que el graf percolat sigui connex en el punt $p = \textit{threshold}$.
 		\item \textbf{Pendent}: pendent del segment en el punt \textit{threshold}.
 	\end{itemize}
 	
@@ -468,7 +468,7 @@
 			18 & 0.15 & 0.60 & -8.80 &   &  180 & 0.06 & 0.54 & -21.30 \\ \hline
 			20 & 0.17 & 0.42 & -8.70 &   &  200 & 0.06 & 0.47 & -23.20 \\ \hline
 		\end{tabular}
-		\caption{Dades sobre la transició de fase de grafs quadrats}
+		\caption{Dades sobre la transició de fase de grafs quadrats amb percolació per arestes}
 		\label{tab:data_edges_square}
 	\end{table}
 	
@@ -553,14 +553,13 @@
 			55 & 0.18 & 0.68 & -9.20 &   & 150 & 0.19 & 0.28 & -11.30 \\ \hline
 			
 		\end{tabular}
-		\caption{Dades sobre la transició de fase de grafs triangulars}
+		\caption{Dades sobre la transició de fase de grafs triangulars amb percolació per arestes}
 		\label{tab:data_edges_triangulars}
 	\end{table}
 	
-	Amb la \textit{Taula \ref{tab:data_edges_triangulars}}, observem númericament el que hem explicat dels gràfics, que el valor on hi ha la transició de fase va disminuint a mesura que $M$ augmenta. Igual que en les graelles quadrades, cada vegada disminueix més a poc a poc el $threshold$, però per contra incrementa el pendent de les rectes. Aixó ens indica que la pèrdua de connectivitat és més abrupta en grafs més grans i que la transició de fase es influenciada per la mida del graf. \\
+	Amb la \textit{Taula \ref{tab:data_edges_triangulars}}, observem númericament el que hem explicat dels gràfics, que el valor on hi ha la transició de fase va disminuint a mesura que $M$ augmenta. Igual que en les graelles quadrades, cada vegada disminueix més a poc a poc el $threshold$, però per contra incrementa el pendent en el punt \textit{threshold}. Aixó ens indica que la pèrdua de connectivitat és més abrupta en grafs més grans i que la transició de fase es influenciada per la mida del graf. \\
 	
-	
-	Pel que fa a la comparació que ens interessava amb les graelles quadrades, tot i que observant els gràfics ja es pot veure que la \textit{p} on hi ha la desconnexió total és més petita en les graelles quadrades, en aquesta taula podem observar resultats de grafs amb el mateix número de files per poder veure millor la comparació.
+	Pel que fa a la comparació que ens interessava amb les graelles quadrades, tot i que observant els gràfics ja es pot veure que la $p$ on hi ha la desconnexió total és més petita en les graelles quadrades, en aquesta taula podem observar resultats de grafs amb el mateix número de files per poder veure millor la comparació.
 	
 	\begin{table}[H]
 		\centering
@@ -577,11 +576,11 @@
 			120 & 0.07 & 0.19 \\ \hline
 			140 & 0.07 & 0.15 \\ \hline
 		\end{tabular}
-		\caption{Comparació del \textit{threshold} entre els grafs quadrats i triangulars}
-		\label{tab:comparacio_threshold_square_triangular}
+		\caption{Comparació del punt \textit{threshold} entre els grafs quadrats i triangulars amb percolació per arestes}
+		\label{tab:comparacio_threshold_square_triangular_edges}
 	\end{table}
 	
-	La \textit{Taula \ref{tab:comparacio_threshold_square_triangular}} ens mostra una comparació de $threshold$ en grafs amb el mateix nombre de files però de diferent tipus, graelles quadrades o triangulars. Com ja hem anat suposant però amb la taula podem confirmar, en les graelles quadrades el moment on apareix la transició de fase és més petit que en les graelles triangulars. Amb aquestes dades podem confirmar la nostra hipòtesi d'experimentació on crèiem que el fet de tenir graelles on els nodes tenen més arestes influiria en el valor $p$ on apareix la transició de fase.
+	La \textit{Taula \ref{tab:comparacio_threshold_square_triangular_edges}} ens mostra una comparació de $threshold$ en grafs amb el mateix nombre de files però de diferent tipus, graelles quadrades o triangulars. Com ja hem anat suposant però amb la taula podem confirmar, en les graelles quadrades el moment on apareix la transició de fase és més petit que en les graelles triangulars. Amb aquestes dades podem confirmar la nostra hipòtesi d'experimentació on crèiem que el fet de tenir graelles on els nodes tenen més arestes influiria en el valor $p$ on apareix la transició de fase.
 	
 	\subsubsection{Percolació per node}
 	
@@ -681,7 +680,7 @@
 	
 	\subsubsection{Percolació per nodes}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.45\textwidth}
 			\centering
@@ -698,7 +697,7 @@
 		\label{fig:percolation_nodes_ba_2_1}
 	\end{figure}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.45\textwidth}
 			\centering
@@ -715,7 +714,7 @@
 		\label{fig:percolation_nodes_ba_5_x}
 	\end{figure}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.45\textwidth}
 			\centering
@@ -732,8 +731,14 @@
 		\label{fig:percolation_nodes_ba_10_x}
 	\end{figure}
 		
-	\newpage
+	\newpage	
 	\section{Conclusions}
+	
+	En aquest estudi, hem explorat els efectes de la percolació en diversos models de grafs, analitzant com la probabilitat de fallada i el nombre de nodes afecten la seva connectivitat i com es produeix la transició de fase. Els models seleccionats inclouen la graella quadrada, la graella triangular, els grafs geomètrics aleatoris i el model de Barabási-Albert. Hem aplicat tant percolació per arestes com per nodes, observant com varien els resultats en funció de la mida i estructura del graf. \\
+	
+	Els resultats obtinguts mostren patrons clars: a mesura que augmenta el nombre de nodes, la transició de fase esdevé més abrupta i ocorre amb valors més petits de probabilitat de fallida. Això és especialment evident en grafs més densos, com les graelles triangulars i els grafs geomètrics amb un radi de connexió gran, on la desconnexió completa es retarda. En canvi, en el model de Barabási-Albert, la percolació afecta més ràpidament la connectivitat quan fallen els hubs, mostrant la fragilitat de les xarxes amb concentració de connexions. \\
+	
+	En futurs treballs, seria interessant ampliar l'estudi amb altres tipus de grafs, com els grafs Erdős-Rényi o els grafs dirigits, així com investigar a part de la connectivitat com a propietat booleana, el nombre de components connexes després del procés de percolació. A més, es podria explorar l'impacte de percolacions selectives o correlacionades, on la fallada d'un node o aresta depengui de la fallada dels seus veïns, per entendre millor les propietats de robustesa i vulnerabilitat de les xarxes complexes.
 	
 	\newpage
 	\section{Bibliografia}
