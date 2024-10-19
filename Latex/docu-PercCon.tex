@@ -333,7 +333,7 @@
 	
 	\subsection{Metodologia}
 	
-	Per dur a terme l'experimentació del projecte, hem utilitzat diferents eines. Hem programat dos programes en \texttt{C++}, un llenguatge que ens ofereix molta eficàcia temporal i espacial. Aquests programes són el \texttt{main} i el \texttt{runner}. També hem dissenyat un fitxer de classe \texttt{graph} amb tots els atributs i funcions necessàries per operar amb els grafs. Aquesta classe representa els grafs com a llistes d'adjacència. \\
+	Per dur a terme l'experimentació del projecte, hem utilitzat diferents eines. Hem programat dos programes en \texttt{C++}, un llenguatge que ens ofereix molta eficàcia temporal i espaial. Aquests programes són el \texttt{main} i el \texttt{runner}. També hem dissenyat un fitxer de classe \texttt{graph} amb tots els atributs i funcions necessàries per operar amb els grafs. Aquesta classe representa els grafs com a llistes d'adjacència. \\
 	
 	Per compilar aquests programes, hem fet ús del programari lliure \texttt{make}, que automatitza i paral·litza el compilatge i l'enllaç. \\
 	
@@ -416,7 +416,7 @@
 	\begin{itemize}
 		\item \textbf{N}: nombre de nodes de l'experiment (pot variar depenent del graf).
 		\item \textbf{\textit{Threshold}}: punt d'inflexió en què apareix la transició de fase.
-		\item \textbf{\% Connex}: la probabilitat, en tant per u, de que el graf percolat sigui connex en el punt $p = \textit{threshold}$.
+		\item \textbf{\% Connex}: la probabilitat, en tant per u, de que el graf percolat sigui connex en el punt $p$.
 		\item \textbf{Pendent}: pendent del segment en el punt \textit{threshold}.
 	\end{itemize}
 	
@@ -499,14 +499,42 @@
 	
 	Els resultats representats en el gràfic ens indiquen que graelles quadrades amb molt poques files, menys de 8, continuen mantenint un percentatge alt de connectivitat qualsevol valor de $p$. A mesura que creix la graella aixó es perd i apareix una transició de fase on al arribar a un cert valor de $p$ el graf deixa de ser connex. Igual que en la percolació per arestes, la mida del graf influeix en el pendent de la transició de fase, quan més gran és el graf més ràpida i brusca és la pèrdua de connectivitat. \\
 	
-	En graelles petites la transició és més suau i fins i tot observem una pujada després de la baixada inicial en valors de $p$ per sobre del 0.75, que indica un increment en el percentatge de grafs connexos quan hi ha una probabilitat de fallida alta. Aquest petit augment final es deu al fet que, amb un valor de $p$ tan alt, s'eliminen molts nodes, i en grafs petits implica que poden apareixer petites components connexes entre elles però aïllades de la resta, cosa que incrementa el percentage de grafs connexos. Aixó no passa en els grafs grans ja que hi ha menys possibilitat que es formin petits \textit{clusters} degut a la distància entre vèrtexs.
+	En graelles petites la transició és més suau i fins i tot observem una pujada després de la baixada inicial en valors de $p$ per sobre del 0.75, que indica un increment en el percentatge de grafs connexos quan hi ha una probabilitat de fallida alta. Aquest petit augment final es deu al fet que, amb un valor de $p$ tan alt, s'eliminen molts nodes, i en grafs petits implica que poden apareixer petites components connexes entre elles però aïllades de la resta, cosa que incrementa el percentage de grafs connexos. Aixó no passa en els grafs grans ja que hi ha menys possibilitat que es formin petits \textit{clusters} degut a la distància entre vèrtexs. \\
+	
+	Ara ens interessa fer una comparació de resultats amb les diferents percolacions. Com hem vist que els grafs tendeixen a un $threshold$ cada vegada més baix quan el graf incrementa el número de nodes, farem la comparació amb els $threshold$ calculats per graelles de mides grans. A més a més, la diferència en els grafs petits és més fàcil de veure gràficament, amb la pujada final en la percolació per node sent el principal canvi. En graelles grans és més difícil veure alguna diferència, així que númericament serà més clar. \\ 
+	
+	\begin{table}
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{gray!30}
+			\multicolumn{1}{|c|}{} &\multicolumn{3}{|c|}{Percolació per arestes} & \multicolumn{3}{|c|}{Percolació per nodes} \\ \hline
+			\rowcolor{gray!30}
+			M & Threshold & \% Connex & Pendent & Threshold & \% Connex & Pendent \\ \hline
+			20 & 0.17 & 0.42 & -8.70 & 0.17 & 0.44 & -10.10 \\ \hline
+			40 & 0.15 & 0.23 & -11.40 & 0.13 & 0.44 & -10.50 \\ \hline
+			60 & 0.11 & 0.40 & -14.90 & 0.11 & 0.45 & -12.60 \\ \hline
+			80 & 0.09 & 0.50 & -14.90 & 0.10 & 0.39 & -14.50 \\ \hline
+			100 & 0.10 & 0.22 & -16.00 & 0.08 & 0.52 & -15.60 \\ \hline
+			120 & 0.07 & 0.56 & -18.50 & 0.07 & 0.58 & -16.80 \\ \hline
+			140 & 0.07 & 0.48 & -19.60 & 0.07 & 0.52 & -17.70 \\ \hline
+			160 & 0.08 & 0.21 & -21.60 & 0.07 & 0.43 & -20.10 \\ \hline
+			180 & 0.06 & 0.54 & -21.30 & 0.08 & 0.19 & -20.80 \\ \hline
+			200 & 0.06 & 0.47 & -23.20 & 0.07 & 0.30 & -22.90 \\ \hline
+		\end{tabular}
+		\caption{Comparació de la transició de fase de graelles quadrades grans amb diferents percolacions}
+		\label{tab:comparacio_edges_nodes_square}
+	\end{table}
+	
+	La \textit{Taula \ref{tab:comparacio_edges_nodes_square}} conté la comparació de dades de transició de fase per graelles quadrades grans al fer la percolació per aresta o per node. Si ens fixem en els valors del $threshold$ en els dos casos són valors molt semblants, així com tampoc podem veure un gran canvi en el percentatge de grafs connexos que tenim en aquest valor de $p$. Amb aquestes dades podem concloure que no hi ha molta diferència entre fer la percolació per nodes o per arestes en les graelles quadrades de gran mida.
+	
 	
 	
 	\subsection{Graella triangular}
 	
 	Ara estudiem la transició de fase en graelles triangulars. En aquest cas només havíem d'estudiar la percolació per aresta i ho hem fet com en les graelles quadrades, amb grafs de mida petita i mida més gran. En aquest cas, els grafs petits comencen amb 5 files fins a 55 files, amb increment de 5 files cada vegada, mentre que la mida gran son grafs de 50 a 150 files amb increments de 10 files. \\
 	
-	Hem decidit fer la percolació per aresta perquè volíem veure si el fet de tenir una graella similar a la graella quadrada, pero amb els vertex del mig (els que no estan a la vora del graf i per tant tenen totes les arestes possibles) de grau més alt influiria en el valor de la probabilitat de fallida on hi ha la transició de fase. Creiem que en aquest cas la probabilitat de fallida on hi ha la transició de fase serà un valor més alt que en graelles quadrades ja que el grau dels vèrtex és més alt i per tant hi ha més arestes que han de fallar per desconnectar els nodes. Després de fer aquesta experimentació, hem decidit fer també l'estudi per percolació de node per poder comparar els resultats amb els obtinguts en graelles quadrades. \\
+	Hem decidit fer la percolació per aresta perquè volíem veure si el fet de tenir una graella similar a la graella quadrada, però amb els vertex del mig (els que no estan a la vora del graf i per tant tenen totes les arestes possibles) de grau més alt influiria en el valor de la probabilitat de fallida on hi ha la transició de fase. Creiem que en aquest cas la probabilitat de fallida on hi ha la transició de fase serà un valor més alt que en graelles quadrades ja que el grau dels vèrtex és més alt i per tant hi ha més arestes que han de fallar per desconnectar els nodes. Després de fer aquesta experimentació, hem decidit fer també l'estudi per percolació de node per poder comparar els resultats amb els obtinguts en graelles quadrades. \\
 	
 	
 	\subsubsection{Percolació per aresta}
@@ -528,7 +556,7 @@
 		\label{fig:percolation_edges_triangular}
 	\end{figure}
 	
-	La \textit{Figura \ref{fig:percolation_edges_triangular}} mostra la comparació de percolació per arestes de graelles triangulars amb els resultats dels grafs petits a l'esquerra i els grans al gràfic de la dreta. La informació que cad agràfic proporciona és la mateixa que en l'experimentació de les graelles quadrades, cada línea indica la relació entre percentatge de grafs connexos i probabilitat de fallida \textit{p} en funció del número de files. \\
+	La \textit{Figura \ref{fig:percolation_edges_triangular}} mostra la comparació de percolació per arestes de graelles triangulars amb els resultats dels grafs petits a l'esquerra i els grans al gràfic de la dreta. La informació que cada gràfic proporciona és la mateixa que en l'experimentació de les graelles quadrades, cada línea indica la relació entre percentatge de grafs connexos i probabilitat de fallida \textit{p} en funció del número de files. \\
 	
 	En els dos casos podem observar que hi ha una transició de fase ja que hi ha una caiguda brusca en un valor determinat de \textit{p}, però en el cas dels grafs petits aquesta caiguda és més gradual, la transició de fase no està tant marcada. En canvi, en grafs amb més files la transició és més ràpida i, si ens fixem en el valor de la probabilitat de fallida on arribem a la desconnexió total, la \textit{p} que marca la transició de fase disminueix a mesura que el graf és més gran. \\
 	
@@ -601,6 +629,41 @@
 		\label{fig:percolation_nodes_triangular}
 	\end{figure}
 	
+	Després de fer la comparació amb la percolació per arestes entre graelles triangulars i quadrades hem decidit fer-ho també per percolació per nodes, la \textit{Figura \ref{fig:percolation_nodes_triangular}} ens mostra els resultats obtinguts de la percolació per nodes en graelles triangulars. \\
+	
+	En aquest cas, podem observar resultats similars a la resta obtinguts de graelles, on podem veure una transició de fase que a mesura que la mida del graf augmenta és més brusca i en un valor de $p$ més petit. En els grafs amb menys de 25 podem observar el mateix fenomen que en les graelles quadrades, on hi ha una caiguda de la connecitvitat quan $p$ ronda el 0.3, però en valors de $p$ molt alts el graf recupera una mica el percentatge de connectivitat.
+	
+	Tot i que en grafs petits podem veure alguna diferència al fer percolació per node o per aresta a simple vista en graelles grans és més dificil de veure ja que la transició de fase que observem en els gràfics sembla igual. Per poder fer una bona comparació, en la taula següent veiem els $threshold$ calculat per grafs grans.
+	
+	\begin{table}
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			\rowcolor{gray!30}
+			\multicolumn{1}{|c|}{} &\multicolumn{3}{|c|}{Percolació per arestes} & \multicolumn{3}{|c|}{Percolació per nodes} \\ \hline
+			\rowcolor{gray!30}
+			M & Threshold & \% Connex & Pendent & Threshold & \% Connex & Pendent \\ \hline
+			50 & 0.25 & 0.33 & -8.30 & 0.23 & 0.42 & -8.90	\\ \hline
+			60 & 0.20 & 0.57 & -9.40 & 0.21 & 0.50 & -8.30	\\ \hline
+			70 & 0.22 & 0.40 & -10.20 & 0.24 & 0.22 & -11.40	\\ \hline
+			80 & 0.19 & 0.55 & -9.80 & 0.23 & 0.24 & -11.00	\\ \hline
+			90 & 0.20 & 0.41 & -9.80 & 0.21 & 0.31 & -11.40	\\ \hline
+			100 & 0.18 & 0.54 & -12.20 & 0.21 & 0.29 & -10.50	\\ \hline
+			110 & 0.20 & 0.34 & -11.00 & 0.21 & 0.26 & -10.60	\\ \hline
+			120 & 0.19 & 0.38 & -10.70 & 0.20 & 0.29 & -9.20	\\ \hline
+			130 & 0.17 & 0.54 & -10.10 & 0.18 & 0.43 & -12.00	\\ \hline
+			140 & 0.15 & 0.64 & -9.90  & 0.20 & 0.22 & -10.80	\\ \hline
+			150 & 0.19 & 0.28 & -11.30 & 0.18 & 0.38 & -9.40	\\ \hline
+		\end{tabular}
+		\caption{Comparació de la transició de fase de grafs triangulars grans amb diferents percolacions}
+		\label{tab:comparacio_edges_nodes_triangulars}
+	\end{table}
+	
+	Com podem veure en la \textit{Taula \ref{tab:comparacio_edges_nodes_triangulars}} els valors que obtenim al fer la percolació per aresta o per node en graelles triangulars és molt semblant. En general, els valors de $threshold$ obtinguts en la percolació per node són una mica més alts, però per contra el percentatge de grafs connexos en aquell punts és una mica més alt en la percolació per arestes. \\
+	
+	Per tant si volem grafs amb més connectivitat seria millor fer la percolació per arestes, però la diferència és petita així que s'obtindran resultats molt semblants si es fa la percolació per nodes.Els pendents són molt similars en els dos casos així que la rapidesa en la que els grafs perden la connectivitat, com hem pogut veure en els gràfics, és casi igual.
+	
+	
 	
 	\subsection{Graf geomètric aleatori}
 	
@@ -670,7 +733,7 @@
 	\end{figure}
 	
 	Per últim, a \textit{Figura \ref{fig:percolation_edges_rgg_0.8}} s'utilitzen grafs geometrics aleatoris amb un radi de connectivitat molt elevat, donant-lis una forma seblant a un graf complet. Per aquest motiu, fins que la probabilitat de percolació no és molt alta, els grafs generats segueixen
-	sent connexos una vegada aplicada la transició de fase. Evidentment, l'augment de nodes provoca que el percentatge de grafs connexos creixi ja que els nodes tenens més probabilitats d'estar units a altres nodes (imatge 2), fet que ha succeït a totes les comparatives.
+	sent connexos una vegada aplicada la transició de fase. Evidentment, l'augment de nodes provoca que el percentatge de grafs connexos creixi ja que els nodes tenen més probabilitats d'estar units a altres nodes (imatge 2), fet que ha succeït a totes les comparatives.
 	
 	\subsection{Graf de Barabási-Albert}
 	
@@ -743,9 +806,15 @@
 	\newpage
 	\section{Bibliografia}
 	
-	\begin{itemize}
-		\item \href{https://ca.wikipedia.org/wiki/Model_d%27Erd%C5%91s-R%C3%A9nyi}{Wikipedia. \textit{Model d'Erdős-Rényi}}.
-	\end{itemize}
+	\renewcommand{\refname}{}	
+	\begin{thebibliography}{99}
+		\vspace{-2em}
+		\bibitem{site_percolation} E. Weisstein, "Site Percolation", \textit{MathWorld -- A Wolfram Web Resource}. Disponible: \href{https://mathworld.wolfram.com/SitePercolation.html}{https://mathworld.wolfram.com/SitePercolation.html}. [Accedit: 17-oct-2024].
+		
+		\bibitem{bond_percolation} E. Weisstein, "Bond Percolation", \textit{MathWorld -- A Wolfram Web Resource}. Disponible: \href{https://mathworld.wolfram.com/BondPercolation.html}{https://mathworld.wolfram.com/BondPercolation.html}. [Accedit: 17-oct-2024].
+		\bibitem{grimmett} G. R. Grimmett i A. M. Stacey, "CRITICAL PROBABILITIES FOR SITE
+		AND BOND PERCOLATION MODELS", Disponible: \href{http://www.statslab.cam.ac.uk/~grg1000/papers/UScrit6.pdf}{http://www.statslab.cam.ac.uk/~grg1000/papers/UScrit6.pdf}. [Accedit: 17-oct-2024].
+	\end{thebibliography}
 	
 	\newpage
 	\section{Annex}
