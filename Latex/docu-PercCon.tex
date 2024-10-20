@@ -499,11 +499,13 @@
 	
 	Els resultats representats en el gràfic ens indiquen que graelles quadrades amb molt poques files, menys de 8, continuen mantenint un percentatge alt de connectivitat qualsevol valor de $p$. A mesura que creix la graella aixó es perd i apareix una transició de fase on al arribar a un cert valor de $p$ el graf deixa de ser connex. Igual que en la percolació per arestes, la mida del graf influeix en el pendent de la transició de fase, quan més gran és el graf més ràpida i brusca és la pèrdua de connectivitat. \\
 	
-	En graelles petites la transició és més suau i fins i tot observem una pujada després de la baixada inicial en valors de $p$ per sobre del 0.75, que indica un increment en el percentatge de grafs connexos quan hi ha una probabilitat de fallida alta. Aquest petit augment final es deu al fet que, amb un valor de $p$ tan alt, s'eliminen molts nodes, i en grafs petits implica que poden apareixer petites components connexes entre elles però aïllades de la resta, cosa que incrementa el percentage de grafs connexos. Aixó no passa en els grafs grans ja que hi ha menys possibilitat que es formin petits \textit{clusters} degut a la distància entre vèrtexs. \\
+	En graelles petites la transició és més suau i fins i tot observem una pujada després de la baixada inicial en valors de $p$ per sobre del 0.75, que indica un increment en el percentatge de grafs connexos quan hi ha una probabilitat de fallida alta. Aquest fenomen apareix quan la percolació genera un sol \textit{cluster}. Això significa al eliminar la gran majoria de nodes, es queda una petita component connexa, anomenada \textit{cluster}. A mesura que els grafs augmenten en nombre de vèrtex, la probabilitat de que aparegui un \textit{cluster} és més petita, ja que la distància entre \textit{clusters} generats serà major, i amb que n'hi hagi dos separats el graf resultant ja no serà connex. \\
 	
-	Ara ens interessa fer una comparació de resultats amb les diferents percolacions. Com hem vist que els grafs tendeixen a un $threshold$ cada vegada més baix quan el graf incrementa el número de nodes, farem la comparació amb els $threshold$ calculats per graelles de mides grans. A més a més, la diferència en els grafs petits és més fàcil de veure gràficament, amb la pujada final en la percolació per node sent el principal canvi. En graelles grans és més difícil veure alguna diferència, així que númericament serà més clar. \\ 
+	Podem calcular la probabilitat de que aparegui un \textit{cluser}, per simplicitat calcularem la probabilitat de que aquest tingui un sol node. Sigui $m$ el nombre de files, $n = m \times m$ nombre de nodes, $p$ probabilitat de fallida de node i $q = 1 - p$ probabilitat de que aquest no falli. Tindrem que $t = n \times q \times p^{n-1}$, on $t$ serà la probabilitat de que el graf percolat tingui un sol \textit{cluster} amb un node. Vegem un exemple que verifiqui aquest càlcul: donats $m = 6 \quad \Rightarrow \quad n = 36$, $p = 0.95 \quad \Rightarrow \quad q = 0.05$, ara calculem $t = 36 \times 0.05 \times 0.95^{36-1} \approx 0.299$. Veiem com en el gràfic (\textit{Figura \ref{fig:percolation_nodes_square}}), quan $m$ val 6, i la probabilitat $p$ s'aproxima a 0.95, tenim una connectivitat propera al $29.9\%$ que acabem de calcular. \\
 	
-	\begin{table}
+	Ara ens interessa fer una comparació de resultats amb les diferents percolacions. Com hem vist que els grafs tendeixen a un $threshold$ cada vegada més baix quan el graf incrementa el número de nodes, farem la comparació amb els $threshold$ calculats per graelles de mides a partir de $m = 20$. A més, la diferència en els grafs de mida inferior és més fàcil de veure gràficament, amb la pujada final en la percolació per node sent el principal canvi. En graelles grans és més difícil veure alguna diferència, així que numèricament serà més clar. \\ 
+	
+	\begin{table} [H]
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|c|}
 			\hline
@@ -532,9 +534,10 @@
 	
 	\subsection{Graella triangular}
 	
-	Ara estudiem la transició de fase en graelles triangulars. En aquest cas només havíem d'estudiar la percolació per aresta i ho hem fet com en les graelles quadrades, amb grafs de mida petita i mida més gran. En aquest cas, els grafs petits comencen amb 5 files fins a 55 files, amb increment de 5 files cada vegada, mentre que la mida gran son grafs de 50 a 150 files amb increments de 10 files. \\
+	En el cas de les graelles triangulars, hem estudiat la percolació per arestes seguint el mateix enfocament utilitzat per a les graelles quadrades. Els grafs considerats van des de 5 fins a 55 files, amb increments de 5 files, i des de 50 fins a 150 files, amb increments de 10 files. \\
 	
-	Hem decidit fer la percolació per aresta perquè volíem veure si el fet de tenir una graella similar a la graella quadrada, però amb els vertex del mig (els que no estan a la vora del graf i per tant tenen totes les arestes possibles) de grau més alt influiria en el valor de la probabilitat de fallida on hi ha la transició de fase. Creiem que en aquest cas la probabilitat de fallida on hi ha la transició de fase serà un valor més alt que en graelles quadrades ja que el grau dels vèrtex és més alt i per tant hi ha més arestes que han de fallar per desconnectar els nodes. Després de fer aquesta experimentació, hem decidit fer també l'estudi per percolació de node per poder comparar els resultats amb els obtinguts en graelles quadrades. \\
+	Hem optat per estudiar la percolació per aresta amb l'objectiu d'analitzar si el fet de tenir una graella similar a la quadrada, però amb els vèrtexs interiors (aquells que no es troben a la vora del graf i, per tant, tenen totes les arestes possibles) de grau superior, afecta la probabilitat de fallida en què es produeix la transició de fase. El grau dels vèrtex interiors de les graelles quadrades era de $4$, el de les triangulars de $6$. Considerem que, en aquest cas, la probabilitat de fallida associada a la transició de fase serà superior a la de les graelles quadrades, ja que el grau dels vèrtexs és més alt, i per tant, hi ha més arestes que han de fallar per desconnectar els nodes. Posteriorment, hem decidit estendre l'estudi a la percolació per node per tal de comparar els resultats amb els obtinguts en graelles quadrades. \\
+	
 	
 	
 	\subsubsection{Percolació per aresta}
@@ -556,11 +559,11 @@
 		\label{fig:percolation_edges_triangular}
 	\end{figure}
 	
-	La \textit{Figura \ref{fig:percolation_edges_triangular}} mostra la comparació de percolació per arestes de graelles triangulars amb els resultats dels grafs petits a l'esquerra i els grans al gràfic de la dreta. La informació que cada gràfic proporciona és la mateixa que en l'experimentació de les graelles quadrades, cada línea indica la relació entre percentatge de grafs connexos i probabilitat de fallida \textit{p} en funció del número de files. \\
+	La \textit{Figura \ref{fig:percolation_edges_triangular}} mostra la comparació de la percolació per arestes en graelles triangulars amb els resultats obtinguts en dos grafs de mostres diferents. El gràfic de l'esquerra presenta un conjunt de nodes $|V|$ inferior al de la dreta. La informació proporcionada en ambdós gràfics és la mateixa que en l'experimentació amb graelles quadrades. \\
 	
-	En els dos casos podem observar que hi ha una transició de fase ja que hi ha una caiguda brusca en un valor determinat de \textit{p}, però en el cas dels grafs petits aquesta caiguda és més gradual, la transició de fase no està tant marcada. En canvi, en grafs amb més files la transició és més ràpida i, si ens fixem en el valor de la probabilitat de fallida on arribem a la desconnexió total, la \textit{p} que marca la transició de fase disminueix a mesura que el graf és més gran. \\
+	En ambdós casos es pot observar una transició de fase, evidenciada per una caiguda brusca en un valor determinat de $p$. Tanmateix, en el cas dels grafs amb menys files, aquesta caiguda és més gradual i la transició de fase és menys pronunciada. En canvi, en grafs amb més files, la transició es produeix de manera més ràpida. A més, si s'analitza el valor del punt \textit{threshold}, es a major nombre de files menor és aquest punt en $p$. \\
 	
-	Per tant, igual que en els grafs quadrats la mida del graf afecta el valor de la probabilitat de fallida on ocorre la transició de fase, la qual disminueix a mesura que el graf augmenta de mida. 
+	Per tant, de manera similar a com ocorre en els grafs quadrats, la mida del graf influeix en el valor de la probabilitat de fallida en què es produeix la transició de fase, la qual disminueix a mesura que el graf augmenta de mida. \\
 	
 	\begin{table}[H]
 		\centering
@@ -585,9 +588,10 @@
 		\label{tab:data_edges_triangulars}
 	\end{table}
 	
-	Amb la \textit{Taula \ref{tab:data_edges_triangulars}}, observem númericament el que hem explicat dels gràfics, que el valor on hi ha la transició de fase va disminuint a mesura que $M$ augmenta. Igual que en les graelles quadrades, cada vegada disminueix més a poc a poc el $threshold$, però per contra incrementa el pendent en el punt \textit{threshold}. Aixó ens indica que la pèrdua de connectivitat és més abrupta en grafs més grans i que la transició de fase es influenciada per la mida del graf. \\
+	Amb la \textit{Taula \ref{tab:data_edges_triangulars}} podem observar numèricament el que hem descrit en els gràfics: el valor on es produeix la transició de fase disminueix a mesura que $M$ augmenta. Com en les graelles quadrades, el valor del \textit{threshold} disminueix lentament amb cada increment de mida, però, en canvi, el pendent en el punt de transició augmenta. Això indica que la pèrdua de connectivitat és més abrupta en grafs més grans i que la transició de fase està influenciada per la mida del graf. \\
 	
-	Pel que fa a la comparació que ens interessava amb les graelles quadrades, tot i que observant els gràfics ja es pot veure que la $p$ on hi ha la desconnexió total és més petita en les graelles quadrades, en aquesta taula podem observar resultats de grafs amb el mateix número de files per poder veure millor la comparació.
+	Pel que fa a la comparació amb les graelles quadrades, tot i que ja es pot apreciar als gràfics que la $p$ on es produeix la desconnexió total és més petita en les graelles quadrades, en aquesta taula es poden veure els resultats de grafs amb el mateix nombre de files, la qual cosa permet una comparació més detallada.
+	
 	
 	\begin{table}[H]
 		\centering
@@ -608,7 +612,8 @@
 		\label{tab:comparacio_threshold_square_triangular_edges}
 	\end{table}
 	
-	La \textit{Taula \ref{tab:comparacio_threshold_square_triangular_edges}} ens mostra una comparació de $threshold$ en grafs amb el mateix nombre de files però de diferent tipus, graelles quadrades o triangulars. Com ja hem anat suposant però amb la taula podem confirmar, en les graelles quadrades el moment on apareix la transició de fase és més petit que en les graelles triangulars. Amb aquestes dades podem confirmar la nostra hipòtesi d'experimentació on crèiem que el fet de tenir graelles on els nodes tenen més arestes influiria en el valor $p$ on apareix la transició de fase.
+	La \textit{Taula \ref{tab:comparacio_threshold_square_triangular_edges}} compara el punt de \textit{threshold} en grafs amb el mateix nombre de files però de diferent tipus: graelles quadrades i triangulars. Els resultats mostren que el punt de \textit{threshold} en les graelles quadrades és menor que en les triangulars. Això ens permet confirmar la hipòtesi formulada durant l'experimentació, segons la qual un grau superior dels nodes influeix en el valor de $p$ on es produeix la transició de fase.
+	
 	
 	\subsubsection{Percolació per node}
 	
@@ -631,11 +636,14 @@
 	
 	Després de fer la comparació amb la percolació per arestes entre graelles triangulars i quadrades hem decidit fer-ho també per percolació per nodes, la \textit{Figura \ref{fig:percolation_nodes_triangular}} ens mostra els resultats obtinguts de la percolació per nodes en graelles triangulars. \\
 	
-	En aquest cas, podem observar resultats similars a la resta obtinguts de graelles, on podem veure una transició de fase que a mesura que la mida del graf augmenta és més brusca i en un valor de $p$ més petit. En els grafs amb menys de 25 podem observar el mateix fenomen que en les graelles quadrades, on hi ha una caiguda de la connecitvitat quan $p$ ronda el 0.3, però en valors de $p$ molt alts el graf recupera una mica el percentatge de connectivitat.
+	En aquest cas, podem observar resultats similars a la resta obtinguts de graelles, on podem veure una transició de fase que a mesura que la mida del graf augmenta és més brusca i en un valor de $p$ menor. En els grafs amb menys de 25 podem observar el mateix fenomen que en les graelles quadrades, on hi ha una caiguda de la connecitvitat quan $p$ ronda el 0.3, però en valors de $p$ molt alts el graf recupera una mica el percentatge de connectivitat. \\
 	
-	Tot i que en grafs petits podem veure alguna diferència al fer percolació per node o per aresta a simple vista en graelles grans és més dificil de veure ja que la transició de fase que observem en els gràfics sembla igual. Per poder fer una bona comparació, en la taula següent veiem els $threshold$ calculat per grafs grans.
+	De forma similar a les graelles quadrades, aquesta anormalitat és deguda a que la percolació de nodes dona peu a que pugui ocorre la següent casuística: donat un grafs de $n$ nodes fallin $n-1$ nodes, aleshores el graf resultant, d'un sol node serà connex. La probabilitat de que això passi la podem calcular de la següent manera. Sigui $p$, la probabilitat de fallida, $q = 1 - p$ probabilitat de que un node no falli, sigui $m$ nombre de files i $n = \frac{m \times (m + 1)}{2}$ el nombre de nodes. Sigui $t$ la probabilitat de que el graf sigui connex amb un sol node, $t = n \times q \times p^{n - 1}$. Provarem el següent cas, $m = 5 \quad \Rightarrow \quad n = 15$, $p = 0.95 \quad \Rightarrow \quad q = 0.05$, aleshores veiem que $t = 15 \times 0.05 \times 0.95^{15 - 1} \approx 0.366$. Veiem com a partir d'aquest càlcul podem explicar el fenòmen que apareix en probabilitats de fallida majors. Ja que per $m = 5$ observem com la probabilitat de grafs connexos en $p = 0.95$, s'aproxima al $36.6\%$ que acabem de calcular. \\
 	
-	\begin{table}
+	A continuació vegeu una taula que ens explica numèricament els valors referents al punt \textit{threshold}. Hem obviat els grafs de mida inferior a $m = 50$ ja que tots ells presenten 
+	Tot i que en grafs petits podem veure alguna diferència al fer percolació per node o per aresta a simple vista en graelles grans és més difícil de veure ja que la transició de fase que observem en els gràfics sembla igual. Per poder fer una bona comparació, en la taula següent veiem els $threshold$ calculat per grafs grans.
+	
+	\begin{table}[H]
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|c|}
 			\hline
