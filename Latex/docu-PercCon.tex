@@ -767,6 +767,12 @@
 		\caption{Comparativa de percolació per arestes del grafs Barabási-Albert amb $n$ = 10..100 (1) i $n$ = 50..500 (2), $m0$ = 2, $m$ = 1}
 		\label{fig:percolation_nodes_ba_2_1}
 	\end{figure}
+
+	En aquesta primera comparativa entre grafs amb nodes que varien des de $n$ = 10..100 i $n$ = 50..500, podem veure una tendència similar a tots dos experiments, però molt més pronunciada en el segon cas. Aquesta tendència mostra que a partir d'una probabilitat de percolació relativament petita, el percentatge de grafs connexes disminueix de manera abrupte. Això es pot explicar degut a que, com que el paràmetre $m$, que representa el nombre d'arestes a les que es conecten els nodes inicialment,
+	és igual a 1, molts nodes están connectats unicament a un altre node que fa de "hub". Si aquest últim falla, el graf deixa de ser connex. 
+	
+Es pot observar també cóm, quan la probabilitat de percolació s'aproxima a 1, el percentatge de connectivitat augmenta sobretot en grafs amb pocs nodes. Aquest comportament ja s'ha observat en els experiments de grafs quadrats i la seva explicació és la mateixa, a mesura que la probabilitat de fallida s'aproxima a 1, la probabilitat que fallin tots els nodes excepte un
+	(que equival a un graf connex) augmenta. Aquest fenomen es dona quan menys nodes té un graf, ja que hi han més possibilitats de que només quedi un sol node.
 	
 	\begin{figure}[H]
 		\centering
@@ -785,6 +791,11 @@
 		\label{fig:percolation_nodes_ba_5_x}
 	\end{figure}
 	
+	En aquest experiment s'han utilitzat com a variables $m0$ = 5, $m$ = 1/2 i un nombre de nodes $n$ = 10..100. Amb aquesta compratativa, podem veure l'impacte d'augmentar el nombre d'arestes inicials que tenen els nodes que no són "hubs" inicialment. Tot i que l'augment és simplement d'una aresta més per node, la probabilitat de percolació que es necessita per a veure un caiguda de la connectivitat
+	com a l'experiment anterior és significativament superior. A més a més, podem observar a través de la primera imatge, com l'augment d'únicament el nombre de "hubs" inicials $m0$, no es gaire significatiu en els resultats de connectivitat, donant una gràfics molt semblant a la primera de l'experiment anterior.
+
+	Novament, podem observar com quan la probabilitat de percolació s'aproxima a 1, la connectivitat dels grafs augmenta amb la mateixa explicació que el cas anterior.
+
 	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.45\textwidth}
@@ -801,7 +812,10 @@
 		\caption{Comparativa de percolació per arestes del grafs Barabási-Albert amb $n$ = 10..100 (1) i $n$ = 50..500 (2), $m0$ = 10 $m$ = 5}
 		\label{fig:percolation_nodes_ba_10_x}
 	\end{figure}
-		
+	
+	Per últim, en aquest experiment hem utilitzat els paràmetres $m0$ = 10, $m$ = 5, i un nombre de nodes $n$ = 10..100 i $n$ = 50..500, amb la fí de comprobar l'impacte d'augmentar tots els paràmetres sense deixar que els grafs generats tinguin una estructura de xarxa més que d'un graf complet. Tot i que no semblin similars, totes dues imatges mostren el mateix comportament que han tingut els altres dos experiments, amb una baixada abrupte de la connectivitat més pronunciada com més nodes hi han i un augment d'aquesta quan la probabilitat de percolació s'aproxima a 1.
+	No obstant, la principal diferència és que, amb tots els paràmetres augmentats, la connectivitat és manté alta en totes dues imatges fins que la probabilitat de percolació no arriba fins a un valor molt superior als alres dos experiments. Això és degut a que els grafs creats en aquest experiment, tot i seguir el model de Barabási-Albert, són els grafs més semblants al seu equivalent complet dels tres experiments, augmentant la seva connectivitat per defecte i sota una percolació de nodes.  
+
 	\newpage	
 	\section{Conclusions}
 	
@@ -822,6 +836,7 @@
 		\bibitem{bond_percolation} E. Weisstein, "Bond Percolation", \textit{MathWorld -- A Wolfram Web Resource}. Disponible: \href{https://mathworld.wolfram.com/BondPercolation.html}{https://mathworld.wolfram.com/BondPercolation.html}. [Accedit: 17-oct-2024].
 		\bibitem{grimmett} G. R. Grimmett i A. M. Stacey, "CRITICAL PROBABILITIES FOR SITE
 		AND BOND PERCOLATION MODELS", Disponible: \href{http://www.statslab.cam.ac.uk/~grg1000/papers/UScrit6.pdf}{http://www.statslab.cam.ac.uk/~grg1000/papers/UScrit6.pdf}. [Accedit: 17-oct-2024].
+	
 	\end{thebibliography}
 	
 	\newpage
