@@ -20,3 +20,5 @@ runner
 *.toc
 *.aux
 *.out
+*.fls
+*.fdb_latexmk

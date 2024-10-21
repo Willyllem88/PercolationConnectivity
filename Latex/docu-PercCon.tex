@@ -332,6 +332,7 @@
 	\section{Experimentació}
 	
 	\subsection{Metodologia}
+	\label{sec:metodologia}
 	
 	Per dur a terme l'experimentació del projecte, hem utilitzat diferents eines. Hem programat dos programes en \texttt{C++}, un llenguatge que ens ofereix molta eficàcia temporal i espacial. Aquests programes són el \texttt{main} i el \texttt{runner}. També hem dissenyat un fitxer de classe \texttt{graph} amb tots els atributs i funcions necessàries per operar amb els grafs. Aquesta classe representa els grafs com a llistes d'adjacència. \\
 	
@@ -410,7 +411,7 @@
 	
 	Abans de procedir amb els experiments, es presenten les claus per interpretar correctament les taules i gràfics que acompanyen els resultats. \\
 	
-	\textbf{Gràfics}: Els gràfics mostren l'evolució dels experiments en funció del paràmetre $p$ (probabilitat de fallida) a l'eix de les X, mentre que l'eix Y mostra la probabilitat que el graf percolat $G_{\text{p}}$ sigui connex. A més, en cada gràfic col·locarem més d'un experiment, donades diferents valors de $n$ (nombre de nodes), pintant de colors diferents cada experiment. Aquest últim paràmetre a vegades canviarà, ja que en grafs, com per exemple en el quadrat, mesurarem amb el paràmetre $m$, que és el nombre de files. \\
+	\textbf{Gràfics}: Els gràfics mostren l'evolució dels experiments en funció del paràmetre $p$ (probabilitat de fallida) a l'eix de les X, mentre que l'eix Y mostra la probabilitat que el graf percolat $G_{\text{p}}$ sigui connex. A més, en cada gràfic col·locarem més d'un experiment, donades diferents valors de $n$ (nombre de nodes), pintant de colors diferents cada experiment. Aquest últim paràmetre a vegades canviarà, ja que en grafs, com per exemple en el quadrat, mesurarem amb el paràmetre $m$, que és el nombre de files. També, al peu de cada graf, hi haurà la seqüència de inputs amb el que s'ha generat aquest, l'ordre i significat de cada valor el podreu trobar a la subsecció \ref{sec:metodologia}. \\
 	
 	\textbf{Taules}: Les taules contenen les mètriques que són més difícils de veure amb els gràfics. Cada fila representa una instància específica de l'experiment, mentre que les columnes mostren:
 	
@@ -671,8 +672,6 @@
 	
 	Per tant si volem grafs amb més connectivitat seria millor fer la percolació per arestes, però la diferència és petita així que s'obtindran resultats molt semblants si es fa la percolació per nodes.Els pendents són molt similars en els dos casos així que la rapidesa en la que els grafs perden la connectivitat, com hem pogut veure en els gràfics, és casi igual.
 	
-	
-	
 	\subsection{Graf geomètric aleatori}
 	
 	L'estudi de transició sobre grafs geomètrics aleatoris depèn, a més de la probabilitat de percolació $p$, dels dos paràmetres que s'utilitzen per a la creació del graf: el nombre de nodes $n$ i el radi de connectivitat $r$.
@@ -745,9 +744,9 @@
 	
 	\subsection{Graf de Barabási-Albert}
 	
-	L'estudia que s'ha realitzat sobre els grafs generats amb el model de Barabási-Albert és un de transició de fase sota percolació per nodes. El motiu és que es vol veure l'impacte d'una percolació a un graf que conté molts vèrtexs units entre sí per un o més "hubs" centrals, l'impacte que tindria la fallida d'algun d'aquests nodes o, per altra banda, el no impacte que pot tenir sobre nodes que tenen una estructura de fulla, és a dir, nodes que estan connectats únicament a un altre node i per tant la seva fallida segueix permetent un graf connex. \\
+	L'estudi que s'ha realitzat sobre els grafs generats amb el model de Barabási-Albert té com a objectiu estudiar la transició de fase sota percolació per nodes. Volem veure l'impacte de la percolació a un graf que conté molts vèrtexs units entre sí per un o més \textit{hubs} centrals, l'impacte que tindria la fallida d'algun d'aquests nodes o, per altra banda, el no impacte que pot tenir sobre nodes que tenen una estructura de fulla, és a dir, nodes que estan connectats únicament a un altre node i per tant la seva fallida segueix permetent un graf connex. \\
 	
-	Els experiments realitzats sobre aquests grafs depenen de tres paràmetres: nombre de nodes $n$, nombre de nodes inicials o \textit{hubs} $m0$, i el nombre d'arestes que han de tenir com a mínim cada node que no és \textit{hub}. Per als nostres experiments, hem decidit donar els següents valors: per al nombre de nodes $n = 10..100$, $n = 50..500$, per al nombre inicial de nodes o "hubs" $m0 = 2$, $m0 = 5$, $m0 = 10$, i per el nombre d'arestes incidents a la resta de nodes $m = 1$, $m = 2$, $m = 5$. Abans de veure els resultats, hem cregut adient una explicació del perquè s'han agafat aquests valors i no d'altres. Els grafs construïts amb el model de Barabási-Albert són típicament utilitzats com a xarxes on els nodes s'uneixen mitjançant "hubs". Per aquest motiu, hem decidit utilitzar aquests valors ja que representen d'una manera bastant realista una xarxa generada per aquest model d'una manera computacionalment viable. \\
+	Els experiments realitzats sobre aquests grafs depenen de tres paràmetres: nombre de nodes $n$, nombre de nodes inicials o \textit{hubs} $m0$, i el nombre d'arestes que han de tenir com a mínim cada node que no és \textit{hub}. Per als nostres experiments, hem decidit donar els següents valors: per al nombre de nodes $n = 10..100$, $n = 50..500$, per al nombre inicial de nodes o "hubs" $m0 = 2$, $m0 = 5$, $m0 = 10$, i per el nombre d'arestes incidents a la resta de nodes $m = 1$, $m = 2$, $m = 5$. Abans de veure els resultats, hem cregut adient una explicació del perquè s'han agafat aquests valors i no d'altres. Els grafs construïts amb el model de Barabási-Albert són típicament utilitzats com a xarxes on els nodes s'uneixen mitjançant "hubs". Per aquest motiu, hem decidit utilitzar aquests valors ja que representen d'una manera força realista una xarxa generada per aquest model d'una forma computacionalment viable. \\
 	
 	\subsubsection{Percolació per nodes}
 	
@@ -768,11 +767,9 @@
 		\label{fig:percolation_nodes_ba_2_1}
 	\end{figure}
 
-	En aquesta primera comparativa entre grafs amb nodes que varien des de $n$ = 10..100 i $n$ = 50..500, podem veure una tendència similar a tots dos experiments, però molt més pronunciada en el segon cas. Aquesta tendència mostra que a partir d'una probabilitat de percolació relativament petita, el percentatge de grafs connexes disminueix de manera abrupte. Això es pot explicar degut a que, com que el paràmetre $m$, que representa el nombre d'arestes a les que es conecten els nodes inicialment,
-	és igual a 1, molts nodes están connectats unicament a un altre node que fa de "hub". Si aquest últim falla, el graf deixa de ser connex. 
+	En aquesta primera comparativa (\textit{Figura \ref{fig:percolation_nodes_ba_2_1}}) entre grafs amb nodes que varien des de $n = 10..100$ i $n = 50..500$, podem veure una tendència similar a tots dos experiments, però molt més pronunciada en el segon cas. Aquesta tendència mostra que a partir d'una probabilitat de percolació relativament petita, el percentatge de grafs connexes disminueix de manera abrupte. Això es pot explicar degut a que, com que el paràmetre $m$, que representa el nombre d'arestes a les que es connecten els nodes inicialment, és igual a 1, molts nodes estan connectats únicament a un altre node que fa de "hub". Si aquest últim falla, el graf deixa de ser connex. \\
 	
-Es pot observar també cóm, quan la probabilitat de percolació s'aproxima a 1, el percentatge de connectivitat augmenta sobretot en grafs amb pocs nodes. Aquest comportament ja s'ha observat en els experiments de grafs quadrats i la seva explicació és la mateixa, a mesura que la probabilitat de fallida s'aproxima a 1, la probabilitat que fallin tots els nodes excepte un
-	(que equival a un graf connex) augmenta. Aquest fenomen es dona quan menys nodes té un graf, ja que hi han més possibilitats de que només quedi un sol node.
+	Es pot observar també com, quan la probabilitat de percolació s'aproxima a $1$, el percentatge de connectivitat augmenta sobretot en grafs amb pocs nodes. Aquest comportament ja s'ha observat en els experiments de grafs quadrats i la seva explicació és la mateixa, a mesura que la probabilitat de fallida s'aproxima a $1$, la probabilitat que fallin tots els nodes excepte un (que equival a un graf connex) augmenta. Aquest fenomen es dona quan menys nodes té un graf, ja que hi ha més possibilitats de que només quedi un sol node. \\
 	
 	\begin{figure}[H]
 		\centering
@@ -787,14 +784,13 @@ Es pot observar també cóm, quan la probabilitat de percolació s'aproxima a 1,
 			\includegraphics[width=\textwidth]{images/barabasi_10-100_5_2}
 			\footnotesize{8800547 10 100 10 1000 NODE\_PERC ./data/ba11.csv Barabasi-Albert 5 2}
 		\end{minipage}
-		\caption{Comparativa de percolació per arestes del grafs Barabási-Albert amb $n$ = 10..100, $m0$ = 5, $m$ = 1 (1) i $m$ = 2 (2)}
+		\caption{Comparativa de percolació per arestes del grafs Barabási-Albert amb $n = 10..100$, $m0 = 5$, $m = 1$ (1) i $m = 2$ (2)}
 		\label{fig:percolation_nodes_ba_5_x}
 	\end{figure}
 	
-	En aquest experiment s'han utilitzat com a variables $m0$ = 5, $m$ = 1/2 i un nombre de nodes $n$ = 10..100. Amb aquesta compratativa, podem veure l'impacte d'augmentar el nombre d'arestes inicials que tenen els nodes que no són "hubs" inicialment. Tot i que l'augment és simplement d'una aresta més per node, la probabilitat de percolació que es necessita per a veure un caiguda de la connectivitat
-	com a l'experiment anterior és significativament superior. A més a més, podem observar a través de la primera imatge, com l'augment d'únicament el nombre de "hubs" inicials $m0$, no es gaire significatiu en els resultats de connectivitat, donant una gràfics molt semblant a la primera de l'experiment anterior.
+	En aquest experiment s'han utilitzat com a variables $m0 = 5$, $m = 1/2$ i un nombre de nodes $n = 10..100$. Amb aquesta comparativa podem veure l'impacte d'augmentar el nombre d'arestes inicials que tenen els nodes que no són "hubs" inicialment. Tot i que l'augment és simplement d'una aresta més per node, la probabilitat de percolació en la qual apareix la transició de fase és significativament superior a la de l'experiment anterior. A més, podem observar a través del primer gràfic de la \textit{Figura \ref{fig:percolation_nodes_ba_5_x}}, com l'augment d'únicament el nombre de \textit{hubs} inicials $m0$, no és gaire significatiu en els resultats de connectivitat, donant uns gràfics molt similars als del primer experiment de \textit{Barabási-Albert}. \\
 
-	Novament, podem observar com quan la probabilitat de percolació s'aproxima a 1, la connectivitat dels grafs augmenta amb la mateixa explicació que el cas anterior.
+	Una altra vegada, podem observar com quan la probabilitat de percolació s'aproxima a $1$, la connectivitat dels grafs augmenta pel mateix motiu que feia anteriorment en la percolació per nodes.
 
 	\begin{figure}[H]
 		\centering
@@ -809,12 +805,13 @@ Es pot observar també cóm, quan la probabilitat de percolació s'aproxima a 1,
 			\includegraphics[width=\textwidth]{images/barabasi_50-500_10_5}
 			\footnotesize{9872345 50 500 50 1000 NODE\_PERC ./data/ba16.csv Barabasi-Albert 10 5}
 		\end{minipage}
-		\caption{Comparativa de percolació per arestes del grafs Barabási-Albert amb $n$ = 10..100 (1) i $n$ = 50..500 (2), $m0$ = 10 $m$ = 5}
+		\caption{Comparativa de percolació per arestes del grafs Barabási-Albert amb $n = 10..100$ (1) i $n = 50..500$ (2), $m0 = 10$ $m = 5$}
 		\label{fig:percolation_nodes_ba_10_x}
 	\end{figure}
 	
-	Per últim, en aquest experiment hem utilitzat els paràmetres $m0$ = 10, $m$ = 5, i un nombre de nodes $n$ = 10..100 i $n$ = 50..500, amb la fí de comprobar l'impacte d'augmentar tots els paràmetres sense deixar que els grafs generats tinguin una estructura de xarxa més que d'un graf complet. Tot i que no semblin similars, totes dues imatges mostren el mateix comportament que han tingut els altres dos experiments, amb una baixada abrupte de la connectivitat més pronunciada com més nodes hi han i un augment d'aquesta quan la probabilitat de percolació s'aproxima a 1.
-	No obstant, la principal diferència és que, amb tots els paràmetres augmentats, la connectivitat és manté alta en totes dues imatges fins que la probabilitat de percolació no arriba fins a un valor molt superior als alres dos experiments. Això és degut a que els grafs creats en aquest experiment, tot i seguir el model de Barabási-Albert, són els grafs més semblants al seu equivalent complet dels tres experiments, augmentant la seva connectivitat per defecte i sota una percolació de nodes.  
+	Per últim, en aquest experiment hem utilitzat els paràmetres $m0 = 10$, $m = 5$, i un nombre de nodes $n = 10..100$ i $n = 50..500$, amb la fí de comprovar l'impacte d'augmentar tots els paràmetres sense deixar que els grafs generats tinguin una estructura de xarxa més que d'un graf complet. Tot i que no semblin similars, totes dues imatges mostren el mateix comportament que han tingut els altres dos experiments, amb una baixada abrupte de la connectivitat més pronunciada com més nodes hi han i un augment d'aquesta quan la probabilitat de percolació s'aproxima a 1. \\
+	
+	No obstant, la principal diferència és que, amb tots els paràmetres augmentats, la connectivitat és manté alta en totes dues imatges fins que la probabilitat de percolació no arriba fins a un valor molt superior als altres dos experiments. Això és degut a que els grafs creats en aquest experiment, tot i seguir el model de Barabási-Albert, són els grafs més semblants al seu equivalent complet dels tres experiments, augmentant la seva connectivitat per defecte i sota una percolació de nodes.  
 
 	\newpage	
 	\section{Conclusions}
@@ -831,7 +828,11 @@ Es pot observar també cóm, quan la probabilitat de percolació s'aproxima a 1,
 	\renewcommand{\refname}{}	
 	\begin{thebibliography}{99}
 		\vspace{-2em}
-		\bibitem{site_percolation} E. Weisstein, "Site Percolation", \textit{MathWorld -- A Wolfram Web Resource}. Disponible: \href{https://mathworld.wolfram.com/SitePercolation.html}{https://mathworld.wolfram.com/SitePercolation.html}. [Accedit: 17-oct-2024].
+		
+		\bibitem{site_percolation} E. Weisstein, "Site Percolation", \textit{MathWorld -- A Wolfram Web Resource}. Disponible: \href{https://es.wikipedia.org/wiki/Modelo_Barab%C3%A1si%E2%80%93Albert}{https://es.wikipedia.org/wiki/Modelo\_Barab\%C3\%A1si\%E2\%80\%93Albert}. [Accedit: 17-oct-2024].
+		
+		\bibitem{percolation_theory} "Percolation Theory", \textit{Wikipedia}. Disponible: \href{https://en.wikipedia.org/wiki/Percolation_theory}{https://en.wikipedia.org/wiki/Percolation\_theory}. [Accedido: 21-oct-2024].
+		
 		
 		\bibitem{bond_percolation} E. Weisstein, "Bond Percolation", \textit{MathWorld -- A Wolfram Web Resource}. Disponible: \href{https://mathworld.wolfram.com/BondPercolation.html}{https://mathworld.wolfram.com/BondPercolation.html}. [Accedit: 17-oct-2024].
 		\bibitem{grimmett} G. R. Grimmett i A. M. Stacey, "CRITICAL PROBABILITIES FOR SITE
