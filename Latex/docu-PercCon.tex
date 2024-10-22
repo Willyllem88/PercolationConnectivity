@@ -66,7 +66,7 @@
 	
 	Definim un resultat com a satisfactori si, donat que es troba una probabilitat de valor $q$ tal que es compleix la propietat $\Pi$ al graf $G_q$ (definim aquesta probabilitat com $q_{\Pi}$), per als grafs $G_{q'}$ on $q' > q_{\Pi}$, aquests verifiquen la propietat $\Pi$, i als grafs $G_{q'}$ on $q' < q_{\Pi}$, no la verifiquen (ambdues afirmacions són vàlides si es compleixen amb una probabilitat prou alta). \\
 	
-	Quan s'ha obtingut aquest resultat, diem que la propietat $\Pi$ presenta una transició de fase al voltant de $q_{\Pi}$. \\
+	Quan s'ha obtingut aquest resultat, diem que la propietat $\Pi$ presenta una transició de fase al voltant de $q_{\Pi}$.
 	
 	\subsection{Objectius de la Experimentació}
 	
@@ -96,13 +96,13 @@
 	
 	Els resultats obtinguts permetran caracteritzar el comportament de diferents models de grafs sota condicions de percolació i explorar la robustesa d'aquestes xarxes davant de fallades aleatòries.
 	
-	
 	\newpage
 	\section{Grafs Seleccionats}
 
 	En aquesta secció s'exposen els grafs seleccionats per a l'estudi experimental. Concretament, explicarem les peculiaritats de cada graf. Així mateix, es detallaran els algorismes utilitzats per a la generació de cada tipus de graf. 
 
 	\subsection{Graella Quadrada}
+	
 	\begin{algorithm} [H]
 		\caption{Generació de Graf de Graella Quadrada $G(m \times m)$}
 		\begin{algorithmic} [1]
@@ -128,7 +128,7 @@
 		\end{algorithmic}
 	\end{algorithm}
 
-	El generador de grafs de graella quadrada crea un graf amb una estructura regular en què cada node és adjacent als nodes de la fila superior, inferior, esquerra i dreta, si aquests existeixen. Això s'aconsegueix comprovant per cada node si existeixen nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents. \\
+	El generador de grafs de graella quadrada crea un graf amb una estructura regular en què cada node és adjacent als nodes de la fila superior, inferior, esquerra i dreta, si aquests existeixen. Això s'aconsegueix comprovant per cada node si existeixen nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents.
 
 	\subsection{Graella Triangular}
 
@@ -160,9 +160,10 @@
 		\end{algorithmic}
 	\end{algorithm}
 	
-	El generador de grafs de graella triangular crea un graf amb $n$ nodes, on $n = 1 + 2 + 3 + \ldots + rows = \frac{rows \times (rows + 1)}{2}$ per tal de aconseguir una estructura triangular. Aquests nodes tenen una estructura en què cada node està connectat als veïns de la dreta i l'esquerra, així com als nodes superiors i inferiors, tant a l'esquerra com a la dreta, sempre que aquests existeixin. Això s'aconsegueix comprovant per a cada node si hi ha nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents. \\
+	El generador de grafs de graella triangular crea un graf amb $n$ nodes, on $n = 1 + 2 + 3 + \ldots + rows = \frac{rows \times (rows + 1)}{2}$ per tal de aconseguir una estructura triangular. Aquests nodes tenen una estructura en què cada node està connectat als veïns de la dreta i l'esquerra, així com als nodes superiors i inferiors, tant a l'esquerra com a la dreta, sempre que aquests existeixin. Això s'aconsegueix comprovant per a cada node si hi ha nodes a la fila inferior i a la columna dreta, i si és així, s'afegeixen les arestes corresponents.
 
 	\subsection{Graf Geomètric Aleatori}
+	
 	\begin{algorithm} [H]
 		\caption{Generació de Graf Geomètric Aleatori $G(n, r)$}
 		\begin{algorithmic} [1]
@@ -253,8 +254,47 @@
 	\section{Algoritmes}
 
 	En aquesta secció es presenten els principals algorismes emprats en l'estudi de la transició de fase. A continuació, detallarem cada algorisme i donarem una breu explicació d'aquests. Els algorismes abordats són els següents:
+	
+	\subsection{Percolació per Nodes}
+	
+	\begin{algorithm} [H]
+		\caption{Percolació de Nodes en un Graf}
+		\begin{algorithmic} [1]
+			\Statex \textbf{Entrada:} Graf $G = (V, E)$ amb $n$ nodes, probabilitat $p$
+			\Statex \textbf{Sortida:} Graf percolat $G_{\text{p}} = (V', E')$ on $V' \subseteq V$ i $E' \subseteq E$
+			\Statex \vspace{-0.25em}
+			\State Inicialitzar un vector $posicioNodes$ de longitud $n$
+			\State Assignar $nbNodesVius = n$
+			\For{cada node $u$ en $V$}
+			\State Generar un valor aleatori $r = \texttt{rand01}()$
+			\If{$r < p$}
+			\State Marcar el node $u$ com a fallat
+			\State Decrementar $nbNodesVius$
+			\Else
+			\State Actualitzar la posició del node viu $posicioNodes[u] = u - n + nbNodesVius$
+			\EndIf
+			\EndFor
+			\Statex
+			\State Crear un graf buit $G_{\text{p}}$ amb $nbNodesVius$ nodes
+			\For{cada node $u$ en $V$}
+			\If{$u$ no ha fallat}
+			\For{cada node $v$ en la llista d'adjacència de $u$ en $G$}
+			\If{$v$ no ha fallat $\land\ u < v$}
+			\State Afegir l'aresta $(posicioNodes[u], posicioNodes[v])$ a $G_{\text{p}}$
+			\EndIf
+			\EndFor
+			\EndIf
+			\EndFor
+			\State Retornar el graf $G_{\text{p}}$
+		\end{algorithmic}
+	\end{algorithm}
+	
+	Aquest algorisme retorna el graf percolat a partir del graf original eliminant nodes amb una probabilitat $p$. Per a cada node, es genera un valor aleatori entre 0 i 1 mitjançant la funció \texttt{rand01()}. Si aquest valor és inferior a $p$, el node es considera eliminat (fallat) i no es conservarà en el graf resultant. \\
+	
+	Els nodes que sobreviuen són reindexats per assegurar que el nou graf té una numeració consecutiva de nodes. Les arestes només es conserven si ambdós nodes que connecten han sobreviscut, i es manté la condició $u<v$ per evitar afegir la mateixa aresta dues vegades, ja que en els grafs no dirigits una aresta $(u,v)$ és equivalent a $(v,u)$. Així, el resultat és un graf amb una mida reduïda en funció de la probabilitat $p$, mantenint només els nodes i arestes que han "sobreviscut" al procés de percolació.
 
 	\subsection{Percolació per Arestes}
+	
 	\begin{algorithm} [H]
 		\caption{Percolació d'Arestes en un Graf}
 		\begin{algorithmic} [1]
@@ -274,45 +314,9 @@
 	\end{algorithm}
 
 	Aquest algorisme retorna el graf percolat a partir del graf original. Això s'aconsegueix eliminant les arestes amb una probabilitat $p$. Per evitar processar una mateixa aresta més d'una vegada, s'utilitza la condició $u < v $, ja que en grafs no dirigits una aresta $(u, v)$ és equivalent a $(v, u)$. Tal com s'ha mencionat prèviament, la funció \texttt{rand01()} genera un nombre aleatori entre 0 i 1, que es compara amb la probabilitat $p$ per decidir si es manté o s'elimina una aresta.
-
-	\subsection{Percolació per Nodes}
-	\begin{algorithm} [H]
-		\caption{Percolació de Nodes en un Graf}
-		\begin{algorithmic} [1]
-			\Statex \textbf{Entrada:} Graf $G = (V, E)$ amb $n$ nodes, probabilitat $p$
-			\Statex \textbf{Sortida:} Graf percolat $G_{\text{p}} = (V', E')$ on $V' \subseteq V$ i $E' \subseteq E$
-			\Statex \vspace{-0.25em}
-			\State Inicialitzar un vector $posicioNodes$ de longitud $n$
-			\State Assignar $nbNodesVius = n$
-			\For{cada node $u$ en $V$}
-				\State Generar un valor aleatori $r = \texttt{rand01}()$
-				\If{$r < p$}
-					\State Marcar el node $u$ com a fallat
-					\State Decrementar $nbNodesVius$
-				\Else
-					\State Actualitzar la posició del node viu $posicioNodes[u] = u - n + nbNodesVius$
-				\EndIf
-			\EndFor
-			\Statex
-			\State Crear un graf buit $G_{\text{p}}$ amb $nbNodesVius$ nodes
-			\For{cada node $u$ en $V$}
-				\If{$u$ no ha fallat}
-					\For{cada node $v$ en la llista d'adjacència de $u$ en $G$}
-						\If{$v$ no ha fallat $\land\ u < v$}
-							\State Afegir l'aresta $(posicioNodes[u], posicioNodes[v])$ a $G_{\text{p}}$
-						\EndIf
-					\EndFor
-				\EndIf
-			\EndFor
-			\State Retornar el graf $G_{\text{p}}$
-		\end{algorithmic}
-	\end{algorithm}
-
-	Aquest algorisme retorna el graf percolat a partir del graf original eliminant nodes amb una probabilitat $p$. Per a cada node, es genera un valor aleatori entre 0 i 1 mitjançant la funció \texttt{rand01()}. Si aquest valor és inferior a $p$, el node es considera eliminat (fallat) i no es conservarà en el graf resultant. \\
-	
-	Els nodes que sobreviuen són reindexats per assegurar que el nou graf té una numeració consecutiva de nodes. Les arestes només es conserven si ambdós nodes que connecten han sobreviscut, i es manté la condició $u<v$ per evitar afegir la mateixa aresta dues vegades, ja que en els grafs no dirigits una aresta $(u,v)$ és equivalent a $(v,u)$. Així, el resultat és un graf amb una mida reduïda en funció de la probabilitat $p$, mantenint només els nodes i arestes que han "sobreviscut" al procés de percolació.
 	
 	\subsection{Càlcul de Components Connexes}
+	
 	\begin{algorithm} [H]
 		\caption{Càlcul del Nombre de Components Connexes}
 		\begin{algorithmic} [1]
@@ -331,7 +335,7 @@
 		\end{algorithmic}
 	\end{algorithm}
 	
-	L'algorisme utilitza una cerca en profunditat (DFS) per explorar cada component connexa del graf. Cada vegada que es troba un node no visitat, es crida la funció \texttt{dfs} per explorar recursivament tots els nodes connectats a aquest node. Aquesta crida recursiva assegura que tots els nodes del mateix component quedin marcats com a visitats, evitant comptar-los més d'una vegada. 
+	L'algorisme utilitza una cerca en profunditat (DFS) per explorar cada component connexa del graf. Cada vegada que es troba un node no visitat, es crida la funció \texttt{dfs} per explorar recursivament tots els nodes connectats a aquest node. Aquesta crida recursiva assegura que tots els nodes del mateix component quedin marcats com a visitats, evitant comptar-los més d'una vegada.
 
 	\newpage
 	\section{Experimentació}
@@ -374,7 +378,7 @@
 		72479 100 1000  100 100   EDGE_PERC  ./data/test3.csv Square-Grid
 	\end{verbatim}
 	
-	El programa \texttt{runner}, per cada fila del fitxer que rep, inicialitzarà una instància del programa \texttt{main}, aconseguint d'aquesta manera automatitzar molt més els tests, podent córrer diferents programes \texttt{main} simultàniament. \\
+	El programa \texttt{runner}, per cada fila del fitxer que rep, inicialitzarà una instància del programa \texttt{main}, aconseguint d'aquesta manera automatitzar molt més els tests, podent córrer diferents programes \texttt{main} simultàniament.
 	
 	\subsubsection{Programa Main}
 	
@@ -431,7 +435,7 @@
 	
 	\subsection{Graella quadrada}
 	
-	Per estudiar la possible transició de fase a graelles quadrades, hem decidit fer proves amb grafs de mides diferents. Més concretament, hem agafat dues mostres: una que contempla grafs d'entre $n = 2 \times 2$ fins a $n = 20 \times 20$, i l'altra mostra serà de $n = 20 \times 20$ fins a $n = 200 \times 200$. Això ens servirà per estudiar com afecta la percolació a la connectivitat, tant percolació per nodes com per arestes. Hem triat aquestes mides de grafs perquè creiem que ens permetran observar com evoluciona la transició de fase fins que aquesta arribi a un llindar, ja que per grafs amb $|V|$ majors el canvi de transició de fase serà cada cop més similar, arribant fins a un llindar. \\
+	Per estudiar la possible transició de fase a graelles quadrades, hem decidit fer proves amb grafs de mides diferents. Més concretament, hem agafat dues mostres: una que contempla grafs d'entre $n = 2 \times 2$ fins a $n = 20 \times 20$, i l'altra mostra serà de $n = 20 \times 20$ fins a $n = 200 \times 200$. Això ens servirà per estudiar com afecta la percolació a la connectivitat, tant percolació per nodes com per arestes. Hem triat aquestes mides de grafs perquè creiem que ens permetran observar com evoluciona la transició de fase fins que aquesta arribi a un llindar, ja que per grafs amb $|V|$ majors el canvi de transició de fase serà cada cop més similar, arribant fins a un llindar.
 	
 	\subsubsection{Percolació per arestes}
 	
@@ -535,17 +539,13 @@
 		\label{tab:comparacio_edges_nodes_square}
 	\end{table}
 	
-	La \textit{Taula \ref{tab:comparacio_edges_nodes_square}} conté la comparació de dades de transició de fase per graelles quadrades grans al fer la percolació per aresta o per node. Si ens fixem en els valors del $threshold$ en els dos casos són valors molt semblants, així com tampoc podem veure un gran canvi en el percentatge de grafs connexos que tenim en aquest valor de $p$. Amb aquestes dades podem concloure que no hi ha molta diferència entre fer la percolació per nodes o per arestes en les graelles quadrades a partir de que tinguin un mida que deixi de generar connectivitat per \textit{clusers}.
-	
-	
+	La \textit{Taula \ref{tab:comparacio_edges_nodes_square}} conté la comparació de dades de transició de fase per graelles quadrades grans al fer la percolació per aresta o per node. Si ens fixem en els valors del $threshold$ en els dos casos són valors molt semblants, així com tampoc podem veure un gran canvi en el percentatge de grafs connexos que tenim en aquest valor de $p$. Amb aquestes dades podem concloure que no hi ha molta diferència entre fer la percolació per nodes o per arestes en les graelles quadrades a partir de que tinguin un mida que deixi de generar connectivitat per \textit{clusers}.	
 	
 	\subsection{Graella triangular}
 	
 	En el cas de les graelles triangulars, hem estudiat la percolació per arestes seguint el mateix enfocament utilitzat per a les graelles quadrades. Els grafs considerats van des de 5 fins a 55 files, amb increments de 5 files, i des de 50 fins a 150 files, amb increments de 10 files. \\
 	
-	Hem optat per estudiar la percolació per aresta amb l'objectiu d'analitzar si el fet de tenir una graella similar a la quadrada, però amb els vèrtexs interiors (aquells que no es troben a la vora del graf i, per tant, tenen totes les arestes possibles) de grau superior, afecta la probabilitat de fallida en què es produeix la transició de fase. El grau dels vèrtex interiors de les graelles quadrades era de $4$, el de les triangulars de $6$. Considerem que, en aquest cas, la probabilitat de fallida associada a la transició de fase serà superior a la de les graelles quadrades, ja que el grau dels vèrtexs és més alt, i per tant, hi ha més arestes que han de fallar per desconnectar els nodes. Posteriorment, hem decidit estendre l'estudi a la percolació per node per tal de comparar els resultats amb els obtinguts en graelles quadrades. \\
-	
-	
+	Hem optat per estudiar la percolació per aresta amb l'objectiu d'analitzar si el fet de tenir una graella similar a la quadrada, però amb els vèrtexs interiors (aquells que no es troben a la vora del graf i, per tant, tenen totes les arestes possibles) de grau superior, afecta la probabilitat de fallida en què es produeix la transició de fase. El grau dels vèrtex interiors de les graelles quadrades era de $4$, el de les triangulars de $6$. Considerem que, en aquest cas, la probabilitat de fallida associada a la transició de fase serà superior a la de les graelles quadrades, ja que el grau dels vèrtexs és més alt, i per tant, hi ha més arestes que han de fallar per desconnectar els nodes. Posteriorment, hem decidit estendre l'estudi a la percolació per node per tal de comparar els resultats amb els obtinguts en graelles quadrades.
 	
 	\subsubsection{Percolació per aresta}
 	
@@ -597,8 +597,7 @@
 	
 	Amb la \textit{Taula \ref{tab:data_edges_triangulars}} podem observar numèricament el que hem descrit en els gràfics: el valor on es produeix la transició de fase disminueix a mesura que $M$ augmenta. Com en les graelles quadrades, el valor del \textit{threshold} disminueix lentament amb cada increment de mida, però, en canvi, el pendent en el punt de transició augmenta. Això indica que la pèrdua de connectivitat és més abrupta en grafs més grans i que la transició de fase està influenciada per la mida del graf. \\
 	
-	Pel que fa a la comparació amb les graelles quadrades, tot i que ja es pot apreciar als gràfics que la $p$ on es produeix la desconnexió total és més petita en les graelles quadrades, en aquesta taula es poden veure els resultats de grafs amb el mateix nombre de files, la qual cosa permet una comparació més detallada.
-	
+	Pel que fa a la comparació amb les graelles quadrades, tot i que ja es pot apreciar als gràfics que la $p$ on es produeix la desconnexió total és més petita en les graelles quadrades, en aquesta taula es poden veure els resultats de grafs amb el mateix nombre de files, la qual cosa permet una comparació més detallada.	
 	
 	\begin{table}[H]
 		\centering
@@ -620,7 +619,6 @@
 	\end{table}
 	
 	La \textit{Taula \ref{tab:comparacio_threshold_square_triangular_edges}} compara el punt de \textit{threshold} en grafs amb el mateix nombre de files però de diferent tipus: graelles quadrades i triangulars. Els resultats mostren que el punt de \textit{threshold} en les graelles quadrades és menor que en les triangulars. Això ens permet confirmar la hipòtesi formulada durant l'experimentació, segons la qual un grau superior dels nodes influeix en el valor de $p$ on es produeix la transició de fase.
-	
 	
 	\subsubsection{Percolació per node}
 	
@@ -744,7 +742,7 @@
 	
 	L'estudi que s'ha realitzat sobre els grafs generats amb el model de Barabási-Albert té com a objectiu estudiar la transició de fase sota percolació per nodes. Volem veure l'impacte de la percolació a un graf que conté molts vèrtexs units entre sí per un o més \textit{hubs} centrals, l'impacte que tindria la fallida d'algun d'aquests nodes o, per altra banda, el no impacte que pot tenir sobre nodes que tenen una estructura de fulla, és a dir, nodes que estan connectats únicament a un altre node i per tant la seva fallida segueix permetent un graf connex. \\
 	
-	Els experiments realitzats sobre aquests grafs depenen de tres paràmetres: nombre de nodes $n$, nombre de nodes inicials o \textit{hubs} $m0$, i el nombre d'arestes que han de tenir com a mínim cada node que no és \textit{hub}. Per als nostres experiments, hem decidit donar els següents valors: per al nombre de nodes $n = 10..100$, $n = 50..500$, per al nombre inicial de nodes o \textit{hubs} $m0 = 2$, $m0 = 5$, $m0 = 10$, i per el nombre d'arestes incidents a la resta de nodes $m = 1$, $m = 2$, $m = 5$. Abans de veure els resultats, hem cregut adient una explicació del perquè s'han agafat aquests valors i no d'altres. Els grafs construïts amb el model de Barabási-Albert són típicament utilitzats com a xarxes on els nodes s'uneixen mitjançant \textit{hubs}. Per aquest motiu, hem decidit utilitzar aquests valors ja que representen d'una manera força realista una xarxa generada per aquest model d'una forma computacionalment viable. \\
+	Els experiments realitzats sobre aquests grafs depenen de tres paràmetres: nombre de nodes $n$, nombre de nodes inicials o \textit{hubs} $m0$, i el nombre d'arestes que han de tenir com a mínim cada node que no és \textit{hub}. Per als nostres experiments, hem decidit donar els següents valors: per al nombre de nodes $n = 10..100$, $n = 50..500$, per al nombre inicial de nodes o \textit{hubs} $m0 = 2$, $m0 = 5$, $m0 = 10$, i per el nombre d'arestes incidents a la resta de nodes $m = 1$, $m = 2$, $m = 5$. Abans de veure els resultats, hem cregut adient una explicació del perquè s'han agafat aquests valors i no d'altres. Els grafs construïts amb el model de Barabási-Albert són típicament utilitzats com a xarxes on els nodes s'uneixen mitjançant \textit{hubs}. Per aquest motiu, hem decidit utilitzar aquests valors ja que representen d'una manera força realista una xarxa generada per aquest model d'una forma computacionalment viable.
 	
 	\subsubsection{Percolació per nodes}
 	
@@ -819,6 +817,20 @@
 	Els resultats obtinguts mostren patrons clars: a mesura que augmenta el nombre de nodes, la transició de fase esdevé més abrupta i ocorre amb valors més petits de probabilitat de fallida. Això és especialment evident en grafs més densos, com les graelles triangulars i els grafs geomètrics amb un radi de connexió gran, on la desconnexió completa es retarda. En canvi, en el model de Barabási-Albert, la percolació afecta més ràpidament la connectivitat quan fallen els hubs, mostrant la fragilitat de les xarxes amb concentració de connexions. \\
 	
 	En futurs treballs, seria interessant ampliar l'estudi amb altres tipus de grafs, com els grafs Erdős-Rényi o els grafs dirigits, així com investigar a part de la connectivitat com a propietat booleana, el nombre de components connexes després del procés de percolació. A més, es podria explorar l'impacte de percolacions selectives o correlacionades, on la fallada d'un node o aresta depengui de la fallada dels seus veïns, per entendre millor les propietats de robustesa i vulnerabilitat de les xarxes complexes.
+	
+	\subsection{Coneixements Adquirits}
+	
+	Al llarg d'aquest projecte, hem adquirit una sèrie de coneixements tècnics i habilitats que han estat essencials per a la seva execució i anàlisi. Entre els principals aspectes apresos, es poden destacar:
+	
+	\begin{itemize}
+		\item \textbf{Latex i Markdown}: Hem millorat considerablement les nostres habilitats en l'ús de \LaTeX{} i Markdown per a la redacció de documents tècnics i científics, facilitant la presentació clara i estructurada dels resultats.
+		\item \textbf{GitHub}: Hem après a gestionar el codi del projecte de manera col·laborativa i eficient utilitzant GitHub, permetent un control de versions robust i la integració contínua dels diferents components desenvolupats.
+		\item \textbf{C++ Modern}: S'ha perfeccionat l'ús de característiques avançades de C++ modern, així com la paral·lelització eficient de codi utilitzant \textit{threads}, accelerant els processos computacionals.
+		\item \textbf{Exportació de dades}: Hem après a exportar els resultats dels experiments en format \texttt{.csv} mitjançant C++, permetent una anàlisi més detallada i estructurada.
+		\item \textbf{Gràfics amb R}: S'ha utilitzat R per a la creació de gràfics que mostren clarament les transicions de fase i els resultats de les simulacions de percolació.
+		\item \textbf{Teoria de Percolació}: Hem aprofundit en el procés de percolació i les seves implicacions en la transició de fase, especialment en diferents models de grafs.
+		\item \textbf{Generadors de Grafs}: Hem aplicat diferents tipus de generadors de grafs, incloent els models d'Erdős-Rényi (que finalment no el vam incloure a la documentació), grafs geomètrics aleatoris (RGGs) i el model de Barabási-Albert, observant els patrons característics de percolació en cadascun.
+	\end{itemize}
 	
 	\newpage
 	\section{Bibliografia}
