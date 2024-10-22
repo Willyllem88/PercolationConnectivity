@@ -16,10 +16,10 @@
 \usepackage{lipsum}
 \usepackage{color}
 
-\title{\textbf{\huge Algorismia}\\[0.5cm]
+\title{\textbf{\huge Algorísmia}\\[0.5cm]
 	\textbf{\Large Estudi Experimental de Connectivitat i Percolació de Grafs}}
 \author{\emph{Pau Belda, Guillem Cabré, Marc Peñalver, Prisca Oleart}}
-\date{\textbf{Curs 2024-25, Quatrimestre de tardor}}
+\date{\textbf{Curs 2024-25, Quadrimestre de tardor}}
 
 \renewcommand*\contentsname{Índex}
 \renewcommand{\tablename}{Taula}
@@ -41,7 +41,7 @@
 	
 	En aquest estudi, ens centrarem en l'efecte de la percolació sobre diferents tipus de grafs, tant deterministes com aleatoris. Concretament, ens proposem investigar com la percolació de nodes i d'arestes afecta la connectivitat del graf i, més específicament, com es produeix la transició de fase que determina el pas d'un graf connex a un graf fragmentat en múltiples components. Les nostres hipòtesis inicials estan basades en la variació d'aquests fenòmens en funció del tipus de graf i del procés de percolació. \\
 	
-	Aquestes hipòtesis ens permetran explorar com diferents configuracions estructurals i processos de fallida afecten la transició de fase i la connectivitat dels grafs.\\
+	Aquestes hipòtesis ens permetran explorar com diferents configuracions estructurals i processos de fallida afecten la transició de fase i la connectivitat dels grafs. \\
 	
 	\newpage
 	
@@ -58,11 +58,11 @@
 		\item \textbf{Percolació per arestes}: En aquest cas, les arestes es desactiven en lloc dels nodes. Això també afecta la connectivitat, ja que les connexions directes entre nodes es perden.
 	\end{itemize}
 	
-	Després d'aplicar el procés de percolació (sobre nodes o arestes), s'obté un graf percolat, que és la versió modificada del graf original, amb una connectivitat reduïda i, possiblement, components desconnectats. Aquest graf l'anomenarem $G_{\text{p}}$.
+	Després d'aplicar el procés de percolació (sobre nodes o arestes), s'obté un graf percolat, que és la versió modificada del graf original, amb una connectivitat reduïda i, possiblement, components desconnectades. Aquest graf l'anomenarem $G_{\text{p}}$.
 	
 	\subsection{Transició de Fase}
 	
-	Una transició de fase d'un graf per a una propietat concreta $\Pi$ fa referència a un resultat satisfactori d'un procés de percolació aplicat al graf. En el nostre cas aquesta propietat $\Pi$ serà la connectivitat del graf. \\
+	Una transició de fase d'un graf per a una propietat concreta $\Pi$ fa referència a un resultat satisfactori d'un procés de percolació aplicat al graf. En el nostre cas aquesta propietat $\Pi$ serà la connectivitat del graf. O dit d'una altra manera, que el graf només tingui una component connexa. \\
 	
 	Definim un resultat com a satisfactori si, donat que es troba una probabilitat de valor $q$ tal que es compleix la propietat $\Pi$ al graf $G_q$ (definim aquesta probabilitat com $q_{\Pi}$), per als grafs $G_{q'}$ on $q' > q_{\Pi}$, aquests verifiquen la propietat $\Pi$, i als grafs $G_{q'}$ on $q' < q_{\Pi}$, no la verifiquen (ambdues afirmacions són vàlides si es compleixen amb una probabilitat prou alta). \\
 	
@@ -76,17 +76,22 @@
 	
 	\textbf{Objectius específics:}
 	\begin{itemize}
-		\item Estudiar la possible transició de fase en graelles quadrades $n = m \times m$, sent $n$ el nombre de nodes, sota un procés de percolació per nodes i arestes amb probabilitat $p$. La hipòtesi plantejada és que la percolació de nodes generarà una transició de fase més ràpida que la percolació d'arestes. \\\endgraf
-		La raó d'aquesta hipòtesi és que, en eliminar nodes, també s'eliminen totes les arestes associades a aquests nodes, fet que altera la connectivitat de manera més dràstica. Per tant, s'espera que la connectivitat del graf es vegi més afectada quan fallin nodes en comparació amb quan només fallin les arestes.
+		\item Estudiar la possible transició de fase en graelles quadrades $n = m \times m$, sent $n$ el nombre de nodes, sota un procés de percolació per nodes i arestes amb probabilitat $p$ de que aquestes fallin. La hipòtesi plantejada és que la percolació de nodes generarà una transició de fase més ràpida que la percolació d'arestes. 
 		
-		\item Estudiar la possible transició de fase en grafs geomètrics aleatoris connexos (\textit{Random geometric graphs}), sota un procés de percolació d’arestes. \\\endgraf
-		La nostra hipòtesi és que, a mesura que augmenta el radi de connexió, el graf esdevé més dens, fet que dificulta la fragmentació del graf quan es produeixen fallades. Per tant, preveiem que, a mesura que augmenta la densitat del graf, serà necessària una probabilitat de fallida més alta per provocar una transició de fase.
+		\par La raó d'aquesta hipòtesi és que, en eliminar nodes, també s'eliminen totes les arestes associades a aquests nodes, fet que altera la connectivitat de manera més dràstica. Per tant, s'espera que la connectivitat del graf es vegi més afectada quan fallin nodes en comparació amb quan només fallin les arestes. \\
 		
-		\item Estudiar la possible transició de fase sota un procés de percolació d'arestes en graelles triangulars $n = \frac{rows \times (rows + 1)}{2}$, sent $n$ el nombre de nodes. \\\endgraf
-		La nostra hipòtesi és que, com més arestes connectin un node, més resistent serà el graf davant la percolació d'arestes, ja que la seva connectivitat global es veurà menys alterada. Això ens permetrà analitzar com el nombre d'arestes per node influeix en la capacitat del graf per mantenir la seva integritat davant fallades. Per validar aquesta hipòtesi, compararem la percolació per arestes en dos models: el graf de graella quadrada, on cada node està connectat a quatre veïns, i el graf de graella triangular, on cada node està connectat a sis veïns. Aquest contrast ens permetrà estudiar com la diferència en el nombre de connexions per node afecta la robustesa del graf.
+		\item Estudiar la possible transició de fase sota un procés de percolació d'arestes en graelles triangulars $n = \frac{rows \times (rows + 1)}{2}$, sent $n$ el nombre de nodes.
 		
-		\item Estudiar la possible transició de fase sota un procés de percolació de nodes en un graf de tipus \textit{Hub Graph} o graf Barabási-Albert. \\\endgraf
-		El graf de Barabási-Albert és un model que genera grafs amb una estructura de xarxa d'escala lliure, on alguns nodes (hubs) concentren un nombre desproporcionat d'arestes. La hipòtesi que proposem és que la tolerància d'aquesta xarxa a les fallades es veurà afectada principalment per la percolació de nodes. En concret, si els hubs comencen a fallar, la xarxa perdrà la seva connectivitat molt més ràpidament que en un graf més uniforme, ja que els hubs són crítics per mantenir el graf connectat.
+		\par La nostra hipòtesi és que, com més arestes connectin un node, més resistent serà el graf davant la percolació d'arestes, ja que la seva connectivitat global es veurà menys alterada. Això ens permetrà analitzar com el nombre d'arestes per node influeix en la capacitat del graf per mantenir la seva integritat davant fallades. Per validar aquesta hipòtesi, compararem la percolació per arestes en dos models: el graf de graella quadrada, on cada node està connectat a quatre veïns, i el graf de graella triangular, on cada node està connectat a sis veïns. Aquest contrast ens permetrà estudiar com la diferència en el nombre de connexions per node afecta la robustesa del graf. \\
+		
+		\item Estudiar la possible transició de fase en grafs geomètrics aleatoris connexos (\textit{Random geometric graphs}), sota un procés de percolació d’arestes.
+		
+		\par La nostra hipòtesi és que, a mesura que augmenta el radi de connexió, el graf esdevé més dens, fet que dificulta la fragmentació del graf quan es produeixen fallades. Per tant, preveiem que, a mesura que augmenta la densitat del graf, serà necessària una probabilitat de fallida més alta per provocar una transició de fase. \\
+		
+		\item Estudiar la possible transició de fase sota un procés de percolació de nodes en un graf de tipus \textit{Hub Graph} o graf Barabási-Albert.
+		
+		\par El graf de Barabási-Albert és un model que genera grafs amb una estructura de xarxa d'escala lliure, on alguns nodes (hubs) concentren un nombre desproporcionat d'arestes. La hipòtesi que proposem és que la tolerància d'aquesta xarxa a les fallades es veurà afectada principalment per la percolació de nodes. En concret, si els hubs comencen a fallar, la xarxa perdrà la seva connectivitat molt més ràpidament que en un graf més uniforme, ja que els hubs són crítics per mantenir el graf connectat. \\
+		
 	\end{itemize}
 	
 	Els resultats obtinguts permetran caracteritzar el comportament de diferents models de grafs sota condicions de percolació i explorar la robustesa d'aquestes xarxes davant de fallades aleatòries.
@@ -326,7 +331,7 @@
 		\end{algorithmic}
 	\end{algorithm}
 	
-	L'algorisme utilitza una cerca en profunditat (DFS) per explorar cada component connex del graf. Cada vegada que es troba un node no visitat, es crida la funció \texttt{dfs} per explorar recursivament tots els nodes connectats a aquest node. Aquesta crida recursiva assegura que tots els nodes del mateix component quedin marcats com a visitats, evitant comptar-los més d'una vegada. 
+	L'algorisme utilitza una cerca en profunditat (DFS) per explorar cada component connexa del graf. Cada vegada que es troba un node no visitat, es crida la funció \texttt{dfs} per explorar recursivament tots els nodes connectats a aquest node. Aquesta crida recursiva assegura que tots els nodes del mateix component quedin marcats com a visitats, evitant comptar-los més d'una vegada. 
 
 	\newpage
 	\section{Experimentació}
@@ -411,7 +416,7 @@
 	
 	Abans de procedir amb els experiments, es presenten les claus per interpretar correctament les taules i gràfics que acompanyen els resultats. \\
 	
-	\textbf{Gràfics}: Els gràfics mostren l'evolució dels experiments en funció del paràmetre $p$ (probabilitat de fallida) a l'eix de les X, mentre que l'eix Y mostra la probabilitat que el graf percolat $G_{\text{p}}$ sigui connex. A més, en cada gràfic col·locarem més d'un experiment, donades diferents valors de $n$ (nombre de nodes), pintant de colors diferents cada experiment. Aquest últim paràmetre a vegades canviarà, ja que en grafs, com per exemple en el quadrat, mesurarem amb el paràmetre $m$, que és el nombre de files. També, al peu de cada graf, hi haurà la seqüència de inputs amb el que s'ha generat aquest, l'ordre i significat de cada valor el podreu trobar a la subsecció \ref{sec:metodologia}. \\
+	\textbf{Gràfics}: Els gràfics mostren l'evolució dels experiments en funció del paràmetre $p$ (probabilitat de fallida) a l'eix de les X, mentre que l'eix Y mostra la probabilitat que el graf percolat $G_{\text{p}}$ sigui connex. A més, en cada gràfic col·locarem més d'un experiment, donats diferents valors de $n$ (nombre de nodes), pintarem de colors diferents cada experiment. Aquest últim paràmetre a vegades canviarà, ja que en grafs, com per exemple en el quadrat, mesurarem amb el paràmetre $m$, que és el nombre de files. També, al peu de cada graf, hi haurà la seqüència de inputs amb el que s'ha generat aquest, l'ordre i significat de cada valor el podreu trobar a la subsecció \ref{sec:metodologia}. \\
 	
 	\textbf{Taules}: Les taules contenen les mètriques que són més difícils de veure amb els gràfics. Cada fila representa una instància específica de l'experiment, mentre que les columnes mostren:
 	
@@ -422,11 +427,11 @@
 		\item \textbf{Pendent}: pendent del segment en el punt \textit{threshold}.
 	\end{itemize}
 	
-	Creiem convenient explicar com calculem el punt d'inflexió o punt \textit{threshold}. El trobarem com el segment amb el pendent més pronunciada.
+	Creiem convenient explicar com calculem el punt d'inflexió o punt \textit{threshold}. El trobarem com el segment amb el pendent més pronunciat.
 	
 	\subsection{Graella quadrada}
 	
-	Per estudiar la possible transició de fase a graelles quadrades, hem decidit fer proves amb grafs de mides diferents. Més concretament, hem agafat dues mostres: una que contempla grafs d'entre $n = 2 \times 2$ fins a $n = 20 \times 20$, i l'altra mostra serà de $n = 20 \times 20$ fins a $n = 200 \times 200$. Això ens servirà per estudiar com afecta a la connectivitat la percolació tant per nodes com per arestes. Hem triat aquestes mides de grafs perquè ens sembla que ens permetrà observar com evoluciona la transició de fase fins que aquesta arribi a un llindar, ja que per grafs amb $|V|$ majors el canvi de transició de fase serà cada cop menor. \\
+	Per estudiar la possible transició de fase a graelles quadrades, hem decidit fer proves amb grafs de mides diferents. Més concretament, hem agafat dues mostres: una que contempla grafs d'entre $n = 2 \times 2$ fins a $n = 20 \times 20$, i l'altra mostra serà de $n = 20 \times 20$ fins a $n = 200 \times 200$. Això ens servirà per estudiar com afecta la percolació a la connectivitat, tant percolació per nodes com per arestes. Hem triat aquestes mides de grafs perquè creiem que ens permetran observar com evoluciona la transició de fase fins que aquesta arribi a un llindar, ja que per grafs amb $|V|$ majors el canvi de transició de fase serà cada cop més similar, arribant fins a un llindar. \\
 	
 	\subsubsection{Percolació per arestes}
 	
@@ -451,7 +456,7 @@
 	
 	En els dos gràfics, podem veure com a mesura que creix el nombre de nodes dels grafs, la transició de fase s'intensifica i apareix en valors de $p$ més petits. \\
 	
-	Amb aquests gràfics, podem observar que, tot i que el punt inicial on comença la transició de fase és força similar per a totes les mides de grafs observats, l'abruptesa del canvi de fase és més pronunciada a mesura que $|V|$ augmenta progressivament. A continuació, analitzarem els valors referents al punt \textit{threshold} de cada mida de graf.
+	Amb aquests gràfics, podem observar que, tot i que el punt inicial on comença la transició de fase és força similar per a totes les mides de grafs observats, l'abruptesa del canvi de fase s'intensifica a mesura que $|V|$ augmenta progressivament. A continuació, analitzarem els valors referents al punt \textit{threshold} de cada mida de graf.
 	
 	\begin{table}[H]
 		\centering
@@ -474,9 +479,9 @@
 		\label{tab:data_edges_square}
 	\end{table}
 	
-	Com hem mencionat anteriorment, la \textit{Taula \ref{tab:data_edges_square}}, ens mostra el $threshold$ on apareix la transició de fase i la probabilitat que el graf sigui connex en aquest valor de $p$, per cada nombre de files del graf. En les graelles de poques files podem veure un $threshold$ que ronda el 0.25, i a mesura que augmenta la mida del graf aquest valor va disminuint. En la taula observem com el \textit{threshold} disminueix força ràpid al principi, ja que anem augmentant la $M$ de dos en dos i baixa 0.07, mentre que en la segona meitat veiem com disminueix en 0.11 però amb grafs que passen de 20 files a 200. Això ens indica que per molt que anem augmentant la mida de la graella el canvi de transició de fase serà cada vegada menor. \\
+	Com hem mencionat anteriorment, la \textit{Taula \ref{tab:data_edges_square}}, ens mostra el $threshold$ on apareix la transició de fase i la probabilitat que el graf sigui connex en aquest valor de $p$, per cada nombre de files del graf. En les graelles de poques files podem veure un $threshold$ que ronda el 0.25, i a mesura que augmenta la mida del graf aquest valor va disminuint. En la taula observem com varia la velocitat amb la que disminueix el \textit{threshold}, aquesta cada cop és menor. Això ens indica que, per molt que anem augmentant la mida de la graella, el punt on aparegui la transició de fase serà cada vegada en valors de $p$ menors, fins arribar a un llindar. \\
 	
-	A més a més, amb la taula podem veure en valors numèrics les observacions que fèiem amb els gràfics, que el valor de $p$ on hi ha la fallida total disminueix a mesura que la $m$ augmenta i que la transició de fase és més abrupta, ja que observant el pendent que ens indica la taula podem veure que les graelles grans són segments molt més empinats.
+	A més, amb la taula podem veure numèricament les observacions que fèiem amb els gràfics. El valor de $p$ on hi ha la fallida total disminueix a mesura que la $m$ augmenta. I que la transició de fase és més abrupta, ja que observant el pendent que ens indica la taula, podem veure que el pendent dels segments on està el \textit{threshold} creix a mesura que $m$ també creix.
 	
 	\subsubsection{Percolació per nodes}
 	
@@ -497,11 +502,11 @@
 		\label{fig:percolation_nodes_square}
 	\end{figure}
 	
-	La \textit{Figura \ref{fig:percolation_nodes_square}} mostra la comparació de la percolació per nodes en grafs quadrats de mides diferents. Com en la percolació per arestes, el gràfic de l'esquerra mostra els resultats per grafs petits i el de la dreta grafs més grans. Hem utilitzat les mateixes mides que en la percolació per aresta per poder comparar els resultats i observar diferències en el mètode que utilitzem per percolar. \\
+	La \textit{Figura \ref{fig:percolation_nodes_square}} mostra la comparació de la percolació per nodes en grafs quadrats de mides diferents. Com en la percolació per arestes, el gràfic de l'esquerra mostra els resultats per grafs amb un nombre de vèrtex menor que els del gràfic de la dreta. Hem utilitzat les mateixes mides que en la percolació per aresta per poder comparar els resultats i observar diferències en el mètode que utilitzem per percolar. \\
 	
-	Els resultats representats en el gràfic ens indiquen que graelles quadrades amb molt poques files, menys de 8, continuen mantenint un percentatge alt de connectivitat qualsevol valor de $p$. A mesura que creix la graella aixó es perd i apareix una transició de fase on al arribar a un cert valor de $p$ el graf deixa de ser connex. Igual que en la percolació per arestes, la mida del graf influeix en el pendent de la transició de fase, quan més gran és el graf més ràpida i brusca és la pèrdua de connectivitat. \\
+	Els resultats representats en el gràfic ens indiquen que graelles quadrades amb molt poques files, menys de 8, continuen mantenint un percentatge alt de connectivitat en qualsevol valor de $p$. A mesura que creix la graella això es perd i apareix una transició de fase. Igual que en la percolació per arestes, la mida del graf influeix en el pendent de la transició de fase, quan més gran és el graf més ràpida i brusca és la pèrdua de connectivitat. \\
 	
-	En graelles petites la transició és més suau i fins i tot observem una pujada després de la baixada inicial en valors de $p$ per sobre del 0.75, que indica un increment en el percentatge de grafs connexos quan hi ha una probabilitat de fallida alta. Aquest fenomen apareix quan la percolació genera un sol \textit{cluster}. Això significa al eliminar la gran majoria de nodes, es queda una petita component connexa, anomenada \textit{cluster}. A mesura que els grafs augmenten en nombre de vèrtex, la probabilitat de que aparegui un \textit{cluster} és més petita, ja que la distància entre \textit{clusters} generats serà major, i amb que n'hi hagi dos separats el graf resultant ja no serà connex. \\
+	En graelles petites la transició és més suau i, fins i tot, observem una pujada després de la baixada inicial en valors de $p$ per sobre del 0.75, que indica un increment en el percentatge de grafs connexos quan hi ha una probabilitat de fallida alta. Aquest fenomen apareix quan la percolació genera un sol \textit{cluster}. Això significa que al eliminar la gran majoria de nodes, es queda una petita component connexa, anomenada \textit{cluster}. A mesura que els grafs augmenten en nombre de vèrtex, la probabilitat de que aparegui un \textit{cluster} és més petita, ja que la distància entre \textit{clusters} generats serà major, i amb que n'hi hagi dos separats el graf resultant ja no serà connex. \\
 	
 	Podem calcular la probabilitat de que aparegui un \textit{cluser}, per simplicitat calcularem la probabilitat de que aquest tingui un sol node. Sigui $m$ el nombre de files, $n = m \times m$ nombre de nodes, $p$ probabilitat de fallida de node i $q = 1 - p$ probabilitat de que aquest no falli. Tindrem que $t = n \times q \times p^{n-1}$, on $t$ serà la probabilitat de que el graf percolat tingui un sol \textit{cluster} amb un node. Vegem un exemple que verifiqui aquest càlcul: donats $m = 6 \quad \Rightarrow \quad n = 36$, $p = 0.95 \quad \Rightarrow \quad q = 0.05$, ara calculem $t = 36 \times 0.05 \times 0.95^{36-1} \approx 0.299$. Veiem com en el gràfic (\textit{Figura \ref{fig:percolation_nodes_square}}), quan $m$ val 6, i la probabilitat $p$ s'aproxima a 0.95, tenim una connectivitat propera al $29.9\%$ que acabem de calcular. \\
 	
@@ -530,7 +535,7 @@
 		\label{tab:comparacio_edges_nodes_square}
 	\end{table}
 	
-	La \textit{Taula \ref{tab:comparacio_edges_nodes_square}} conté la comparació de dades de transició de fase per graelles quadrades grans al fer la percolació per aresta o per node. Si ens fixem en els valors del $threshold$ en els dos casos són valors molt semblants, així com tampoc podem veure un gran canvi en el percentatge de grafs connexos que tenim en aquest valor de $p$. Amb aquestes dades podem concloure que no hi ha molta diferència entre fer la percolació per nodes o per arestes en les graelles quadrades de gran mida.
+	La \textit{Taula \ref{tab:comparacio_edges_nodes_square}} conté la comparació de dades de transició de fase per graelles quadrades grans al fer la percolació per aresta o per node. Si ens fixem en els valors del $threshold$ en els dos casos són valors molt semblants, així com tampoc podem veure un gran canvi en el percentatge de grafs connexos que tenim en aquest valor de $p$. Amb aquestes dades podem concloure que no hi ha molta diferència entre fer la percolació per nodes o per arestes en les graelles quadrades a partir de que tinguin un mida que deixi de generar connectivitat per \textit{clusers}.
 	
 	
 	
@@ -670,14 +675,11 @@
 	
 	Com podem veure en la \textit{Taula \ref{tab:comparacio_edges_nodes_triangulars}} els valors que obtenim al fer la percolació per aresta o per node en graelles triangulars és molt semblant. En general, els valors de $threshold$ obtinguts en la percolació per node són una mica més alts, però per contra el percentatge de grafs connexos en aquell punts és una mica més alt en la percolació per arestes. \\
 	
-	Per tant si volem grafs amb més connectivitat seria millor fer la percolació per arestes, però la diferència és petita així que s'obtindran resultats molt semblants si es fa la percolació per nodes.Els pendents són molt similars en els dos casos així que la rapidesa en la que els grafs perden la connectivitat, com hem pogut veure en els gràfics, és casi igual.
+	Per tant si volem grafs amb més connectivitat seria millor fer la percolació per arestes, però la diferència és petita així que s'obtindran resultats molt semblants si es fa la percolació per nodes. Els pendents són molt similars en els dos casos així que la rapidesa en la que els grafs perden la connectivitat, com hem pogut veure en els gràfics, és casi igual.
 	
 	\subsection{Graf geomètric aleatori}
 	
-	L'estudi de transició sobre grafs geomètrics aleatoris depèn, a més de la probabilitat de percolació $p$, dels dos paràmetres que s'utilitzen per a la creació del graf: el nombre de nodes $n$ i el radi de connectivitat $r$.
-	En aquesta experimentació, s'han fet 6 casos de prova, on es compara l'impacte de tots dos paràmetres en diferents nivells. En el cas del nombre de nodes $n$, els valors que s'han utilitzar són de 10 a 100 i de 100 a 1000,
-	donant-nos resultats per a grafs amb pocs nodes fins a grafs amb una quantitat relativament gran de nodes. Per part del radi de connectivitat $r$, els valors que s'han escollit són de 0.2, 0.5, 0.8, que ens permeten observar grafs amb una connectivitat
-	bastant feble en el cas del primer valor, grafs amb una connectivitat molt alta amb $r$ = 0.8 i un mig entre tots dos valors.
+	L'estudi de transició sobre grafs geomètrics aleatoris depen, a més de la probabilitat de percolació $p$, dels dos paràmetres que s'utilitzen per a la creació del graf: el nombre de nodes $n$ i el radi de connectivitat $r$. En aquesta experimentació, s'han fet 6 casos de prova, on es compara l'impacte de tots dos paràmetres en diferents nivells. En el cas del nombre de nodes $n$, els valors que s'han utilitzar són de $10$ a $100$ i de $100$ a $1000$, donant-nos resultats per a grafs amb pocs nodes fins a grafs amb una quantitat relativament gran de nodes. Per part del radi de connectivitat $r$, els valors que s'han escollit són de $0.2$, $0.5$, $0.8$, que ens permeten observar grafs amb una connectivitat bastant feble en el cas del primer valor, grafs amb una connectivitat molt alta amb $r = 0.8$ i un mig entre tots dos valors.
 	
 	\subsubsection{Percolació per arestes}
 	
@@ -698,9 +700,7 @@
 		\label{fig:percolation_edges_rgg_0.2}
 	\end{figure}
 	
-	En aquesta primera comparativa, \textit{Figura \ref{fig:percolation_edges_rgg_0.2}}, veiem com grafs amb una connectivitat feble amb pocs nodes deixen de generar grafs connexos quan hi ha una probabilitat de percolació relativament baixa. No obstant, a mesura que augmenten els nodes, la quantitat de grafs connexos
-	en funció de la probabilitat de percolació comença a créixer de manera notable (imatge 2). Això ens mostra que, tot i ser grafs amb una connectivitat teòrica feble, amb una quantitat de nodes suficientment gran es pot aconseguir una transició de fase tot i que la probabilitat
-	de percolació sigui alta. 
+	En aquesta primera comparativa, \textit{Figura \ref{fig:percolation_edges_rgg_0.2}}, veiem com grafs amb una connectivitat feble amb pocs nodes deixen de generar grafs connexos quan hi ha una probabilitat de percolació relativament baixa. No obstant, a mesura que augmenten els nodes, la quantitat de grafs connexos en funció de la probabilitat de percolació comença a créixer de manera notable (imatge 2). Això ens mostra que, tot i ser grafs amb una connectivitat teòrica feble, amb una quantitat de nodes suficientment gran es pot aconseguir una transició de fase tot i que la probabilitat de percolació sigui alta. \\
 	
 	\begin{figure}[H]
 		\centering
@@ -719,8 +719,7 @@
 		\label{fig:percolation_edges_rgg_0.5}
 	\end{figure}
 	
-	Per altra banda, la \textit{Figura \ref{fig:percolation_edges_rgg_0.5}} mostra els resultats dels grafs amb una connectivitat teòrica major als anteriors. L'impacte d'aquesta connectivitat major es veu reflectit clarament en tots dos experiments. En els casos de grafs amb una quantitat de nodes no gaire elevada, el percentatge de grafs connexos en funció de la probabilitat de percolació és bastant elevat fins i tot per al cas de grafs d'únicament 10 nodes (imatge esquerra). Més enllà d'aquesta quantitat, el percentatge incrementa de forma notòria fins a arribar un punt en el que la diferència entre les probabilitats de percolació per a cada quantitat de nodes és irrisòria.
-	
+	Per altra banda, la \textit{Figura \ref{fig:percolation_edges_rgg_0.5}} mostra els resultats dels grafs amb una connectivitat teòrica major als anteriors. L'impacte d'aquesta connectivitat major es veu reflectit clarament en tots dos experiments. En els casos de grafs amb una quantitat de nodes no gaire elevada, el percentatge de grafs connexos en funció de la probabilitat de percolació és bastant elevat fins i tot per al cas de grafs d'únicament 10 nodes (imatge esquerra). Més enllà d'aquesta quantitat, el percentatge incrementa de forma notòria fins a arribar un punt en el que la diferència entre les probabilitats de percolació per a cada quantitat de nodes és irrisòria. \\
 	
 	\begin{figure}[H]
 		\centering
@@ -739,14 +738,13 @@
 		\label{fig:percolation_edges_rgg_0.8}
 	\end{figure}
 	
-	Per últim, a \textit{Figura \ref{fig:percolation_edges_rgg_0.8}} s'utilitzen grafs geomètrics aleatoris amb un radi de connectivitat molt elevat, donant-lis una forma semblant a un graf complet. Per aquest motiu, fins que la probabilitat de percolació no és molt alta, els grafs generats segueixen
-	sent connexos una vegada aplicada la transició de fase. Evidentment, l'augment de nodes provoca que el percentatge de grafs connexos creixi ja que els nodes tenen més probabilitats d'estar units a altres nodes (imatge 2), fet que ha succeït a totes les comparatives.
+	Per últim, a \textit{Figura \ref{fig:percolation_edges_rgg_0.8}} s'utilitzen grafs geomètrics aleatoris amb un radi de connectivitat molt elevat, donant-lis una forma semblant a un graf complet. Per aquest motiu, fins que la probabilitat de percolació no és molt alta, els grafs generats segueixen sent connexos una vegada aplicada la transició de fase. Evidentment, l'augment de nodes provoca que el percentatge de grafs connexos creixi ja que els nodes tenen més probabilitats d'estar units a altres nodes (imatge 2), fet que ha succeït a totes les comparatives.
 	
 	\subsection{Graf de Barabási-Albert}
 	
 	L'estudi que s'ha realitzat sobre els grafs generats amb el model de Barabási-Albert té com a objectiu estudiar la transició de fase sota percolació per nodes. Volem veure l'impacte de la percolació a un graf que conté molts vèrtexs units entre sí per un o més \textit{hubs} centrals, l'impacte que tindria la fallida d'algun d'aquests nodes o, per altra banda, el no impacte que pot tenir sobre nodes que tenen una estructura de fulla, és a dir, nodes que estan connectats únicament a un altre node i per tant la seva fallida segueix permetent un graf connex. \\
 	
-	Els experiments realitzats sobre aquests grafs depenen de tres paràmetres: nombre de nodes $n$, nombre de nodes inicials o \textit{hubs} $m0$, i el nombre d'arestes que han de tenir com a mínim cada node que no és \textit{hub}. Per als nostres experiments, hem decidit donar els següents valors: per al nombre de nodes $n = 10..100$, $n = 50..500$, per al nombre inicial de nodes o "hubs" $m0 = 2$, $m0 = 5$, $m0 = 10$, i per el nombre d'arestes incidents a la resta de nodes $m = 1$, $m = 2$, $m = 5$. Abans de veure els resultats, hem cregut adient una explicació del perquè s'han agafat aquests valors i no d'altres. Els grafs construïts amb el model de Barabási-Albert són típicament utilitzats com a xarxes on els nodes s'uneixen mitjançant "hubs". Per aquest motiu, hem decidit utilitzar aquests valors ja que representen d'una manera força realista una xarxa generada per aquest model d'una forma computacionalment viable. \\
+	Els experiments realitzats sobre aquests grafs depenen de tres paràmetres: nombre de nodes $n$, nombre de nodes inicials o \textit{hubs} $m0$, i el nombre d'arestes que han de tenir com a mínim cada node que no és \textit{hub}. Per als nostres experiments, hem decidit donar els següents valors: per al nombre de nodes $n = 10..100$, $n = 50..500$, per al nombre inicial de nodes o \textit{hubs} $m0 = 2$, $m0 = 5$, $m0 = 10$, i per el nombre d'arestes incidents a la resta de nodes $m = 1$, $m = 2$, $m = 5$. Abans de veure els resultats, hem cregut adient una explicació del perquè s'han agafat aquests valors i no d'altres. Els grafs construïts amb el model de Barabási-Albert són típicament utilitzats com a xarxes on els nodes s'uneixen mitjançant \textit{hubs}. Per aquest motiu, hem decidit utilitzar aquests valors ja que representen d'una manera força realista una xarxa generada per aquest model d'una forma computacionalment viable. \\
 	
 	\subsubsection{Percolació per nodes}
 	
@@ -767,9 +765,9 @@
 		\label{fig:percolation_nodes_ba_2_1}
 	\end{figure}
 
-	En aquesta primera comparativa (\textit{Figura \ref{fig:percolation_nodes_ba_2_1}}) entre grafs amb nodes que varien des de $n = 10..100$ i $n = 50..500$, podem veure una tendència similar a tots dos experiments, però molt més pronunciada en el segon cas. Aquesta tendència mostra que a partir d'una probabilitat de percolació relativament petita, el percentatge de grafs connexes disminueix de manera abrupte. Això es pot explicar degut a que, com que el paràmetre $m$, que representa el nombre d'arestes a les que es connecten els nodes inicialment, és igual a 1, molts nodes estan connectats únicament a un altre node que fa de "hub". Si aquest últim falla, el graf deixa de ser connex. \\
+	En aquesta primera comparativa (\textit{Figura \ref{fig:percolation_nodes_ba_2_1}}) entre grafs amb nodes que varien des de $n = 10..100$ i $n = 50..500$, podem veure una tendència similar a tots dos experiments, però molt més pronunciada en el segon cas. Aquesta tendència mostra que a partir d'una probabilitat de percolació relativament petita, el percentatge de grafs connexes disminueix de manera abrupte. Això es pot explicar degut a que, com que el paràmetre $m$, que representa el nombre d'arestes a les que es connecten els nodes inicialment, és igual a 1, molts nodes estan connectats únicament a un altre node que fa de \textit{hub}. Si aquest últim falla, el graf deixa de ser connex. \\
 	
-	Es pot observar també com, quan la probabilitat de percolació s'aproxima a $1$, el percentatge de connectivitat augmenta sobretot en grafs amb pocs nodes. Aquest comportament ja s'ha observat en els experiments de grafs quadrats i la seva explicació és la mateixa, a mesura que la probabilitat de fallida s'aproxima a $1$, la probabilitat que fallin tots els nodes excepte un (que equival a un graf connex) augmenta. Aquest fenomen es dona quan menys nodes té un graf, ja que hi ha més possibilitats de que només quedi un sol node. \\
+	Es pot observar també com, quan la probabilitat de percolació s'aproxima a $1$, el percentatge de connectivitat augmenta sobretot en grafs amb pocs nodes. Aquest comportament ja s'ha observat en els experiments de grafs quadrats i la seva explicació és la mateixa, a mesura que la probabilitat de fallida s'aproxima a $1$, la probabilitat que fallin tots els nodes excepte un (que equival a un graf connex) augmenta. Aquest fenomen es dona quan menys nodes té un graf, ja que serà més probable que només quedi un sol node després de la percolació. \\
 	
 	\begin{figure}[H]
 		\centering
@@ -788,9 +786,9 @@
 		\label{fig:percolation_nodes_ba_5_x}
 	\end{figure}
 	
-	En aquest experiment s'han utilitzat com a variables $m0 = 5$, $m = 1/2$ i un nombre de nodes $n = 10..100$. Amb aquesta comparativa podem veure l'impacte d'augmentar el nombre d'arestes inicials que tenen els nodes que no són "hubs" inicialment. Tot i que l'augment és simplement d'una aresta més per node, la probabilitat de percolació en la qual apareix la transició de fase és significativament superior a la de l'experiment anterior. A més, podem observar a través del primer gràfic de la \textit{Figura \ref{fig:percolation_nodes_ba_5_x}}, com l'augment d'únicament el nombre de \textit{hubs} inicials $m0$, no és gaire significatiu en els resultats de connectivitat, donant uns gràfics molt similars als del primer experiment de \textit{Barabási-Albert}. \\
+	En aquest experiment s'han utilitzat com a variables $m0 = 5$, $m = 1/2$ i un nombre de nodes $n = 10..100$. Amb aquesta comparativa podem veure l'impacte d'augmentar el nombre d'arestes inicials que tenen els nodes que no són \textit{hubs} inicialment. Tot i que l'augment és simplement d'una aresta més per node, la probabilitat de percolació en la qual apareix la transició de fase és significativament superior a la de l'experiment anterior. A més, podem observar a través del primer gràfic de la \textit{Figura \ref{fig:percolation_nodes_ba_5_x}}, com l'augment d'únicament el nombre de \textit{hubs} inicials $m0$, no és gaire significatiu en els resultats de connectivitat, donant uns gràfics molt similars als del primer experiment de Barabási-Albert. \\
 
-	Una altra vegada, podem observar com quan la probabilitat de percolació s'aproxima a $1$, la connectivitat dels grafs augmenta pel mateix motiu que feia anteriorment en la percolació per nodes.
+	Una altra vegada, podem observar com quan la probabilitat de percolació s'aproxima a $1.0$, la connectivitat dels grafs augmenta pel mateix motiu que feia anteriorment en la percolació per nodes.
 
 	\begin{figure}[H]
 		\centering
@@ -852,5 +850,13 @@
 	
 	\newpage
 	\section{Annex}
+	
+	\subsection*{Enllaç al Codi}
+	
+	El codi font i documentació addicional del projecte estan disponibles al repositori de GitHub. Podeu accedir-hi mitjançant el següent enllaç:
+	
+	\href{https://github.com/Willyllem88/PercolationConnectivity}{GitHub - Estudi de Percolació i Connectivitat} \\
+	
+	En aquest repositori, a més del codi, es proporciona informació sobre la generació de grafs, les dependències del programa, instruccions de compilació i execució, així com exemples de com configurar els paràmetres per realitzar els experiments.
 	
 	\end{document}
