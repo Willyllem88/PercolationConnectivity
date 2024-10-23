@@ -1,0 +1,20 @@
+9283948 10 100 10 1000 NODE_PERC ./data/rgg1.csv Random-Geometric 0.2
+2389476 10 100 10 1000 NODE_PERC ./data/rgg2.csv Random-Geometric 0.5
+8273563 10 100 10 1000 NODE_PERC ./data/rgg3.csv Random-Geometric 0.8
+1234567 50 500 50 1000 NODE_PERC ./data/rgg4.csv Random-Geometric 0.2
+7654321 50 500 50 1000 NODE_PERC ./data/rgg5.csv Random-Geometric 0.5
+4321066 50 500 50 1000 NODE_PERC ./data/rgg6.csv Random-Geometric 0.8
+2873469 100 1000 100 1000 NODE_PERC ./data/rgg7.csv Random-Geometric 0.2
+6673428 100 1000 100 1000 NODE_PERC ./data/rgg8.csv Random-Geometric 0.5
+9293745 100 1000 100 1000 NODE_PERC ./data/rgg9.csv Random-Geometric 0.8
+
+9283948 10 100 10 1000 EDGE_PERC ./data/rgg10.csv Random-Geometric 0.2
+2389476 10 100 10 1000 EDGE_PERC ./data/rgg11.csv Random-Geometric 0.5
+8273563 10 100 10 1000 EDGE_PERC ./data/rgg12.csv Random-Geometric 0.8
+1234567 50 500 50 1000 EDGE_PERC ./data/rgg13.csv Random-Geometric 0.2
+7654321 50 500 50 1000 EDGE_PERC ./data/rgg14.csv Random-Geometric 0.5
+4321066 50 500 50 1000 EDGE_PERC ./data/rgg15.csv Random-Geometric 0.8
+2873469 100 1000 100 1000 EDGE_PERC ./data/rgg16.csv Random-Geometric 0.2
+6673428 100 1000 100 1000 EDGE_PERC ./data/rgg17.csv Random-Geometric 0.5
+9293745 100 1000 100 1000 EDGE_PERC ./data/rgg18.csv Random-Geometric 0.8
+

@@ -1,0 +1,4 @@
+4321 2 20 2 1000 EDGE_PERC ./data/squareE-2-20-1.csv Square-Grid
+5202 2 20 2 1000 NODE_PERC ./data/squareN-2-20-1.csv Square-Grid
+4532 20 200 20 1000 EDGE_PERC ./data/squareE-20-200.csv Square-Grid
+4657 20 200 20 1000 NODE_PERC ./data/squareN-20-200.csv Square-Grid
