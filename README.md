@@ -1,5 +1,22 @@
 # Connectivitat i Percolació
 
+## Taula de continguts
+
+- [Connectivitat i Percolació](#connectivitat-i-percolació)
+  - [Taula de continguts](#taula-de-continguts)
+  - [Documentació del projecte](#documentació-del-projecte)
+  - [Compilació i Execució](#compilació-i-execució)
+    - [Requisits](#requisits)
+    - [Compilació](#compilació)
+    - [Execució](#execució)
+      - [Executar `main`](#executar-main)
+      - [Executar `runner`](#executar-runner)
+      - [Exemple de fitxer d'entrada (`input.txt`)](#exemple-de-fitxer-dentrada-inputtxt)
+
+---
+
+## Documentació del projecte
+
 Aquest projecte estudia les transicions de fase en grafs aleatoris, centrant-se en la connectivitat a mesura que s'aplica la percolació sobre nodes i arestes. Els models analitzats inclouen:
 
 - **Erdös-Rényi** (grafs aleatoris)
@@ -8,7 +25,9 @@ Aquest projecte estudia les transicions de fase en grafs aleatoris, centrant-se 
 - **Small World** (grafs amb alta agrupació i baixa distància mitjana)
 - **Barabási-Albert** (grafs d'escala lliure)
 
-L'objectiu és entendre millor les dinàmiques de connectivitat en xarxes complexes i la seva vulnerabilitat a mesura que es modifica la probabilitat de fallida, _q_.
+L'objectiu és entendre millor les dinàmiques de connectivitat en xarxes complexes i la seva vulnerabilitat a mesura que es modifica la probabilitat de fallida, _p_.
+
+Una documentació més extensa es troba a `./Latex/docu-PercCon.pdf`, on es detallen els algorismes usats, els experiments realitzats, els gràfics i les conclusions finals.
 
 ---
 
