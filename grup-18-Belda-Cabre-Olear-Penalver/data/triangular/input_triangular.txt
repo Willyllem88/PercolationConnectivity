@@ -1,4 +1,0 @@
-3497 5 55 5 1000 EDGE_PERC ./data/triangularE-5-55-1000.csv Triangular-Grid
-7002 5 55 5 1000 NODE_PERC ./data/triangularN-5-55-1000.csv Triangular-Grid
-3363 50 150 10 1000 EDGE_PERC ./data/triangularE-50-150.csv Triangular-Grid
-4056 50 150 10 1000 NODE_PERC ./data/triangularN-50-150.csv Triangular-Grid
